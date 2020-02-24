@@ -1,0 +1,85 @@
+{% extends 'base.html' %} {% block title %}
+Detail - {{ block.super }} {% endblock title %}
+{% block content %}
+<section class="section">
+    <div class="container">
+      <h1 class="title">
+        SessionDetail
+      </h1>
+      <p> <a href="{% url 'session_table' pk=refs.pk %}">Table > </a></p>
+      
+      <p class="subtitle">
+      {% comment %} {% for ref in refs %}  {% endcomment %}
+      <div class="box">
+      <p> Session Name: {{refs.session_name}} </p>
+      <p> Session ID: {{refs.ref_number}} </p>
+      {% comment %} <p> Name: {{process}} </p>
+      <p> Files {{files}} </p> {% endcomment %}
+      <div class="box">
+       {% for doc in docs %} 
+       
+        <p> Position: {{doc.position}} </p>
+        <p> Uploaded File: {{doc.document}} </p>
+        <p> Session Name: {{doc.process}} </p>
+        <p> Ref_number: {{doc.process.ref_number}} </p>
+          <br>
+         {% endfor %}  
+         
+
+         {% for ret in rets %} 
+         <p> Ret Name: {{ ret.ret_name  }} </p>
+         <p> Ref_Number: {{ ret.parent_ref_number  }} </p>
+         <p> Session Name: {{ ret.parent_ref_number.ref_number  }} </p>
+         <p> StationID: {{ ret.station_id }} </p>
+         <p> Address: {{ ret.address }} </p>
+         <p> AISG Version: {{ ret.aisg_version  }} </p>
+         <p> Bearing: {{ ret.bearing }} </p>
+         <p> Bearing: {{ ret.hw_version }} </p>
+         <p> parentfile: {{ ret.ret_position }} </p>
+         <p> parentfile: {{ ret.sector_id }} </p>
+         <br>
+
+         {% endfor %}
+
+
+         </div>
+         <div class='box'>
+        <h2>Gamma Pos 2  </p>
+         {% for g in gamma_pos_2 %} 
+         <p>StationID {{ g.station_id  }}</p>
+         <p>Sector_id{{ g.sector_id  }}</p>
+         <br>
+         {% endfor %}
+         </div>
+
+        <div class='box'>
+        <h2>Alpha Pos 4 </p>
+         {% for a in alpha_pos_4 %} 
+         <p>StationID {{ a.station_id  }}</p>
+         <p>Sector_id{{ a.sector_id  }}</p>
+         <br>
+         {% endfor %}
+         </div>
+
+         {% comment %} {% for ret in rets %} 
+
+         <div class="box">
+        {% comment %} <p> Files : {{file}} </p>
+        <p> Files #: {{file.position}} </p>
+        <p> Files #: {{file.process.ref_number}} </p>
+        <p> Files #: {{file.process.session_name}} </p> {% endcomment %}
+
+         {% comment %} <p> Ret #: {{ret}} </p>
+         <p> Ret Address: {{ret.address}} </p>
+         <p> Ret #: {{ret.parent_ref_number.session_name}} </p> {% endcomment %}
+        
+        
+        
+
+
+        </div>
+        {% comment %} {% endfor %}  {% endcomment %}
+      </p>
+    </div>
+  </section>
+{% endblock content %}

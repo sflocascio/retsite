@@ -1,0 +1,25 @@
+Address: 1.3
+Station ID: 078356A--49L
+Device Type: MultiRET
+Vendor Code: CP
+Device Serial: CP0018CN102788720MM.3
+Antenna Model: NNH4-65B-R6
+Min Tilt: 2.0, Max Tilt: 14.0
+Antenna Serial: 000018CN102788720
+Antenna Type: 
+Antenna Technology: 
+Antenna Frequency Band: IV  : UL 1710-1755, DL 2110-2155 MHz; III : UL 1710-1785, DL 1805-1880 MHz; II  : UL 1850-1910, DL 1930-1990 MHz; I   : UL 1920-1980, DL 2110-2170 MHz
+Antenna Beamwidth: 
+Antenna Gain: 
+Electrical Tilt: 2.0
+Mechanical Tilt: 0.0
+Sector ID: ALPHA POS 4 PCSL
+Location: 
+Bearing: 0.0 degrees
+Height on Tower: 
+Installer ID: SACW
+Install Date: 010419
+Product Number: COMMRET2
+HW Version: 4
+SW Version: 000.050.045
+AISG Version: 2.0

@@ -1,0 +1,74 @@
+{% extends 'base.html' %} 
+{% load crispy_forms_tags %}
+
+
+{% block title %}
+    About - {{ block.super }} {% endblock title %}
+{% block content %} 
+
+
+{% comment %} <form method="post" class="uniForm">
+    {{ my_formset|crispy }}
+</form> {% endcomment %}
+
+<section class="section">
+    <div class="container">
+    <h2 class = "title"> Process <h2> 
+<div class = "box">
+
+    <h3 class = "subtitle"> Create Session  </h3> 
+    {% comment %} {% for tower in towers %} {% endcomment %}
+    <form class="uniForm" enctype="multipart/form-data" action="create_object_form" method="post"> 
+        {% csrf_token %} 
+        <input class="input is-hovered" placeholder="Session Name" type="text" name="session" required id="id_document" >
+        <br>
+        <br>
+         {{ form1|crispy }} 
+         <br>
+         {{ form2|crispy }}   
+        
+        {% comment %} <input type="file"  name="alpha_pos_1"/> {% endcomment %}
+        {% comment %} <input type="file" name="document" required id="id_document" value="{{tower.name}}">
+        <input type="dropdown" name="position" required id="id_document" value="{{tower.name}}"> {% endcomment %}
+ {% comment %} {% endfor %} {% endcomment %}
+
+         {% comment %} <select name="servers">
+                <option value="" disabled="disabled" selected="selected">Please select the server</option>
+                <option value="x.x.x.x">server_name</option>
+                <option value="x.x.x.x">server_name</option>
+        </select> {% endcomment %}
+
+
+
+        {% comment %} {{ form.as_p }} {% endcomment %}
+        {% comment %} <input type="file" name="document" required id="id_document" value="alpha_pos">  {% endcomment %}
+        {% comment %} {{ form.as_p }} {% endcomment %}
+        
+        <br> 
+        <br> 
+        <input class="button is-medium" type="submit" value="Submit" />
+   
+
+    {% comment %} <h3 class = "subtitle" > Position 2 </h3> 
+    <form enctype="multipart/form-data" action="upload_file" method="post"> 
+        <input type="file"  name="alpha_pos_2"/> 
+        {% csrf_token %}  {% endcomment %}
+    </form>
+
+    
+    <br> 
+    {% for tower in towers %}
+    {{ tower.name }}
+
+    {% endfor %}
+
+    
+
+</div> 
+</div>
+</section>
+
+
+
+
+{% endblock content %}

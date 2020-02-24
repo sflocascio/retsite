@@ -1,0 +1,30 @@
+{
+"Data":[{
+  "AISG Version": "2.0",
+  "Address": "1.1",
+  "Antenna Beamwidth": "",
+  "Antenna Frequency Band": "VI  : UL  830- 840, DL  875- 885 MHz; V   : UL  824- 849, DL  869- 894 MHz",
+  "Antenna Gain": "",
+  "Antenna Model": "NNH4-65B-R6",
+  "Antenna Serial": "000018CN102788720",
+  "Antenna Technology": "",
+  "Antenna Type": "",
+  "Bearing": "0.0 degrees",
+  "Device Serial": "CP0018CN102788720MM.1",
+  "Device Type": "MultiRET",
+  "Electrical Tilt": "2.0",
+  "HW Version": "4",
+  "Height on Tower": "",
+  "Install Date": "010419",
+  "Installer ID": "SACW",
+  "Location": "",
+  "Mechanical Tilt": "0.0",
+  "Min Tilt": "2.0, Max Tilt: 14.0",
+  "Product Number": "COMMRET2",
+  "SW Version": "000.050.045",
+  "Sector ID": "ALPHA POS 4 FNET",
+  "Station ID": "078356A--4PM",
+  "Vendor Code": "CP"
+}
+]
+}

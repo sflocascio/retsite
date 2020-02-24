@@ -1,0 +1,80 @@
+
+Site Report: C:\ATCLite_Site_Files\WI0193 RET GAMMA TESTER! POS 2.txtrpt
+
+Address: 1
+Station ID: 078356C--27L
+Device Type: RET
+Vendor Code: AN
+Device Serial: AN00018CN1029669641
+Antenna Model: JAHH-65B-R3B-V3
+Min Tilt: 2.0, Max Tilt: 14.0
+Antenna Serial: 00018CN1029669641
+Antenna Type: 
+Antenna Technology: 
+Antenna Frequency Band: XII : UL  699-716, DL 729-746 MHz; XIII: UL  777-787, DL 746-756 MHz; XIV : UL  788-798, DL 758-768 MHz
+Antenna Beamwidth: 
+Antenna Gain: 
+Electrical Tilt: 2.0
+Mechanical Tilt: -2.0
+Sector ID: GAMMA POS 2 700L
+Location: 
+Bearing: 240.0 degrees
+Height on Tower: 
+Installer ID: SACW
+Install Date: 010419
+Product Number: JAHH-65B-R3B-V3
+HW Version: 602
+SW Version: RC3_235K
+AISG Version: 2.0
+
+Address: 2
+Station ID: 078356C--28U
+Device Type: RET
+Vendor Code: AN
+Device Serial: AN00018CN1029669642
+Antenna Model: JAHH-65B-R3B-V3
+Min Tilt: 2.0, Max Tilt: 14.0
+Antenna Serial: 00018CN1029669642
+Antenna Type: 
+Antenna Technology: 
+Antenna Frequency Band: VI  : UL  830- 840, DL  875- 885 MHz; V   : UL  824- 849, DL  869- 894 MHz
+Antenna Beamwidth: 
+Antenna Gain: 
+Electrical Tilt: 2.0
+Mechanical Tilt: -2.0
+Sector ID: GAMMA POS 2 850U
+Location: 
+Bearing: 240.0 degrees
+Height on Tower: 
+Installer ID: SACW
+Install Date: 010419
+Product Number: JAHH-65B-R3B-V3
+HW Version: 602
+SW Version: RC3_235K
+AISG Version: 2.0
+
+Address: 3
+Station ID: 078356C--22L
+Device Type: RET
+Vendor Code: AN
+Device Serial: AN00018CN1029669643
+Antenna Model: JAHH-65B-R3B-V3
+Min Tilt: 0.0, Max Tilt: 10.0
+Antenna Serial: 00018CN1029669643
+Antenna Type: 
+Antenna Technology: 
+Antenna Frequency Band: IV  : UL 1710-1755, DL 2110-2155 MHz; III : UL 1710-1785, DL 1805-1880 MHz; II  : UL 1850-1910, DL 1930-1990 MHz; I   : UL 1920-1980, DL 2110-2170 MHz; IX  : UL 1749.9-1784.9, DL 1844.9-1879.9 MHz; X   : UL 1710-1770, DL 2110-2170 MHz
+Antenna Beamwidth: 
+Antenna Gain: 
+Electrical Tilt: 0.0
+Mechanical Tilt: -2.0
+Sector ID: GAMMA POS 2 AWSL
+Location: 
+Bearing: 240.0 degrees
+Height on Tower: 
+Installer ID: SACW
+Install Date: 010419
+Product Number: JAHH-65B-R3B-V3
+HW Version: 602
+SW Version: RC3_235K
+AISG Version: 2.0

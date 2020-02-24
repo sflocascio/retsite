@@ -1,0 +1,238 @@
+{% extends 'base.html' %} {% block title %}
+Detail - {{ block.super }} {% endblock title %}
+{% block content %}
+<section class="section">
+    <div class="container">
+      <h1 class="title">
+        Session Detail 
+      </h1>
+      
+      {% comment %} <p> <a href="{% url 'export_csv' pk=refs.pk %}"> EXPORT CSV > </a></p> {% endcomment %}
+
+      <div class="box">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <a class="level-item">
+          <span class="icon is-large"><i class="fas fa-broadcast-tower"style="color:#9da69c;"></i></span>
+        </a>
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+
+      <p>
+          <strong>Session Name </strong> <small>{{refs.session_name}} </small>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: 2/17/19 </span>
+          <br>
+        </p>
+      
+  
+        <p>
+          <strong>Owner: </strong> <small>@johnsmith</small>  
+          <br>
+        </p>
+        <p>
+          <strong> Ref Id: </strong> <small>{{refs.ref_number}}</small> 
+          <br>
+        </p>
+        <p>
+          <strong> Session Details: </strong> <small> Working on site 54 in Illinois</small> 
+          <br>
+        </p>
+        <p>
+          <strong> Rets Uploaded: </strong> <small>  4 </small> 
+          <br>
+        </p>
+      </div>
+      <nav class="level is-mobile">
+        <div class="level-left">
+
+          <a href="{% url 'export_csv' pk=refs.pk %}"> <button class="button is-primary is-light">Export CSV</button></a>
+          &nbsp;&nbsp;
+          <button class="button is-link is-light">Download PDF</button>
+          &nbsp;&nbsp;
+          <button class="button is-info is-light">Email as Attatchment</button>
+          &nbsp;&nbsp;
+          <button class="button is-light">Download Source Files</button>
+          &nbsp;&nbsp;
+          <button class="button  is-light">Delete</button>
+        </div>
+      </nav>
+    </div>
+    <div class="media-right">
+    <button class="delete"></button>
+  </div>
+  </article>
+
+</div>
+
+
+<div class="box">
+         {% comment %} inset table here {% endcomment %}
+         
+<div class="scrolling-wrapper" id="HTMLtoPDF">
+         <table class="table is-striped is-hoverable is-bordered">
+  <thead>
+    <tr>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      {% comment %} <th><abbr title="Goal difference">GD</abbr></th>
+      <th><abbr title="Points">Pts</abbr></th>
+      <th>Qualification or relegation</th> {% endcomment %}
+    </tr>
+  </thead>
+
+  <tbody>
+   <th> Gamma Position 2 </th>
+  {% if gamma_pos_2 %}
+    {% for g in gamma_pos_2 %} 
+      <tr>
+        <td>{{ g.sector_id  }}</td>
+        <td>{{ g.address  }}</td>
+        <td>{{ g.station_id  }}</td>
+        <td>{{ g.hw_version  }}</td>
+        <td>{{ g.bearing  }}</td>
+        <td>{{ g.aisg_version  }}</td>
+        <td>{{ g.ret_name }}</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data </td>
+          </tr>
+      {% endif %}
+    <th> Beta Position 2 </th>
+    {% if beta_pos_2 %}
+      {% for a in beta_pos_2 %} 
+      <tr>
+        <td>{{ a.sector_id  }}</td>
+        <td>{{ a.address  }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.hw_version  }}</td>
+        <td>{{ a.bearing  }}</td>
+        <td>{{ a.aisg_version  }}</td>
+        <td>{{ a.ret_name }}</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+          <tr>
+        <td> No Data Beta 2</td>
+        </tr>
+      {% endif %}
+    <th> Alpha Position 4 </th>
+    {% if alpha_pos_4%}
+        {% for a in alpha_pos_4 %} 
+          <tr>
+            <td>{{ a.sector_id  }}</td>
+            <td>{{ a.address  }}</td>
+            <td>{{ a.station_id  }}</td>
+            <td>{{ a.hw_version  }}</td>
+            <td>{{ a.bearing  }}</td>
+            <td>{{ a.aisg_version  }}</td>
+            <td>{{ a.ret_name }}</td>
+          </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+      <th> No Data Alha 4</th>
+      </tr>
+    {% endif %}
+
+    
+  </tbody>
+</table>
+</div>  
+</div>
+{% comment %} End ExportPDF  {% endcomment %}
+        
+<div class="box">
+<h1 class="title">
+        Source Files 
+      </h1>
+{% for d in docs %}
+{% comment %} <p> The File: {{d.document}} </p>  {% endcomment %}
+<p><strong>Position:</strong> {{d.position}} </p>
+{% comment %} <p>Document Uploaded {{d.document}} </p> {% endcomment %}
+<a href="{{d.document.url}}" download> Download File</a>
+<br> 
+<br> 
+{% endfor %}
+</div>
+        
+        
+
+
+
+
+
+
+
+        </div>
+      </p>
+    </div>
+  </section>
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+<br> 
+      
+      <p class="subtitle"> Diagnostics </p>
+      {% comment %} {% for ref in refs %}  {% endcomment %}
+      <div class="box">
+      <p> Session Name: {{refs.session_name}} </p>
+      <p> Session ID: {{refs.ref_number}} </p>
+      {% comment %} <p> Name: {{process}} </p>
+      <p> Files {{files}} </p> {% endcomment %}
+     <div class='box'>
+        <h2>Gamma Pos 2  </p>
+         {% for g in gamma_pos_2 %} 
+         <p>StationID {{ g.station_id  }}</p>
+         <p>Sector_id{{ g.sector_id  }}</p>
+         <br>
+         {% endfor %}
+         </div>
+
+
+
+
+	<!-- here we call the function that makes PDF -->
+	<a href="#" onclick="HTMLtoPDF()">Download PDF</a>
+
+
+
+
+
+{% endblock content %}

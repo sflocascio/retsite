@@ -1,0 +1,30 @@
+{
+"data":[{
+  "AISG Version": "2.0", 
+  "Address": "3", 
+  "Antenna Beamwidth": "", 
+  "Antenna Frequency Band": "IV  : UL 1710-1755, DL 2110-2155 MHz; III : UL 1710-1785, DL 1805-1880 MHz; II  : UL 1850-1910, DL 1930-1990 MHz; I   : UL 1920-1980, DL 2110-2170 MHz; IX  : UL 1749.9-1784.9, DL 1844.9-1879.9 MHz; X   : UL 1710-1770, DL 2110-2170 MHz", 
+  "Antenna Gain": "", 
+  "Antenna Model": "JAHH-65B-R3B-V3", 
+  "Antenna Serial": "00018CN1029669643", 
+  "Antenna Technology": "", 
+  "Antenna Type": "", 
+  "Bearing": "240.0 degrees", 
+  "Device Serial": "AN00018CN1029669643", 
+  "Device Type": "RET", 
+  "Electrical Tilt": "0.0", 
+  "HW Version": "602", 
+  "Height on Tower": "", 
+  "Install Date": "010419", 
+  "Installer ID": "SACW", 
+  "Location": "", 
+  "Mechanical Tilt": "-2.0", 
+  "Min Tilt": "0.0, Max Tilt: 10.0", 
+  "Product Number": "JAHH-65B-R3B-V3", 
+  "SW Version": "RC3_235K", 
+  "Sector ID": "GAMMA POS 2 AWSL", 
+  "Station ID": "078356C--22L", 
+  "Vendor Code": "AN"
+}
+]
+}

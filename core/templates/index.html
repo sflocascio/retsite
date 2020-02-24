@@ -1,0 +1,111 @@
+{% extends 'base.html' %} {% block title %}
+  Homepage - {{ block.super }} {% endblock title %}
+{% block content %}
+
+
+<section class="section">
+    {% if messages %}
+      {% for message in messages %}
+        <div class="notification ">
+            <button class="delete"></button>
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+    <div class="container">
+      <h1 class="title">
+        Sessions
+      </h1>
+
+      <br>
+      {% for ref in refs %} 
+
+      <div class="box">
+  <article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <a class="level-item">
+          <span class="icon is-small"><i class="fas fa-broadcast-tower"style="color:#9da69c;"></i></span>
+        </a>
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+
+        <p class="#"> 
+        {% comment %} <i class="fas fa-broadcast-tower" style="color:#9da69c;"> {% endcomment %}
+        <strong> Session Name: </strong> {{ref.session_name}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: 2/17/19 </span>
+        </p>
+
+        <p>
+          <strong>Created By: </strong> <small>@johnsmith</small> <small>31m</small>
+          <br>
+        </p>
+        <p>
+          <strong> Ref Id: </strong> <small>{{ref.ref_number}}</small> 
+          <br>
+        </p>
+        <p>
+          <strong> Session Details: </strong> <small> Working on site 54 in Illinois</small> 
+          <br>
+        </p>
+        <p>
+          <strong> Files Processed: </strong> <small>  4 </small> 
+          <br>
+        </p>
+      </div>
+      <nav class="level is-mobile">
+        <div class="level-left">
+        <a href="{% url 'session_table' pk=ref.pk %}">
+          <button class="button is-link is-light">Details</button></a>
+          &nbsp;&nbsp;
+          <button class="button is-primary is-light">Export CSV</button>
+          &nbsp;&nbsp;
+          <button class="button is-dangeris-light">Remove</button>
+        </div>
+      </nav>
+    </div>
+    <div class="media-right">
+    <button class="delete"></button>
+  </div>
+  </article>
+
+</div>
+      {% comment %} <div class="box">
+      <p> Session Name: {{ref.session_name}} </p>
+      <p> Session ID: {{ref.ref_number}} </p>
+      <p> <a href="{% url 'session_detail' pk=ref.pk %}">Details</a></p>
+      <p> Name: {{process}} </p>
+      <p> Files {{files}} </p>
+      
+          
+        <div class="box">
+        <p> SessionName : {{ref.session_name}} </p>
+        <p> Files #: {{files.position}} </p>
+        <p> Files #: {{files.process.ref_number}} </p>
+        <p> Files #: {{files.process.session_name}} </p>
+
+         <p> Ret #: {{ret}} </p>
+       </div>
+        
+        </div> {% endcomment %}
+          
+         {% comment %} {% endfor %}   {% endcomment %}
+
+         {% comment %} {% for ret in rets %} 
+
+         <div class="box">
+        {% comment %} <p> Files : {{file}} </p>
+        <p> Files #: {{file.position}} </p>
+        <p> Files #: {{file.process.ref_number}} </p>
+        <p> Files #: {{file.process.session_name}} </p> {% endcomment %}
+
+         {% comment %} <p> Ret #: {{ret}} </p>
+         <p> Ret Address: {{ret.address}} </p>
+         <p> Ret #: {{ret.parent_ref_number.session_name}} </p> {% endcomment %}
+        {% endfor %} 
+      </p>
+    </div>
+  </section>
+{% endblock content %}
