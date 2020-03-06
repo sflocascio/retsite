@@ -17,15 +17,55 @@
 <div class = "box">
 
     <h3 class = "subtitle"> Create Session  </h3> 
+    <p class = "#">  {{ now | date:"D d M Y -  h:i:s"}} </p> 
+    <br>
     {% comment %} {% for tower in towers %} {% endcomment %}
     <form class="uniForm" enctype="multipart/form-data" action="create_object_form" method="post"> 
+   
         {% csrf_token %} 
         <input class="input is-hovered" placeholder="Session Name" type="text" name="session" required id="id_document" >
         <br>
         <br>
-         {{ form1|crispy }} 
-         <br>
-         {{ form2|crispy }}   
+         <div class="columns">
+            <div class="column">
+                {{ form1|crispy }} 
+                    <br>
+                    {{ form2|crispy }}   
+                    <br>
+                    {{ form3|crispy }}  
+                    <br>
+                    {{ form4|crispy }}   
+                    <br>
+                            </div>
+            <div class="column">
+            {{ form5|crispy }}   
+                    <br>
+                    {{ form6|crispy }}   
+                    <br>
+                    {{ form7|crispy }}   
+                    <br>
+                    {{ form8|crispy }}   
+                    <br>
+            </div>
+            <div class="column">
+                
+                    {{ form9|crispy }}   
+                    <br>
+                    {{ form10|crispy }}   
+                    <br>
+                    {{ form11|crispy }}   
+                    <br>
+                    {{ form12|crispy }}   
+                    <br>
+            </div>
+
+</div>
+         
+         
+        
+         
+        
+        
         
         {% comment %} <input type="file"  name="alpha_pos_1"/> {% endcomment %}
         {% comment %} <input type="file" name="document" required id="id_document" value="{{tower.name}}">
@@ -57,11 +97,7 @@
 
     
     <br> 
-    {% for tower in towers %}
-    {{ tower.name }}
-
-    {% endfor %}
-
+    
     
 
 </div> 

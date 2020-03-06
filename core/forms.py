@@ -18,7 +18,7 @@ class DocumentForm(forms.ModelForm):
     ('alpha_pos_2', 'alpha_pos_2'),)
     position = forms.ChoiceField(choices=POSITION_OPTIONS)
     #position = forms.ChoiceField(choices=POSITION_OPTIONS, required=True )
-    document = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    document = forms.FileField(required = False, widget=forms.ClearableFileInput(attrs={'multiple': True}))
     #document = forms.FileField()
     class Meta:
         

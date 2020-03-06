@@ -1,4 +1,7 @@
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth.models import User
 from core.models import  Document, Process, Ret, Process
 from django.contrib import messages
 import csv
@@ -9,10 +12,11 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 from core.forms import DocumentForm
 from django.core.files.storage import FileSystemStorage
+from django.utils import timezone
 #from core.forms import FileForm
 
 def index(request):
-    refs = Process.objects.prefetch_related('process').all()
+    refs = Process.objects.prefetch_related('process').order_by('-created_date')
     files = Document.objects.prefetch_related('process').all()
     rets = Ret.objects.select_related('parent_ref_number').all()
     # docs = Document.objects.get(process__exact = files.ref_number)
@@ -71,16 +75,49 @@ def session_detail(request, pk):
       
 def process(request):
     #towers = Tower.objects.all()
+    now = timezone.now()
     form1 = DocumentForm(prefix="a1")
     form2 = DocumentForm(prefix="a2")
+    form3 = DocumentForm(prefix="a3")
+    form4 = DocumentForm(prefix="a4")
+    form5 = DocumentForm(prefix="a5")
+    form6 = DocumentForm(prefix="a6")
+    form7 = DocumentForm(prefix="a7")
+    form8 = DocumentForm(prefix="a8")
+    form9 = DocumentForm(prefix="a9")
+    form10 = DocumentForm(prefix="a10")
+    form11 = DocumentForm(prefix="a11")
+    form12 = DocumentForm(prefix="a12")
     # cwd = os.getcwd()  # Get the current working directory (cwd)
     # files = os.listdir(cwd)  # Get all the files in that directory
     # print("Files in %r: %s" % (cwd, files))
     return render(request, 'about.html', {
         
         'form1'  : form1 ,
-        'form2'  : form2 
+        'form2'  : form2 ,
+        'form3'  : form3 ,
+        'form4'  : form4 ,
+        'form5'  : form5 ,
+        'form6'  : form6 ,
+        'form7'  : form7 ,
+        'form8'  : form8 ,
+        'form9'  : form9 ,
+        'form10'  : form10 ,
+        'form11'  : form11 ,
+        'form12'  : form12 ,
+        'now' : now,
     })    
+
+def process_v2(request):
+    now = timezone.now()
+
+    return render(request, 'process_v2.html', {
+        'now' : now,
+    })
+
+
+
+
 
 def create_object(request, *args, **kwargs):
     #file_upload = '/Users/samsmacbookair/projects/john_proj/core/retStaged.txtrpt'
@@ -355,6 +392,34 @@ def create_object_new(request, *args, **kwargs):
 
     return render(request, 'about.html')
 
+def create_session_form(request, *args, **kwargs):
+    #Using ModelForm to create OBJECTS
+    #file_upload = '/Users/samsmacbookair/projects/john_proj/core/retStaged.txtrpt'
+    if request.method == "POST":
+        print(" \n === Entered New Upload Block === Method is POST ... ")
+
+        fcc_id = request.POST.get('fcc_id')
+        site_common_name = request.POST.get('site_common_name')
+        market = request.POST.get('market')
+        enode_b_id = request.POST.get('enode_b_id')
+        ptn = request.POST.get('ptn')
+        release = request.POST.get('release')
+
+        process = Process(fcc_id = fcc_id, 
+        site_common_name = site_common_name,
+        market = market,
+        enode_b_id = enode_b_id,
+        ptn = ptn, 
+        release =release
+        )
+        happy = process.save()
+
+    else:
+        print("Invalied")
+        
+    messages.success(request, "Session Created: '{}' ".format(process.fcc_id))
+    return redirect('home')
+
 def create_object_form(request, *args, **kwargs):
     #Using ModelForm to create OBJECTS
     #file_upload = '/Users/samsmacbookair/projects/john_proj/core/retStaged.txtrpt'
@@ -368,8 +433,28 @@ def create_object_form(request, *args, **kwargs):
 
         newfile = DocumentForm(request.POST, request.FILES, prefix="a2")
         newfile2 = DocumentForm(request.POST, request.FILES, prefix="a1")
+        newfile3 = DocumentForm(request.POST, request.FILES, prefix="a3")
+        newfile4 = DocumentForm(request.POST, request.FILES, prefix="a4")
+        newfile5 = DocumentForm(request.POST, request.FILES, prefix="a5")
+        newfile6 = DocumentForm(request.POST, request.FILES, prefix="a6")
+        newfile7 = DocumentForm(request.POST, request.FILES, prefix="a7")
+        newfile8 = DocumentForm(request.POST, request.FILES, prefix="a8")
+        newfile9 = DocumentForm(request.POST, request.FILES, prefix="a9")
+        newfile10 = DocumentForm(request.POST, request.FILES, prefix="a10")
+        newfile11 = DocumentForm(request.POST, request.FILES, prefix="a11")
+        newfile12 = DocumentForm(request.POST, request.FILES, prefix="a12")
         uploaded_file_list.append(newfile)
         uploaded_file_list.append(newfile2)
+        uploaded_file_list.append(newfile3)
+        uploaded_file_list.append(newfile4)
+        uploaded_file_list.append(newfile5)
+        uploaded_file_list.append(newfile6)
+        uploaded_file_list.append(newfile7)
+        uploaded_file_list.append(newfile8)
+        uploaded_file_list.append(newfile9)
+        uploaded_file_list.append(newfile10)
+        uploaded_file_list.append(newfile11)
+        uploaded_file_list.append(newfile12)
 
         print("UploadedFileList:::: ", uploaded_file_list)
         session_name = request.POST.get('session')
@@ -388,29 +473,31 @@ def create_object_form(request, *args, **kwargs):
                 print("New process REF NUMBER in loop:", process.ref_number)
                 # if not you can only using `obj = form.save()`
                 original_file_name = the_file.cleaned_data['document']
-                #original_file_name2 = newfile2.cleaned_data['document']
-                #initial_obj = the_file.save(commit=False)
-                #print("HELP", initial_obj.document)
-                modified_file_name = the_file.save()
-                modified_file_name.process = process
-                print("THE FILE.PROCESS:", modified_file_name.process)
-                #modified_file_name2 = newfile2.save()
-                updated_file = modified_file_name.save()
-                print("Original File Name", original_file_name)
-                #print("Modified File Name ", modified_file_name.document)
-            
-                #print("Document Object saved, from file that was renamed:", newfile)
+                print("Original FILE NAME:", original_file_name)
+                if original_file_name != None:
+                    #original_file_name2 = newfile2.cleaned_data['document']
+                    #initial_obj = the_file.save(commit=False)
+                    #print("HELP", initial_obj.document)
+                    modified_file_name = the_file.save()
+                    modified_file_name.process = process
+                    print("THE FILE.PROCESS:", modified_file_name.process)
+                    #modified_file_name2 = newfile2.save()
+                    updated_file = modified_file_name.save()
+                    print("Original File Name", original_file_name)
+                    #print("Modified File Name ", modified_file_name.document)
                 
-                #cleaned_file = newfile
-                #print("CLEANED FILE:", cleaned_file)
-                #cleaned_file = newfile.document
-                #print("cleanedFILE:", cleaned_file.document)
-                modified_file_list.append(modified_file_name.document)
-                #modified_file_list.append(modified_file_name2.document)
-                #print("Current Cleaned FILE LIST", cleaned_file_list)
-                print(" Modified LIST ", modified_file_list)
-                print(" repeating FOR loop ")
-                # print("Inital OBject.document.url:", initial_obj.document.url)
+                    #print("Document Object saved, from file that was renamed:", newfile)
+                    
+                    #cleaned_file = newfile
+                    #print("CLEANED FILE:", cleaned_file)
+                    #cleaned_file = newfile.document
+                    #print("cleanedFILE:", cleaned_file.document)
+                    modified_file_list.append(modified_file_name.document)
+                    #modified_file_list.append(modified_file_name2.document)
+                    #print("Current Cleaned FILE LIST", cleaned_file_list)
+                    print(" Modified LIST ", modified_file_list)
+                    print(" repeating FOR loop ")
+                    # print("Inital OBject.document.url:", initial_obj.document.url)
             else:
                 print("Form NOT valid")
 
@@ -487,7 +574,7 @@ def create_object_form(request, *args, **kwargs):
             json_string = f.read()
             f.close()
             data = json.loads(json_string)
-            
+            #Add variables and parsing for band, technology, operating_band
 
             for values in data['Data']:
                 object = Ret.objects.create(

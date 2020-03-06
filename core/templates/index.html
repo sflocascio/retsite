@@ -18,6 +18,12 @@
         Sessions
       </h1>
 
+      {% comment %} <div class "box" > 
+ <a class="nav-link login-button" href="{% url 'registration_register' %}"> Create Account </a>
+                                </li>
+                             <li class="nav-item">
+                                    <a class="nav-link add-button" href="{% url 'auth_login' %}"> Login </a></div> {% endcomment %}
+
       <br>
       {% for ref in refs %} 
 
@@ -35,7 +41,7 @@
 
         <p class="#"> 
         {% comment %} <i class="fas fa-broadcast-tower" style="color:#9da69c;"> {% endcomment %}
-        <strong> Session Name: </strong> {{ref.session_name}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: 2/17/19 </span>
+        <strong> FCC ID: </strong> {{ref.fcc_id}}  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: {{ref.created_date}} </span>
         </p>
 
         <p>
@@ -43,15 +49,27 @@
           <br>
         </p>
         <p>
-          <strong> Ref Id: </strong> <small>{{ref.ref_number}}</small> 
+          <strong> Reference Id: </strong> <small>{{ref.ref_number}}</small> 
           <br>
         </p>
         <p>
-          <strong> Session Details: </strong> <small> Working on site 54 in Illinois</small> 
+          <strong> Site Common Name: </strong> <small> {{ref.site_common_name}}</small> 
           <br>
         </p>
         <p>
-          <strong> Files Processed: </strong> <small>  4 </small> 
+          <strong> Market: </strong> <small> {{ref.market}}</small> 
+        </p>
+        <p>
+          <strong> PTN: </strong> <small> {{ref.ptn}}</small> 
+        </p>
+        <p>
+          <strong> Release: </strong> <small> {{ref.release}}</small> 
+        </p>
+        <p>
+          <strong> Enode B Id: </strong> <small> {{ref.enode_b_id}}</small> 
+        </p>
+        <p>
+          <strong> Cross Sector Redundency </strong> <small>  {{ref.cross_sector_redundency}}</small> 
           <br>
         </p>
       </div>
