@@ -258,6 +258,8 @@ def session_detail_v2(request, pk):
                 band = get_band(station_id)
                 technology = get_technology(station_id)
                 operating_band = get_operating_band(band, technology)
+
+                #Handle Technologies that Come back empty and set subunit if they are, otherwise set to undefined
                 if operating_band == '--':
                     ret_sub_unit = station_id
                 else:

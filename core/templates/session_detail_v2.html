@@ -3,8 +3,10 @@ Detail - {{ block.super }} {% endblock title %}
 {% block content %}
 {% load crispy_forms_tags %}
 <section class="section">
+<br>
     <div class="container">
       <h1 class="title">
+      <br>
         Session Detail 
       </h1>
       
@@ -78,11 +80,35 @@ Detail - {{ block.super }} {% endblock title %}
          <div class="columns">
             <div class="column">
             <h1 class="subtitle">Alphas</h1>
-            
-                
-               
                   {% if alpha_pos_4 %}
-                  <p> already uploaded </p>
+                  <p> Aplha Uploaded already uploaded </p>
+                  {% for a in alpha_pos_4 %}
+                  <!--Accordion wrapper-->
+                      <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+                        <!-- Accordion card -->
+                        <div class="card">
+                          <!-- Card header -->
+                          <div class="card-header" role="tab" id="headingTwo1">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                              aria-expanded="false" aria-controls="collapseTwo1">
+                              <h5 class="mb-0">
+                                {{a.sector_id}} <i class="fas fa-angle-down rotate-icon"></i>
+                              </h5>
+                            </a>
+                          </div>
+                          <!-- Card body -->
+                          <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                            data-parent="#accordionEx1">
+                            <div class="card-body">
+                            {{ a.ret_name }}
+                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Accordion card -->
+                      </div>
+                      <!-- Accordion wrapper -->
+                      {% endfor %}
 
                 {% else %}
                 
@@ -119,7 +145,7 @@ Detail - {{ block.super }} {% endblock title %}
                     <br>
             </div>
             <div class="column">
-            <h1 class="subtitle"></h1>
+            <h1 class="subtitle">GAMMA </h1>
                 
                     {{ form9|crispy }}  
                     <input class="button is-small" type="submit" value="Submit" /> 
@@ -139,13 +165,16 @@ Detail - {{ block.super }} {% endblock title %}
 
 </div> 
 
+{% comment %}  =====================  TECHNOLOGIES SECTION ========================== {% endcomment %}
 <div class = "box" > 
 <h1 class ="title"> Technologies </h1>
 {% for t in technologies %}
-  <p>{{ t.technology_operating_band}}</p>
-  <p>{{ t.technology_cell_id}}</p>
-  <a class="button is-small is-info is-outlined" href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit this technology</a>
-  <br>
+  {% if t.technology_operating_band != '--' %}
+      <p>{{ t.technology_operating_band}}</p>
+      <p>{{ t.technology_cell_id}}</p>
+      <a class="button is-small is-info is-outlined" href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit this technology</a>
+      <br>
+  {% endif %}
 {% endfor %}
 
 </div> 
@@ -154,7 +183,8 @@ Detail - {{ block.super }} {% endblock title %}
 
 
 <div class="box">
-         {% comment %} inset table here {% endcomment %}
+
+{% comment %}  =====================  TABLE SECTION ========================== {% endcomment %}
          
 <div class="scrolling-wrapper" id="HTMLtoPDF">
          <table class="table is-striped is-hoverable is-bordered">
@@ -317,8 +347,30 @@ Detail - {{ block.super }} {% endblock title %}
 	<!-- here we call the function that makes PDF -->
 	<a href="#" onclick="HTMLtoPDF()">Download PDF</a>
 
-
-
+<!--Accordion wrapper-->
+<div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+  <!-- Accordion card -->
+  <div class="card">
+    <!-- Card header -->
+    <div class="card-header" role="tab" id="headingTwo1">
+      <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+        aria-expanded="false" aria-controls="collapseTwo1">
+        <h5 class="mb-0">
+          Collapsible Group Item #1 <i class="fas fa-angle-down rotate-icon"></i>
+        </h5>
+      </a>
+    </div>
+    <!-- Card body -->
+    <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+      data-parent="#accordionEx1">
+      <div class="card-body">
+        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+      </div>
+    </div>
+  </div>
+  <!-- Accordion card -->
+</div>
+<!-- Accordion wrapper -->
 
 
 {% endblock content %}
