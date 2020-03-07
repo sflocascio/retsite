@@ -84,11 +84,11 @@ class Ret(models.Model):
     
     relative_antenna_position = models.CharField(max_length=500, null=True)
     bearing = models.CharField(max_length=500)
-    operating_band = models.CharField(max_length=500, null=True)
-    band = models.CharField(max_length=500, null=True)
-    technology = models.CharField(max_length=500, null=True)
+    operating_band = models.CharField(max_length=500, null=True) #Numbers or Pairs (ex: 700/800) based off Band table ...
+    band = models.CharField(max_length=500, null=True) #Simply 1 character such (ex: 2, 3, E, K) etc.. 
+    technology = models.CharField(max_length=500, null=True) #Simply 1 Letter (ex: L, U, F, N )
     eutran_cell_id = models.CharField(max_length=500, null=True)
-    ret_sub_unit = models.CharField(max_length=500, null=True)
+    ret_sub_unit = models.CharField(max_length=500, null=True) #This is (station_id + eutran_cell_id)
     address = models.CharField(max_length=500)
     
     hw_version = models.CharField(max_length=500)

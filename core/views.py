@@ -256,8 +256,12 @@ def session_detail_v2(request, pk):
                 print("StationID HERE::", station_id)
                 position_code = get_sector_and_position_code(station_id)
                 band = get_band(station_id)
-                operating_band = get_operating_band(band)
-
+                technology = get_technology(station_id)
+                operating_band = get_operating_band(band, technology)
+                if operating_band == '--':
+                    ret_sub_unit = station_id
+                else:
+                    ret_sub_unit = 'not yet defined'
                 #get or update tecnology object here 
                 update_or_create_technology_object(operating_band, process)
 
@@ -266,10 +270,11 @@ def session_detail_v2(request, pk):
                 #RET object created here 
                 object = Ret.objects.create(
                 ret_position = get_ret_position(position_code),
-                band = band,
-                operating_band = operating_band,
-                technology = get_technology(station_id),
-                parent_ref_number = process,
+                band = band, #set above
+                operating_band = operating_band, #set above
+                ret_sub_unit = ret_sub_unit,
+                technology = technology, #set above 
+                parent_ref_number = process, #set to parent ref 
                 address=values['Address'],
                 ret_name=file , 
                 aisg_version=values['AISG Version'], 
@@ -789,7 +794,12 @@ def update_technology_cell_id(request, pk):
             for ret in rets:
                 if ret.operating_band == technology_operating_band:
                     ret.ret_cell_id = technology_cell_id
+                    #Here you have the indv. ret and it's attributes for play 
+                    prefix = get_eutran_prefix(ret.station_id) #returns A,B, or C 
+                    ret.eutran_cell_id = set_eutran_cell_id(ret.band, ret.ret_cell_id, prefix)
+                    ret.ret_sub_unit = set_ret_sub_unit(ret.station_id, ret.eutran_cell_id)
                     ret.save()
+                    
 
             # return redirect('home')
             return redirect('session_detail', pk=session_id)
