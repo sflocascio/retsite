@@ -776,16 +776,39 @@ def update_technology_cell_id(request, pk):
     refs = Technology.objects.get(pk=pk)
     session_id = refs.parent_ref_number.id
     form_class = TechnologyForm
+    parent_session = refs.parent_ref_number
+    rets = parent_session.parent_ref_number.all()
+    #rets = refs.parent_ref_number.all()
 
     if request.method =='POST':
         form = form_class(data=request.POST, instance=refs)
         if form.is_valid():
+            technology_operating_band = form.cleaned_data['technology_operating_band']
+            technology_cell_id = form.cleaned_data['technology_cell_id']
             form.save()
+            for ret in rets:
+                if ret.operating_band == technology_operating_band:
+                    ret.ret_cell_id = technology_cell_id
+                    ret.save()
+
             # return redirect('home')
             return redirect('session_detail', pk=session_id)
     else:
         form = form_class(instance=refs)
     return render(request, 'edit_technology.html', {'refs': refs, 'form': form, })
+
+# if method == POST:
+#     technology = Something to get the specific technology 
+#       Need to set the Foreign Keys to each otheer 
+#     technology_cell_id = user input on this specfic form 
+#     technolgy_cell_id.save()
+
+#     for ret in rets:
+#         if ret.operating_band == tecnology.operating_band:
+#             ret.cell_id = technology_cell_id 
+#             ret.save() or update   
+#         else: 
+#             pass
 
 
 #     refs = Process.objects.get(pk=pk)
