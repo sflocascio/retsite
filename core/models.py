@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 # ./manage.py migrate --fake core
 # python manage.py migrate --fake core zero
 # python manage.py migrate --fake-initial
-# python manage.py migrate --fake my_app 0001
+# python manage.py migrate --fake core 0001
 # python manage.py migrate --fake
 
 # python manage.py sqlclear core
@@ -56,10 +56,10 @@ class Document(models.Model):
     document = models.FileField(upload_to='', null=True)
     #uploaded_at = models.DateTimeField(auto_now_add=True)
     position = models.CharField(max_length=500, null=True, choices=POSITION_OPTIONS)
+    connected_rrh_serial = models.CharField(max_length=500, null=True) #This comes from user entry
     process = models.ForeignKey(
         Process, to_field='ref_number',null=True, related_name="process", on_delete=models.CASCADE)
-    # parent_name = models.OneToOneField(
-    #    Process, on_delete=models.CASCADE, to_field='session_name', null=True, parent_link=True,  unique=True, related_name="parent_name")
+
     # def __str__(self):
     #     return self.document   
 
@@ -89,27 +89,25 @@ class Ret(models.Model):
     technology = models.CharField(max_length=500, null=True)
     eutran_cell_id = models.CharField(max_length=500, null=True)
     ret_sub_unit = models.CharField(max_length=500, null=True)
-    connected_rrh_serial = models.CharField(max_length=500, null=True) #This comes from user entry
     address = models.CharField(max_length=500)
     
     hw_version = models.CharField(max_length=500)
     installation_date = models.CharField(max_length=500, null=True)
     installer_id = models.CharField(max_length=500, null=True)
+    ret_cell_id = models.CharField(max_length=500, null=True)
 
     #parent_file = models.ForeignKey(Document, on_delete=models.SET_NULL, related_name="parent_file", null=True)
 
     def __str__(self):
-        return self.ret_name    
+        return self.sector_id   
 
 
-# class Unrelated(models.Model):
-#     ret_name = models.CharField(max_length=500, null=True)
-#     rret_name = models.CharField(max_length=500, null=True)
-#     aisg_version = models.CharField(max_length=500)
-#     address = models.CharField(max_length=500)
-#     bearing = models.CharField(max_length=500)
-#     hw_version = models.CharField(max_length=500)
-#     #parent_file = models.ForeignKey(Document, on_delete=models.SET_NULL, related_name="parent_file", null=True)
+class Technology(models.Model):
+    parent_ref_number = models.ForeignKey(
+        Process, to_field='ref_number',null=True, related_name="parent_ref_number_tech", on_delete=models.CASCADE)
+    technology_operating_band = models.CharField(max_length=500, null=True)
+    technology_cell_id = models.CharField(max_length=500, null=True)
 
-#     def __str__(self):
-#         return self.name    
+
+    def __str__(self):
+        return self.technology_operating_band   

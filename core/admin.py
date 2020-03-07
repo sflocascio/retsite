@@ -1,13 +1,13 @@
 from django.contrib import admin
 
-from core.models import  Document, Process, Ret
+from core.models import  Document, Process, Ret, Technology
 
 
 class RetSectionAdmin(admin.ModelAdmin):
     model = Ret
 
-# class UnrelatedAdmin(admin.ModelAdmin):
-#     model = Unrelated
+class TechnologyAdmin(admin.ModelAdmin):
+    model = Technology
 
 class DocumentAdmin(admin.ModelAdmin):
     model = Document
@@ -41,3 +41,4 @@ class ProcessAdmin(admin.ModelAdmin):
 admin.site.register(Ret)
 admin.site.register(Document)
 admin.site.register(Process)
+admin.site.register(Technology)
