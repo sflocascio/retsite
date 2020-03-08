@@ -15,6 +15,7 @@
 
     <div class="container">
       <h1 class="title">
+      <br>
         Sessions
       </h1>
 
@@ -80,7 +81,8 @@
           &nbsp;&nbsp;
           <button class="button is-primary is-light">Export CSV</button>
           &nbsp;&nbsp;
-          <button class="button is-dangeris-light">Remove</button>
+          <a href="{% url 'delete_all_files' pk=ref.pk %}">
+          <button class="button is-link is-light">Delete This Session</button></a>
         </div>
       </nav>
     </div>

@@ -51,6 +51,7 @@ urlpatterns = [
     path('<pk>/detail/atenna', views.process_antenna_file, name='process_antenna_file'),
     path('<pk>/table/', views.session_table, name='session_table'),
     path('<pk>/export/', views.export_csv, name='export_csv'),
+    path('<pk>/delete', views.delete_all_files, name='delete_all_files'),
     # path('accounts/', include('registration.backends.simple.urls')),
     # path('accounts/register/',
     #     HomeRegistrationView.as_view(),

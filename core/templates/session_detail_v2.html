@@ -2,353 +2,31 @@
 Detail - {{ block.super }} {% endblock title %}
 {% block content %}
 {% load crispy_forms_tags %}
-<section class="section">
-<br>
-    <div class="container">
-      <h1 class="title">
-      <br>
-        Session Detail 
-      </h1>
-      
-      {% comment %} <p> <a href="{% url 'export_csv' pk=refs.pk %}"> EXPORT CSV > </a></p> {% endcomment %}
-
-      <div class="box">
-  <article class="media">
-    <div class="media-left">
-      <figure class="image is-64x64">
-        <a class="level-item">
-          <span class="icon is-large"><i class="fas fa-broadcast-tower"style="color:#9da69c;"></i></span>
-        </a>
-      </figure>
-    </div>
-    <div class="media-content">
-      <div class="content">
-
-      <p>
-          <strong>Session Name </strong> <small>{{refs.session_name}} </small>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: {{refs.created_date}} </span>
-          <br>
-        </p>
-      
-  
-        <p>
-          <strong>Owner: </strong> <small>@johnsmith</small>  
-          <br>
-        </p>
-        <p>
-          <strong> Ref Id: </strong> <small>{{refs.ref_number}}</small> 
-          <br>
-        </p>
-        <p>
-          <strong> Session Details: </strong> <small> Working on site 54 in Illinois</small> 
-          <br>
-        </p>
-        <p>
-          <strong> Rets Uploaded: </strong> <small>  4 </small> 
-          <br>
-        </p>
-      </div>
-      <nav class="level is-mobile">
-        <div class="level-left">
-
-          <a href="{% url 'export_csv' pk=refs.pk %}"> <button class="button is-primary is-light">Export CSV</button></a>
-          &nbsp;&nbsp;
-          <button class="button is-link is-light">Download PDF</button>
-          &nbsp;&nbsp;
-          <button class="button is-info is-light">Email as Attatchment</button>
-          &nbsp;&nbsp;
-          <button class="button is-light">Download Source Files</button>
-          &nbsp;&nbsp;
-          <button class="button  is-light">Delete</button>
-        </div>
-      </nav>
-    </div>
-    <div class="media-right">
-    <button class="delete"></button>
-  </div>
-  </article>
-
-</div>
-<div class="box"> 
-<h1 class="subtitle">
-        Process Antenna Files 
-      </h1>
-
- <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
-        {% csrf_token %} 
-        <br>
-        <br>
-         <div class="columns">
-            <div class="column">
-            <h1 class="subtitle">Alphas</h1>
-                  {% if alpha_pos_4 %}
-                  <p> Aplha Uploaded already uploaded </p>
-                  {% for a in alpha_pos_4 %}
-                  <!--Accordion wrapper-->
-                      <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
-                        <!-- Accordion card -->
-                        <div class="card">
-                          <!-- Card header -->
-                          <div class="card-header" role="tab" id="headingTwo1">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
-                              aria-expanded="false" aria-controls="collapseTwo1">
-                              <h5 class="mb-0">
-                                {{a.sector_id}} <i class="fas fa-angle-down rotate-icon"></i>
-                              </h5>
-                            </a>
-                          </div>
-                          <!-- Card body -->
-                          <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
-                            data-parent="#accordionEx1">
-                            <div class="card-body">
-                            {{ a.ret_name }}
-                              Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Accordion card -->
-                      </div>
-                      <!-- Accordion wrapper -->
-                      {% endfor %}
-
-                {% else %}
-                
-                {{ form1|crispy }} 
-                <input class="button is-small" type="submit" value="Submit" />
-
-                 {% endif %}
-            
-                    <br>
-                    
-                    {{ form2|crispy }} 
-                    <input class="button is-small" type="submit" value="Submit" />  
-                    <br>
-                    {{ form3|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />  
-                    <br>
-                    {{ form4|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />   
-                    <br>
-                            </div>
-            <div class="column">
-            <h1 class="subtitle">Beta</h1>
-            {{ form5|crispy }} 
-            <input class="button is-small" type="submit" value="Submit" />  
-                    <br>
-                    {{ form6|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />   
-                    <br>
-                    {{ form7|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />   
-                    <br>
-                    {{ form8|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />   
-                    <br>
-            </div>
-            <div class="column">
-            <h1 class="subtitle">GAMMA </h1>
-                
-                    {{ form9|crispy }}  
-                    <input class="button is-small" type="submit" value="Submit" /> 
-                    <br>
-                    {{ form10|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />   
-                    <br>
-                    {{ form11|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />   
-                    <br>
-                    {{ form12|crispy }}
-                    <input class="button is-small" type="submit" value="Submit" />   
-                    <br>
-            </div>
-
-</div>
-
-</div> 
-
-{% comment %}  =====================  TECHNOLOGIES SECTION ========================== {% endcomment %}
-<div class = "box" > 
-<h1 class ="title"> Technologies </h1>
-{% for t in technologies %}
-  {% if t.technology_operating_band != '--' %}
-      <p>{{ t.technology_operating_band}}</p>
-      <p>{{ t.technology_cell_id}}</p>
-      <a class="button is-small is-info is-outlined" href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit this technology</a>
-      <br>
-  {% endif %}
-{% endfor %}
-
-</div> 
 
 
-
-
-<div class="box">
-
-{% comment %}  =====================  TABLE SECTION ========================== {% endcomment %}
-         
-<div class="scrolling-wrapper" id="HTMLtoPDF">
-         <table class="table is-striped is-hoverable is-bordered">
-  <thead>
-    <tr>
-      <th><abbr title="Position">Sector ID</abbr></th>
-      <th><abbr title="Played">Address</abbr></th>
-      <th><abbr title="Won">Station ID</abbr></th>
-      <th><abbr title="Drawn">HW Version</abbr></th>
-      <th><abbr title="Lost">Bearing</abbr></th>
-      <th><abbr title="Goals for">AISG Version</abbr></th>
-      <th><abbr title="Goals against">Ret Name</abbr></th>
-      <th><abbr title="Position">Sector ID</abbr></th>
-      <th><abbr title="Played">Address</abbr></th>
-      <th><abbr title="Won">Station ID</abbr></th>
-      <th><abbr title="Drawn">HW Version</abbr></th>
-      <th><abbr title="Lost">Bearing</abbr></th>
-      <th><abbr title="Goals for">AISG Version</abbr></th>
-      <th><abbr title="Goals against">Ret Name</abbr></th>
-      <th><abbr title="Position">Sector ID</abbr></th>
-      <th><abbr title="Played">Address</abbr></th>
-      <th><abbr title="Won">Station ID</abbr></th>
-      <th><abbr title="Drawn">HW Version</abbr></th>
-      <th><abbr title="Lost">Bearing</abbr></th>
-      <th><abbr title="Goals for">AISG Version</abbr></th>
-      <th><abbr title="Goals against">Ret Name</abbr></th>
-      {% comment %} <th><abbr title="Goal difference">GD</abbr></th>
-      <th><abbr title="Points">Pts</abbr></th>
-      <th>Qualification or relegation</th> {% endcomment %}
-    </tr>
-  </thead>
-
-  <tbody>
-   <th> Gamma Position 2 </th>
-  {% if gamma_pos_2 %}
-    {% for g in gamma_pos_2 %} 
-      <tr>
-        <td>{{ g.sector_id  }}</td>
-        <td>{{ g.address  }}</td>
-        <td>{{ g.station_id  }}</td>
-        <td>{{ g.hw_version  }}</td>
-        <td>{{ g.bearing  }}</td>
-        <td>{{ g.aisg_version  }}</td>
-        <td>{{ g.ret_name }}</td>
-      </tr>
-      {% endfor %}
-        {% else %}
-            <tr>
-          <td> No Data </td>
-          </tr>
-      {% endif %}
-    <th> Beta Position 2 </th>
-    {% if beta_pos_2 %}
-      {% for a in beta_pos_2 %} 
-      <tr>
-        <td>{{ a.sector_id  }}</td>
-        <td>{{ a.address  }}</td>
-        <td>{{ a.station_id  }}</td>
-        <td>{{ a.hw_version  }}</td>
-        <td>{{ a.bearing  }}</td>
-        <td>{{ a.aisg_version  }}</td>
-        <td>{{ a.ret_name }}</td>
-      </tr>
-      {% endfor %}
-        {% else %}
-          <tr>
-        <td> No Data Beta 2</td>
-        </tr>
-      {% endif %}
-    <th> Alpha Position 4 </th>
-    {% if alpha_pos_4%}
-        {% for a in alpha_pos_4 %} 
-          <tr>
-            <td>{{ a.sector_id  }}</td>
-            <td>{{ a.address  }}</td>
-            <td>{{ a.station_id  }}</td>
-            <td>{{ a.hw_version  }}</td>
-            <td>{{ a.bearing  }}</td>
-            <td>{{ a.aisg_version  }}</td>
-            <td>{{ a.ret_name }}</td>
-          </tr>
-        {% endfor %}
-        {% else %}
-        <tr>
-      <th> No Data Alha 4</th>
-      </tr>
-    {% endif %}
-
-    
-  </tbody>
-</table>
-</div>  
-</div>
-{% comment %} End ExportPDF  {% endcomment %}
-        
-<div class="box">
-<h1 class="title">
-        Source Files 
-      </h1>
-{% for d in docs %}
-{% comment %} <p> The File: {{d.document}} </p>  {% endcomment %}
-<p><strong>Position:</strong> {{d.position}} </p>
-{% comment %} <p>Document Uploaded {{d.document}} </p> {% endcomment %}
-<a href="{{d.document.url}}" download> Download File</a>
-<br> 
-<br> 
-{% endfor %}
-</div>
-        
-        
-
-
-
-
-
-
-
-        </div>
-      </p>
-    </div>
-  </section>
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-<br> 
-      
-      <p class="subtitle"> Diagnostics ________________________________________________________________</p>
- 
- 
  <div class="section">  
+ <br>
+
  <h1 class="title"> Session Detail </h1>
 
 <div class="tabs is-boxed">
   <ul>
+    <li >
+      <a>
+        <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+        <span>Back</span>
+      </a>
+    </li>
     <li class="is-active">
       <a>
-        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-        <span>Pictures</span>
+        <span class="icon is-small"><i class="fas fa-broadcast-tower" aria-hidden="true"></i></span>
+        <span>Editing "{{ refs.site_common_name }}"</span>
       </a>
     </li>
     <li>
       <a>
-        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-        <span>Music</span>
-      </a>
-    </li>
-    <li>
-      <a>
-        <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
-        <span>Videos</span>
+        <span class="icon is-small"><i class="fas fa-table" aria-hidden="true"></i></span>
+        <span> Grid View </span>
       </a>
     </li>
     <li>
@@ -414,15 +92,13 @@ Detail - {{ block.super }} {% endblock title %}
           &nbsp;&nbsp;
           <button class="button is-info is-light">Email as Attatchment</button>
           &nbsp;&nbsp;
-          <button class="button is-light">Download Source Files</button>
-          &nbsp;&nbsp;
           <button class="button  is-light">Delete</button>
         </div>
       </nav>
     </div>
-    <div class="media-right">
+    {% comment %} <div class="media-right">
     <button class="delete"></button>
-  </div>
+  </div> {% endcomment %}
   </article>
 
 
@@ -433,16 +109,36 @@ Detail - {{ block.super }} {% endblock title %}
   </div>
   <div class="tile is-parent">
     <article class="tile is-child box">
-      <p class="title">Two</p>
-      <p class="subtitle">Subtitle</p>
+      {% comment %} <p class="title">Two</p> {% endcomment %}
+      <p class="subtitle">Upload Additional Session Files</p>
+      <div class="field">
+  <div class="file is-small is-boxed">
+    <label class="file-label">
+      <input class="file-input" type="file" name="resume">
+      <span class="file-cta">
+        <span class="file-icon">
+          <i class="fas fa-upload"></i>
+        </span>
+        <span class="file-label">
+          File…
+        </span>
+      </span>
+    </label>
+  </div>
+  <button class="button is-small is-fullwidth">Submit </button>
+  <br> 
+  <button class="button is-small is-fullwidth"> See all Session Uploads </button>
+</div>
+
     </article>
   </div>
   <div class="tile is-parent">
     <article class="tile is-child box">
       <p class="title">Notes:</p>
       <p class="subtitle">Peoria, IL</p>
-      <p class="subtitle">Peoria, IL</p>
+      <p class="#"> Had a good time working on the tower </p>
       
+
     </article>
   </div>
   
@@ -456,8 +152,8 @@ Detail - {{ block.super }} {% endblock title %}
         <article class="tile is-child box">
         {% comment %} <span class="tag is-primary is-light">Alpha Position 1</span> &nbsp; {% endcomment %}
         <span class="tag is-link"><b>Alpha Position 1</b></span>
-
-        
+         <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+        {% csrf_token %} 
         
 
           {% comment %} <p class="title">Five</p>
@@ -466,9 +162,9 @@ Detail - {{ block.super }} {% endblock title %}
           <br>
 
           {% if alpha_pos_4 %}
-                  <p class="is-size-7"> <b>Uploaded File:</b> lkjdsa.txt </p>
-                  <p class="is-size-7"> <b>RRH Serial:</b> lkjdsa.txt </p>
-                  <p class="is-size-7"> <b>HSomethin:</b> lkjdsa.txt </p>
+                  <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> lkjdsa.txt </p>
+                  <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> 76532 </p>
+                 <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> fsdkjhi.png </p>
                   <h5> Ret Files </h5>
                   {% for a in alpha_pos_4 %}
                   <!--Accordion wrapper-->
@@ -503,13 +199,29 @@ Detail - {{ block.super }} {% endblock title %}
                       <!-- Accordion wrapper -->
                       {% endfor %}
                       <br>
-                      <button class="button is-small is-link is-light">Download Source File</button>
-                      <button class="button is-small is-danger is-light">Remove File</button>
-                      
-                      <br>
-                      <br>
-                      <button class="button is-small is-fullwidth">Upload Artifacts </button>
-                      
+                      <button class="button is-small is-fullwidth">Upload Screenshots </button>
+                    <br>
+                      <div class="dropdown is-hoverable">
+  <div class="dropdown-trigger">
+    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+      <span>Options</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+      <ul>
+      <li><button class="button is-small is-link is-light">Download Source File</button></li>
+      <li> <button type="submit" name="sendinfo" value="Send" class="button is-small is-danger is-light">Remove Antenna File</button> <i class="fa fa-trash"></i></li>
+      <li><button class="button is-small is-link is-light">Download Screen Shot</button></li>
+      <li> <button class="button is-small is-danger is-light">Remove Screen Shot</button> </li>
+      </div>
+    </div>
+  </div>
+</div>
 
                 {% else %}
                 
@@ -643,14 +355,19 @@ Detail - {{ block.super }} {% endblock title %}
         {% for t in technologies %}
           {% if t.technology_operating_band != '--' %}
           <div class = "box">
-            <p><b> Operating Band :</b> {{ t.technology_operating_band}}</p>
-            <p><b>Cell Id :</b>{{ t.technology_cell_id}}</p>
+          
+            <p class="is-size-7"><b> Operating Band :</b> <span class="tag is-info is-light">{{ t.technology_operating_band}}</span></p>
+            <p class="is-size-7"><b>Cell Id :</b> <span class="tag is-success is-light">{{ t.technology_cell_id}}</span></p>
             <a class="button is-small is-info is-outlined" href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit this technology</a>
             <br>
             </div>
           {% endif %}
         {% endfor %}
-
+      {% if technologies %}
+      <button type="submit" name="delete_tech" value="Send" class="button is-small is-danger is-light">Clear Technologies </button> <i class="fa fa-trash"></i>
+      {% else %}
+      <p> ** Upload antennae files to generate Technologies ** </p> 
+      {% endif %}
 
 
 
@@ -660,7 +377,7 @@ Detail - {{ block.super }} {% endblock title %}
   </div>
 </div>
 
-<div class="tile is-ancestor">
+{% comment %} <div class="tile is-ancestor">
   <div class="tile is-parent">
     <article class="tile is-child box">
       <p class="title">Twelve</p>
@@ -688,6 +405,107 @@ Detail - {{ block.super }} {% endblock title %}
       </div>
     </article>
   </div>
+</div> {% endcomment %}
+
+
+
+
+
+
+{% comment %}  =====================  TABLE SECTION ========================== {% endcomment %}
+ <div class="box">        
+<div class="scrolling-wrapper" id="HTMLtoPDF">
+         <table class="table is-striped is-hoverable is-bordered">
+  <thead>
+    <tr>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      {% comment %} <th><abbr title="Goal difference">GD</abbr></th>
+      <th><abbr title="Points">Pts</abbr></th>
+      <th>Qualification or relegation</th> {% endcomment %}
+    </tr>
+  </thead>
+
+  <tbody>
+   <th> Gamma Position 2 </th>
+  {% if gamma_pos_2 %}
+    {% for g in gamma_pos_2 %} 
+      <tr>
+        <td>{{ g.sector_id  }}</td>
+        <td>{{ g.address  }}</td>
+        <td>{{ g.station_id  }}</td>
+        <td>{{ g.hw_version  }}</td>
+        <td>{{ g.bearing  }}</td>
+        <td>{{ g.aisg_version  }}</td>
+        <td>{{ g.ret_name }}</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data </td>
+          </tr>
+      {% endif %}
+    <th> Beta Position 2 </th>
+    {% if beta_pos_2 %}
+      {% for a in beta_pos_2 %} 
+      <tr>
+        <td>{{ a.sector_id  }}</td>
+        <td>{{ a.address  }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.hw_version  }}</td>
+        <td>{{ a.bearing  }}</td>
+        <td>{{ a.aisg_version  }}</td>
+        <td>{{ a.ret_name }}</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+          <tr>
+        <td> No Data Beta 2</td>
+        </tr>
+      {% endif %}
+    <th> Alpha Position 4 </th>
+    {% if alpha_pos_4%}
+        {% for a in alpha_pos_4 %} 
+          <tr>
+            <td>{{ a.sector_id  }}</td>
+            <td>{{ a.address  }}</td>
+            <td>{{ a.station_id  }}</td>
+            <td>{{ a.hw_version  }}</td>
+            <td>{{ a.bearing  }}</td>
+            <td>{{ a.aisg_version  }}</td>
+            <td>{{ a.ret_name }}</td>
+          </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+      <th> No Data Alha 4</th>
+      </tr>
+    {% endif %}
+
+    
+  </tbody>
+</table>
+</div>  
 </div>
+{% comment %} End ExportPDF  {% endcomment %}
 
 {% endblock content %}

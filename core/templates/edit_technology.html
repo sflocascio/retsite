@@ -6,7 +6,7 @@
 {% block content %}
 
 
-<div class="title container tabs is-toggle-rounded avenir">
+{% comment %} <div class="title container tabs is-toggle-rounded avenir">
   <ul>
     <li >
       <a class="has-text-grey-lighter" href="{% url 'home' %}">
@@ -39,18 +39,127 @@
 
 
     
+</div> {% endcomment %}
+
+
+
+
+ <div class="section">  
+ <br>
+
+ <h1 class="title"> Session Detail </h1>
+
+<div class="tabs is-boxed">
+  <ul>
+    <li >
+      <a>
+        <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+        <span>Home</span>
+      </a>
+    </li>
+    <li >
+      <a>
+        <span class="icon is-small"><i class="fas fa-broadcast-tower" aria-hidden="true"></i></span>
+        <span> Session "{{ session.site_common_name }}"</span>
+      </a>
+    </li>
+    <li class="is-active">
+      <a>
+        <span class="icon is-small"><i class="fas fa-pen" aria-hidden="true"></i></span>
+        <span> Editing Operating Band : {{ refs.technology_operating_band }}</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+        <span>Documents</span>
+      </a>
+    </li>
+  </ul>
 </div>
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+
+
+
+
+
+<div class="tile is-ancestor">
+  <div class="tile is-8 is-parent">
+    <article class="tile is-child box">
+      
+
+<article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <a class="level-item">
+          <span class="icon is-large"><i class="fas fa-broadcast-tower"style="color:#9da69c;"></i></span>
+        </a>
+      </figure>
+    </div>
+    <div class="media-content">
+      <div class="content">
+
+       <form role="form" action="" method="post" class="subtitle">
+        {% csrf_token %}
+        {{ form.as_p}}
+        <br>
+
+        <button class= " button is-outlined" type="submit">Submit</button>
+    </form>
+
+
+     
+      </div>
+      <nav class="level is-mobile">
+        <div class="level-left">
+
+        </div>
+      </nav>
+    </div>
+
+  </article>
+
+
+
+
+
+    </article>
+  
+
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+       <p>
+          <strong>Session Name </strong> <small>{{session.site_common_name}} </small>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: {{session.created_date}} </span>
+          <br>
+        </p>
+      
+  
+        <p>
+          <strong>Owner: </strong> <small>@johnsmith</small>  
+          <br>
+        </p>
+        <p>
+          <strong> Ref Id: </strong> <small>{{session.ref_number}}</small> 
+          <br>
+        </p>
+        <p>
+          <strong> Session Location: </strong> <small> Working on site 54 in Peoria, Illinois</small> 
+          <br>
+        </p>
+        <p>
+          <strong> FCC ID  </strong> <small>  {{session.fcc_id}}  </small> 
+          <br>
+        </p>
+      
+
+    </article>
+  </div>
+  
+</div>
+
 
 
 

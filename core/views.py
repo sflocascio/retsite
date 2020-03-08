@@ -85,6 +85,11 @@ def session_detail_v2(request, pk):
     gamma_pos_2 = rets.filter(sector_id__contains='GAMMA POS 2')
     beta_pos_2 = rets.filter(sector_id__contains='BETA POS 2')
 
+    if request.POST.get("sendinfo"):  
+            alpha_pos_4.delete()
+    if request.POST.get("delete_tech"):  
+            technologies.delete()
+
     form1 = DocumentForm(prefix="a1")
     form2 = DocumentForm(prefix="a2")
     form3 = DocumentForm(prefix="a3")
@@ -785,6 +790,7 @@ def update_technology_cell_id(request, pk):
     form_class = TechnologyForm
     parent_session = refs.parent_ref_number
     rets = parent_session.parent_ref_number.all()
+    session = refs.parent_ref_number
     #rets = refs.parent_ref_number.all()
 
     if request.method =='POST':
@@ -804,10 +810,44 @@ def update_technology_cell_id(request, pk):
                     
 
             # return redirect('home')
-            return redirect('session_detail', pk=session_id)
+            return redirect('session_detail_v2', pk=session_id)
     else:
         form = form_class(instance=refs)
-    return render(request, 'edit_technology.html', {'refs': refs, 'form': form, })
+    return render(request, 'edit_technology.html', {'refs': refs, 'form': form, 'session': session,})
+
+
+def delete_all_files(request, pk):
+    refs = Process.objects.get(pk=pk)
+    print("entered DELETE All files")
+    # session_id = refs.id
+    refs.delete()
+    # docs = refs.process.all()
+    # process = Process.objects.get(pk=pk)
+    # rets = parent_session.parent_ref_number.all()
+    # technologies = Technology.objects.get(pk=pk)
+
+
+    # card = Document.objects.get(pk=pk)
+    # quiz_id = card.quiz.id
+    # if (request.user == quiz.author) or (request.user.is_staff):
+    # for d in docs:
+    #     print("docs ptined:", d.document)
+    #     d.delete()
+    # for t in technologies:
+    #     t.delete()
+    # for r in rets:
+    #     r.delete()
+
+    #messages.success(request, f'Card "{card.answer}" Deleted')
+    #return redirect('session_detail_v2', pk=session_id)
+    return redirect('home')
+    # return render(request, 'quizzes/quiz_detail.html',)
+
+
+
+
+
+
 
 # if method == POST:
 #     technology = Something to get the specific technology 
