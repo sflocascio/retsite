@@ -1,4 +1,5 @@
 #From core.models import File
+from django.utils.translation import gettext_lazy as _
 
 # from core.models import File
 
@@ -23,7 +24,8 @@ class DocumentForm(forms.ModelForm):
     ('alpha_pos_2', 'alpha_pos_2'),)
     #position = forms.ChoiceField(choices=POSITION_OPTIONS)
     #position = forms.ChoiceField(choices=POSITION_OPTIONS, required=True )
-    document = forms.FileField(required = False, widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    document = forms.FileField(required = False, widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'narrow-select'}))
+ 
     connected_rrh_serial = forms.CharField(required=False) #This comes from user entry
 
     #document = forms.FileField()
@@ -32,7 +34,18 @@ class DocumentForm(forms.ModelForm):
         #position = forms.ChoiceField(choices=POSITION_OPTIONS, required=True )
         
         model = Document
-        fields = ( 'document', 'connected_rrh_serial' )
+        #exclude = ['connected_rrh_serial']
+        fields = ( 'document', )
+        labels = {
+            'connected_rrh_serial': _('rrh'),
+        }
+        # widgets = {
+        #     'connected_rrh_serial': TextInput(attrs = {
+        #         'placeholder': 'Username',
+        #         'class': 'form-control',
+        #         'aria-describedby': 'sizing-addon1',
+
+        #     })
 
 # class DocumentForm(forms.ModelForm):
 #     file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))

@@ -325,52 +325,369 @@ Detail - {{ block.super }} {% endblock title %}
 <br> 
 <br> 
       
-      <p class="subtitle"> Diagnostics </p>
-      {% comment %} {% for ref in refs %}  {% endcomment %}
-      <div class="box">
-      <p> Session Name: {{refs.session_name}} </p>
-      <p> Session ID: {{refs.ref_number}} </p>
-      {% comment %} <p> Name: {{process}} </p>
-      <p> Files {{files}} </p> {% endcomment %}
-     <div class='box'>
-        <h2>Gamma Pos 2  </p>
-         {% for g in gamma_pos_2 %} 
-         <p>StationID {{ g.station_id  }}</p>
-         <p>Sector_id{{ g.sector_id  }}</p>
-         <br>
-         {% endfor %}
-         </div>
+      <p class="subtitle"> Diagnostics ________________________________________________________________</p>
+ 
+ 
+ <div class="section">  
+ <h1 class="title"> Session Detail </h1>
 
-
-
-
-	<!-- here we call the function that makes PDF -->
-	<a href="#" onclick="HTMLtoPDF()">Download PDF</a>
-
-<!--Accordion wrapper-->
-<div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
-  <!-- Accordion card -->
-  <div class="card">
-    <!-- Card header -->
-    <div class="card-header" role="tab" id="headingTwo1">
-      <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
-        aria-expanded="false" aria-controls="collapseTwo1">
-        <h5 class="mb-0">
-          Collapsible Group Item #1 <i class="fas fa-angle-down rotate-icon"></i>
-        </h5>
+<div class="tabs is-boxed">
+  <ul>
+    <li class="is-active">
+      <a>
+        <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
+        <span>Pictures</span>
       </a>
+    </li>
+    <li>
+      <a>
+        <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
+        <span>Music</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
+        <span>Videos</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+        <span>Documents</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+
+
+<div class="tile is-ancestor">
+  <div class="tile is-8 is-parent">
+    <article class="tile is-child box">
+      
+
+<article class="media">
+    <div class="media-left">
+      <figure class="image is-64x64">
+        <a class="level-item">
+          <span class="icon is-large"><i class="fas fa-broadcast-tower"style="color:#9da69c;"></i></span>
+        </a>
+      </figure>
     </div>
-    <!-- Card body -->
-    <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
-      data-parent="#accordionEx1">
-      <div class="card-body">
-        Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3
+    <div class="media-content">
+      <div class="content">
+
+      <p>
+          <strong>Session Name </strong> <small>{{refs.site_common_name}} </small>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: {{refs.created_date}} </span>
+          <br>
+        </p>
+      
+  
+        <p>
+          <strong>Owner: </strong> <small>@johnsmith</small>  
+          <br>
+        </p>
+        <p>
+          <strong> Ref Id: </strong> <small>{{refs.ref_number}}</small> 
+          <br>
+        </p>
+        <p>
+          <strong> Session Location: </strong> <small> Working on site 54 in Peoria, Illinois</small> 
+          <br>
+        </p>
+        <p>
+          <strong> FCC ID  </strong> <small>  {{refs.fcc_id}}  </small> 
+          <br>
+        </p>
+      </div>
+      <nav class="level is-mobile">
+        <div class="level-left">
+
+          <a href="{% url 'export_csv' pk=refs.pk %}"> <button class="button is-primary is-light">Export CSV</button></a>
+          &nbsp;&nbsp;
+          <button class="button is-link is-light">Download PDF</button>
+          &nbsp;&nbsp;
+          <button class="button is-info is-light">Email as Attatchment</button>
+          &nbsp;&nbsp;
+          <button class="button is-light">Download Source Files</button>
+          &nbsp;&nbsp;
+          <button class="button  is-light">Delete</button>
+        </div>
+      </nav>
+    </div>
+    <div class="media-right">
+    <button class="delete"></button>
+  </div>
+  </article>
+
+
+
+
+
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+      <p class="title">Two</p>
+      <p class="subtitle">Subtitle</p>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+      <p class="title">Notes:</p>
+      <p class="subtitle">Peoria, IL</p>
+      <p class="subtitle">Peoria, IL</p>
+      
+    </article>
+  </div>
+  
+</div>
+
+
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-8">
+    <div class="tile">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+        {% comment %} <span class="tag is-primary is-light">Alpha Position 1</span> &nbsp; {% endcomment %}
+        <span class="tag is-link"><b>Alpha Position 1</b></span>
+
+        
+        
+
+          {% comment %} <p class="title">Five</p>
+          <p class="subtitle">Subtitle</p> {% endcomment %}
+          <div class="content">
+          <br>
+
+          {% if alpha_pos_4 %}
+                  <p class="is-size-7"> <b>Uploaded File:</b> lkjdsa.txt </p>
+                  <p class="is-size-7"> <b>RRH Serial:</b> lkjdsa.txt </p>
+                  <p class="is-size-7"> <b>HSomethin:</b> lkjdsa.txt </p>
+                  <h5> Ret Files </h5>
+                  {% for a in alpha_pos_4 %}
+                  <!--Accordion wrapper-->
+                      <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+                      
+                        <!-- Accordion card -->
+                        <div class="card">
+                        
+                          <!-- Card header -->
+                          <div class="card-header" role="tab" id="headingTwo1">
+                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                              aria-expanded="false" aria-controls="collapseTwo1">
+                              <h5 class="mb-0 is-subtitle">
+                                {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                              </h5>
+                            </a>
+                          </div>
+                          <!-- Card body -->
+                          <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                            data-parent="#accordionEx1">
+                            <div class="card-body">
+                            <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                            <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                            <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                            <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                            <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                            </div>
+                          </div>
+                        </div>
+                        <!-- Accordion card -->
+                      </div>
+                      <!-- Accordion wrapper -->
+                      {% endfor %}
+                      <br>
+                      <button class="button is-small is-link is-light">Download Source File</button>
+                      <button class="button is-small is-danger is-light">Remove File</button>
+                      
+                      <br>
+                      <br>
+                      <button class="button is-small is-fullwidth">Upload Artifacts </button>
+                      
+
+                {% else %}
+                
+                {{ form1|crispy }} 
+                <input class="button is-small" type="submit" value="Submit" />
+
+                 {% endif %}
+          
+          </div>
+        </article>
+      </div>
+      <div class="tile is-8 is-vertical">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+            <span class="tag is-link"><b>Alpha Position 2</b></span>
+              
+               <div class="#">
+               <br>
+                    {{ form2|crispy }} 
+                    <br>
+                    <input class="button is-small" type="submit" value="Submit" />  
+                   </div>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <span class="tag is-link"><b>Alpha Position 3</b></span>
+              
+               
+                    {{ form3|crispy }} 
+                    <input class="button is-small" type="submit" value="Submit" />  
+                    <br>
+            </article>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <!-- Accordion card -->
-</div>
-<!-- Accordion wrapper -->
 
+
+
+     <div class="tile">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title">Five</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+          <p>content  </p>
+          </div>
+        </article>
+      </div>
+      <div class="tile is-8 is-vertical">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Six</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Seven</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <div class="tile">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title">Five</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+          <p>content  </p>
+          </div>
+        </article>
+      </div>
+      <div class="tile is-8 is-vertical">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Six</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Seven</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    {% comment %} <div class="tile">
+      <div class="tile is-8 is-parent">
+        <article class="tile is-child box">
+          <p class="title">Nine</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+          </div>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title">Ten</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+          </div>
+        </article>
+      </div>
+    </div> {% endcomment %}
+  </div>
+  
+  <div class="tile is-parent">
+    <article class="tile is-child box ">
+      <div class="content">
+        <p class="title"> Technologies </p>
+        <p class="#"> Auto generated technologies from RET files </p>
+        <div class="content">
+
+        {% for t in technologies %}
+          {% if t.technology_operating_band != '--' %}
+          <div class = "box">
+            <p><b> Operating Band :</b> {{ t.technology_operating_band}}</p>
+            <p><b>Cell Id :</b>{{ t.technology_cell_id}}</p>
+            <a class="button is-small is-info is-outlined" href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit this technology</a>
+            <br>
+            </div>
+          {% endif %}
+        {% endfor %}
+
+
+
+
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+<div class="tile is-ancestor">
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+      <p class="title">Twelve</p>
+      <p class="subtitle">Subtitle</p>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut.</p>
+      </div>
+    </article>
+  </div>
+  <div class="tile is-parent is-6">
+    <article class="tile is-child box">
+      <p class="title">Thirteen</p>
+      <p class="subtitle">Subtitle</p>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+      </div>
+    </article>
+  </div>
+  <div class="tile is-parent">
+    <article class="tile is-child box">
+      <p class="title">Fourteen</p>
+      <p class="subtitle">Subtitle</p>
+      <div class="content">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut.</p>
+      </div>
+    </article>
+  </div>
+</div>
 
 {% endblock content %}
