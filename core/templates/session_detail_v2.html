@@ -12,7 +12,7 @@ Detail - {{ block.super }} {% endblock title %}
 <div class="tabs is-boxed">
   <ul>
     <li >
-      <a>
+      <a href="{% url 'home' %}"> 
         <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
         <span>Back</span>
       </a>
@@ -24,7 +24,7 @@ Detail - {{ block.super }} {% endblock title %}
       </a>
     </li>
     <li>
-      <a>
+      <a href="#grid">
         <span class="icon is-small"><i class="fas fa-table" aria-hidden="true"></i></span>
         <span> Grid View </span>
       </a>
@@ -75,7 +75,7 @@ Detail - {{ block.super }} {% endblock title %}
           <br>
         </p>
         <p>
-          <strong> Session Location: </strong> <small> Working on site 54 in Peoria, Illinois</small> 
+          <strong> Market: </strong> <small> {{refs.market}} </small> 
           <br>
         </p>
         <p>
@@ -106,10 +106,9 @@ Detail - {{ block.super }} {% endblock title %}
 
 
     </article>
-  </div>
+  {% comment %} </div>
   <div class="tile is-parent">
     <article class="tile is-child box">
-      {% comment %} <p class="title">Two</p> {% endcomment %}
       <p class="subtitle">Upload Additional Session Files</p>
       <div class="field">
   <div class="file is-small is-boxed">
@@ -128,7 +127,7 @@ Detail - {{ block.super }} {% endblock title %}
   <button class="button is-small is-fullwidth">Submit </button>
   <br> 
   <button class="button is-small is-fullwidth"> See all Session Uploads </button>
-</div>
+</div> {% endcomment %}
 
     </article>
   </div>
@@ -144,101 +143,144 @@ Detail - {{ block.super }} {% endblock title %}
   
 </div>
 
-
+<!-- START RET CARD -->
 <div class="tile is-ancestor">
   <div class="tile is-vertical is-8">
     <div class="tile">
       <div class="tile is-parent">
         <article class="tile is-child box">
-        {% comment %} <span class="tag is-primary is-light">Alpha Position 1</span> &nbsp; {% endcomment %}
         <span class="tag is-link"><b>Alpha Position 1</b></span>
-         <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
-        {% csrf_token %} 
-        
-
-          {% comment %} <p class="title">Five</p>
-          <p class="subtitle">Subtitle</p> {% endcomment %}
           <div class="content">
           <br>
-
-          {% if alpha_pos_4 %}
-                  <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> lkjdsa.txt </p>
-                  <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> 76532 </p>
-                 <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> fsdkjhi.png </p>
-                  <h5> Ret Files </h5>
-                  {% for a in alpha_pos_4 %}
-                  <!--Accordion wrapper-->
-                      <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
-                      
-                        <!-- Accordion card -->
-                        <div class="card">
-                        
-                          <!-- Card header -->
-                          <div class="card-header" role="tab" id="headingTwo1">
-                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
-                              aria-expanded="false" aria-controls="collapseTwo1">
-                              <h5 class="mb-0 is-subtitle">
-                                {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
-                              </h5>
-                            </a>
-                          </div>
-                          <!-- Card body -->
-                          <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
-                            data-parent="#accordionEx1">
-                            <div class="card-body">
-                            <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
-                            <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
-                            <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
-                            <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
-                            <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
-                            </div>
-                          </div>
-                        </div>
-                        <!-- Accordion card -->
-                      </div>
-                      <!-- Accordion wrapper -->
-                      {% endfor %}
-                      <br>
-                      <button class="button is-small is-fullwidth">Upload Screenshots </button>
-                    <br>
-                      <div class="dropdown is-hoverable">
-  <div class="dropdown-trigger">
-    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
-      <span>Options</span>
-      <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-      </span>
-    </button>
-  </div>
-  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-    <div class="dropdown-content">
-      <div class="dropdown-item">
-      <ul>
-      <li><button class="button is-small is-link is-light">Download Source File</button></li>
-      <li> <button type="submit" name="sendinfo" value="Send" class="button is-small is-danger is-light">Remove Antenna File</button> <i class="fa fa-trash"></i></li>
-      <li><button class="button is-small is-link is-light">Download Screen Shot</button></li>
-      <li> <button class="button is-small is-danger is-light">Remove Screen Shot</button> </li>
-      </div>
-    </div>
-  </div>
-</div>
-
-                {% else %}
-                
-                {{ form1|crispy }} 
-                <input class="button is-small" type="submit" value="Submit" />
-
-                 {% endif %}
-          
+          <!-- Basic RET CARD info -->
+          {% if alpha4 %}
+            {% with alpha_pos_4|first as first_object %}
+                <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ first_object.parent_file.document.name }} </p>
+                <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ first_object.parent_file.connected_rrh_serial }} </p>
+            {% endwith %}
+          {% for a in alpha4.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in alpha4.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if alpha4.parent_antenna_file.all %}
+            <div class="modal" id="myModal">
+              <div class="modal-background"></div>
+                <div class="modal-card">
+                  <header class="modal-card-head">
+                    <p class="modal-card-title">Alpha Position 1 Screenshot</p>
+                    <button class="delete" aria-label="close" data-bulma-modal="close"></button>
+                  </header>
+                  <section class="modal-card-body">
+                    {% for a in alpha4.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+                  </section>
+                <footer class="modal-card-foot">
+                {% comment %} <button class="button is-success">Save changes</button> {% endcomment %}
+                  <button class="button" data-bulma-modal="close">Cancel</button>
+                </footer>
+              </div>
+            </div>
+          <button id="btn" class="button is-small">View Screenshot</button>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screen_form|crispy }} 
+                <input class="button is-small" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                <button class="button is-small is-fullwidth">
+                      {% with alpha_pos_4|first as file %}
+                      <a href="{{file.parent_file.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                      {% endwith %}
+                      <i class="fa fa-download"></i>
+                </button>
+                      {% if alpha4.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with alpha4.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action=""  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form1|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
           </div>
         </article>
       </div>
+<!-- END RET CARD   -->
+
+
       <div class="tile is-8 is-vertical">
         <div class="tile">
           <div class="tile is-parent">
             <article class="tile is-child box">
             <span class="tag is-link"><b>Alpha Position 2</b></span>
-              
                <div class="#">
                <br>
                     {{ form2|crispy }} 
@@ -250,8 +292,6 @@ Detail - {{ block.super }} {% endblock title %}
           <div class="tile is-parent">
             <article class="tile is-child box">
               <span class="tag is-link"><b>Alpha Position 3</b></span>
-              
-               
                     {{ form3|crispy }} 
                     <input class="button is-small" type="submit" value="Submit" />  
                     <br>
@@ -375,6 +415,7 @@ Detail - {{ block.super }} {% endblock title %}
       </div>
     </article>
   </div>
+  
 </div>
 
 {% comment %} <div class="tile is-ancestor">
@@ -411,9 +452,11 @@ Detail - {{ block.super }} {% endblock title %}
 
 
 
-
+<a id="grid">
 {% comment %}  =====================  TABLE SECTION ========================== {% endcomment %}
- <div class="box">        
+ <div class="box"> </a>  
+ 
+ <h1 class="title"> Grid      </h1> 
 <div class="scrolling-wrapper" id="HTMLtoPDF">
          <table class="table is-striped is-hoverable is-bordered">
   <thead>
@@ -505,7 +548,41 @@ Detail - {{ block.super }} {% endblock title %}
   </tbody>
 </table>
 </div>  
+<div class="box">
+<form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    {{ screen_form|crispy }} 
+                    <input class="button is-small" type="submit" value="upload" />
+                    </form>
 </div>
+
+<div class="modal" id="myModal">
+  <div class="modal-background"></div>
+  <div class="modal-card">
+    <header class="modal-card-head">
+      <p class="modal-card-title">Modal title</p>
+      <button class="delete" aria-label="close" data-bulma-modal="close"></button>
+    </header>
+    <section class="modal-card-body">
+       {% for a in alpha4.parent_antenna_file.all %}  
+      <p>{{alpha4.parent_antenna_file.image.url}}</p>
+      <p>{{a.image}}</p>
+      <p>There is something her</p>
+      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+     {% endfor %}  
+    </section>
+    <footer class="modal-card-foot">
+      <button class="button is-success">Save changes</button>
+      <button class="button" data-bulma-modal="close">Cancel</button>
+    </footer>
+  </div>
+</div>
+
+<button id="btn" class="button is-small">Click for Modal</button>
+</div>
+
+
 {% comment %} End ExportPDF  {% endcomment %}
 
 {% endblock content %}

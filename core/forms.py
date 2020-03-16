@@ -9,14 +9,20 @@ from django.utils.translation import gettext_lazy as _
 #         fields= ["name", "filepath"]
 
 from django import forms
-from core.models import Document, Technology
+from core.models import *
 
 class TechnologyForm(forms.ModelForm):
     class Meta:
         model = Technology
         fields = ('technology_operating_band', 'technology_cell_id',)
 
+class ScreenshotForm(forms.ModelForm):
+    #imagey = forms.ImageField(required = False, widget=forms.ClearableFileInput(attrs={'class': 'narrow-select'}))
 
+    class Meta:
+        model = Screenshot
+        #exclude = ['connected_rrh_serial']
+        fields = ( 'image',)
 
 class DocumentForm(forms.ModelForm):
     POSITION_OPTIONS = (  
@@ -35,7 +41,7 @@ class DocumentForm(forms.ModelForm):
         
         model = Document
         #exclude = ['connected_rrh_serial']
-        fields = ( 'document', )
+        fields = ( 'document', 'connected_rrh_serial', )
         labels = {
             'connected_rrh_serial': _('rrh'),
         }
@@ -47,11 +53,3 @@ class DocumentForm(forms.ModelForm):
 
         #     })
 
-# class DocumentForm(forms.ModelForm):
-#     file = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
-#     class Meta:
-#         model = Document
-#         fields = ['file']
-
-# class DocumentForm(forms.Form):
-#     file_field = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))

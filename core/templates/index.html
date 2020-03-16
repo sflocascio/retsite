@@ -79,6 +79,9 @@
         <a href="{% url 'session_detail_v2' pk=ref.pk %}">
           <button class="button is-link is-light">Details</button></a>
           &nbsp;&nbsp;
+          <a href="{% url 'upload_screenshot' pk=ref.pk %}">
+          <button class="button is-link is-light">Screenhot</button></a>
+          &nbsp;&nbsp;
           <button class="button is-primary is-light">Export CSV</button>
           &nbsp;&nbsp;
           <a href="{% url 'delete_all_files' pk=ref.pk %}">

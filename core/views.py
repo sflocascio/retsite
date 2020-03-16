@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
-from core.models import  Document, Process, Ret, Process
+from core.models import  *
 from django.contrib import messages
 import csv
 import json
@@ -73,24 +73,80 @@ def session_detail(request, pk):
         'gamma_pos_2' : gamma_pos_2,
     })
 
+def upload_screenshot(request, pk):
+
+    print("Activated the upload screenshotttttt")
+    refs = Process.objects.get(pk=pk) #Get the related Session object
+    docs = refs.process.all() #Get all the related Antenna(document) Objects based off foreign Key
+    screenshots = Screenshot.objects.all()
+    process = Process.objects.get(pk=pk)
+    session_id = refs.id
+    rets = refs.parent_ref_number.all() #Get all Ret objects related to Parent using ForeignKey
+    technologies = refs.parent_ref_number_tech.all()
+    screen_form = ScreenshotForm(prefix="screen") 
+    
+    #alpa = Document.objects.get(antenna_position__contains='Alpha Position 4')
+    alpa = refs.process.get(antenna_position__contains='Alpha Position 4')
+    #alpa = docs.objects.all()
+
+    if request.method == "POST":
+        newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screen" )
+        if newfile.is_valid(): 
+            #object = Screenshot.objects.create(parent_file = alpa)#<----this works
+            #newdoc = Document(image = request.FILES['imagey'])
+            object = newfile.save(commit=False)
+            object.parent_file = alpa
+            
+            #object.parent_file = alpa
+            object.save()
+            #save_her = object.save()
+
+            print("This is alpa:", alpa)
+            print("Activated the upload screenshotttttt")
+        
+            print("This is object:", object)
+            #return redirect('home')
+            return redirect('session_detail_v2', pk=session_id)
+
+    return render(request, 'upload_screenshot.html', {
+            
+            'screen_form'  : screen_form ,
+            
+        })   
+
 #View of Parent Session Detail
 def session_detail_v2(request, pk):
-    refs = Process.objects.get(pk=pk)
-    docs = refs.process.all()
+    refs = Process.objects.get(pk=pk) #Get the related Session object
+    docs = refs.process.all() #Get all the related Antenna(document) Objects based off foreign Key
+    screenshots = Screenshot.objects.all()
     process = Process.objects.get(pk=pk)
-    rets = refs.parent_ref_number.all()
+    session_id = refs.id
+    rets = refs.parent_ref_number.all() #Get all Ret objects related to Parent using ForeignKey
     technologies = refs.parent_ref_number_tech.all()
-
+    try:
+        alpha4 = docs.get(antenna_position='Alpha Position 4') #Get all Document objects in a position
+    except:
+        alpha4 = None
+    #alpha4 = docs.parent_antenna_file.get(antenna_position__contains='Alpha Position 4')
+    #alpha4 = Screenshot.objects.all()
+    # alpha5 = alpha4.parent_antenna_file.all()
     alpha_pos_4 = rets.filter(sector_id__contains='ALPHA POS 4')
     gamma_pos_2 = rets.filter(sector_id__contains='GAMMA POS 2')
     beta_pos_2 = rets.filter(sector_id__contains='BETA POS 2')
 
+    screen_form = ScreenshotForm(prefix="screen") 
+    #if request.FILES.has_key('image_1'):
+    
+                # modified_file_name = the_file.save()
+                # modified_file_name.process = process
+
     if request.POST.get("sendinfo"):  
-            alpha_pos_4.delete()
+            alpha4.delete()
+            return redirect('session_detail_v2', pk=session_id)
     if request.POST.get("delete_tech"):  
             technologies.delete()
-
-    form1 = DocumentForm(prefix="a1")
+    #try expanding across based on: a, b = 100, 200
+    form1 = DocumentForm(prefix="a1") 
     form2 = DocumentForm(prefix="a2")
     form3 = DocumentForm(prefix="a3")
     form4 = DocumentForm(prefix="a4")
@@ -106,8 +162,25 @@ def session_detail_v2(request, pk):
     modified_file_list = []
     uploaded_file_list = []
 
-    #Handle All Ret FILE Uploads HERE
+    #Handle All Ret ANTENNA FILE Uploads HERE
     if request.method == "POST":
+
+        # newfile = ScreenshotForm(request.POST, request.FILES, prefix="screen")
+        # if newfile.is_valid():  
+        #     alpa = docs.get(antenna_position__contains='Alpha Position 4')
+        #     object = newfile.save()
+
+        #     help = object.parent_file
+        #     save_her = object.save()
+            #newfile.parent_file = alpa
+            
+            #uploaded_file_name = Document.objects.get(document = input_file)
+            
+            # print("This is alpa:", alpa)
+        
+            # print("This is object:", object)
+            
+            #updated_object = object.save()
         
         print(" \n === Entered New Upload Block === Method is POST ... ")
         newfile = DocumentForm(request.POST, request.FILES, prefix="a2")
@@ -152,8 +225,10 @@ def session_detail_v2(request, pk):
                 print("New process REF NUMBER in loop:", process.ref_number)
                 # if not you can only using `obj = form.save()`
                 original_file_name = the_file.cleaned_data['document']
+                #connected_rrh_serial = the_file.cleaned_data['']
+
                 print("Original FILE NAME:", original_file_name)
-                if original_file_name != None:
+                if original_file_name != None: #exclude empty forms 
                     #original_file_name2 = newfile2.cleaned_data['document']
                     #initial_obj = the_file.save(commit=False)
                     #print("HELP", initial_obj.document)
@@ -258,11 +333,16 @@ def session_detail_v2(request, pk):
             for values in data['Data']:
                 station_id = values['Station ID']
 
+
                 print("StationID HERE::", station_id)
+                #All are set using util functions 
                 position_code = get_sector_and_position_code(station_id)
                 band = get_band(station_id)
                 technology = get_technology(station_id)
                 operating_band = get_operating_band(band, technology)
+                ret_position = get_ret_position(position_code)
+                uploaded_file_name.antenna_position = ret_position #Setting the position of the RET
+                save = uploaded_file_name.save()
 
                 #Handle Technologies that Come back empty and set subunit if they are, otherwise set to undefined
                 if operating_band == '--':
@@ -276,7 +356,8 @@ def session_detail_v2(request, pk):
 
                 #RET object created here 
                 object = Ret.objects.create(
-                ret_position = get_ret_position(position_code),
+                parent_file = uploaded_file_name,
+                ret_position = ret_position,
                 band = band, #set above
                 operating_band = operating_band, #set above
                 ret_sub_unit = ret_sub_unit,
@@ -293,16 +374,13 @@ def session_detail_v2(request, pk):
                 object.save()
             print("JSON file list created:", json_files_created)
 
-  
-    messages.success(request,  "Rets Detected: {} ".format(total_rets_created))
+        messages.success(request,  "Rets Detected: {} ".format(total_rets_created))
+        return redirect('session_detail_v2', pk=session_id)
 
     print("TOTAL REST CREATED", total_rets_created)
     total_rets_created = 0
     print("TOTAL REST CREATED after 0", total_rets_created)
 
-    
-
-   
     return render(request, 'session_detail_v2.html', {
         'refs'  : refs,
         'docs'  : docs,
@@ -323,6 +401,9 @@ def session_detail_v2(request, pk):
         'form10'  : form10 ,
         'form11'  : form11 ,
         'form12'  : form12 ,
+        'screen_form' : screen_form,
+        'alpha4' : alpha4,
+        # 'alpha5' : alpha5,
     })
       
 def process(request):

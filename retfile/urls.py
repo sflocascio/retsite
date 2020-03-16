@@ -46,6 +46,7 @@ urlpatterns = [
     #path('upload_file', views.upload_file, name='upload_file'),
     path('admin/', admin.site.urls),
     path('<pk>/', views.session_detail, name='session_detail'),
+    path('<pk>/detail/upload', views.upload_screenshot, name='upload_screenshot'),
     path('<pk>/detail/', views.session_detail_v2, name='session_detail_v2'),
     path('<pk>/detail/update', views.update_technology_cell_id, name='update_technology_cell_id'),
     path('<pk>/detail/atenna', views.process_antenna_file, name='process_antenna_file'),

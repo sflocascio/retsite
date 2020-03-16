@@ -53,18 +53,19 @@ class Process(models.Model):
     #     return self.user
 
 class Document(models.Model):
-    document = models.FileField(upload_to='', null=True)
+    document = models.FileField(upload_to='', null=True, unique=True)
     #uploaded_at = models.DateTimeField(auto_now_add=True)
-    position = models.CharField(max_length=500, null=True, choices=POSITION_OPTIONS)
+    #position = models.CharField(max_length=500, null=True, choices=POSITION_OPTIONS)
+    antenna_position = models.CharField(max_length=500, null=True)
     connected_rrh_serial = models.CharField(max_length=500, null=True) #This comes from user entry
     process = models.ForeignKey(
         Process, to_field='ref_number',null=True, related_name="process", on_delete=models.CASCADE)
-
     # def __str__(self):
-    #     return self.document   
-
-
+    #     return self.document.name
+ 
 class Ret(models.Model):
+    parent_file = models.ForeignKey(
+        Document, to_field='document',null=True, related_name="parent_file", on_delete=models.CASCADE)
     parent_ref_number = models.ForeignKey(
         Process, to_field='ref_number',null=True, related_name="parent_ref_number", on_delete=models.CASCADE)
     ret_position = models.CharField(max_length=500, null=True) #Alpha Gamma Beta, Pos 1,2,3 ETC
@@ -101,13 +102,21 @@ class Ret(models.Model):
     def __str__(self):
         return self.sector_id   
 
-
 class Technology(models.Model):
     parent_ref_number = models.ForeignKey(
         Process, to_field='ref_number',null=True, related_name="parent_ref_number_tech", on_delete=models.CASCADE)
     technology_operating_band = models.CharField(max_length=500, null=True)
     technology_cell_id = models.CharField(max_length=500, null=True)
 
-
     def __str__(self):
-        return self.technology_operating_band   
+        return self.technology_operating_band
+
+class Screenshot(models.Model):
+    parent_file = models.ForeignKey(
+        Document, to_field='document', null=True, related_name="parent_antenna_file", on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='test_image', blank=True)
+
+    @property
+    def image_url(self):
+        if self.image and hasattr(self.image, 'url'):
+            return self.image.url

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from core.models import  Document, Process, Ret, Technology
+from core.models import  *
 
 
 class RetSectionAdmin(admin.ModelAdmin):
@@ -25,6 +25,10 @@ class DocumentAdmin(admin.ModelAdmin):
 class ProcessAdmin(admin.ModelAdmin):
     model = Process
 
+
+class ScreenshotAdmin(admin.ModelAdmin):
+    model = Screenshot
+
 # class ProcessAdmin(admin.ModelAdmin):
 #     model = Process
 #     list_display = ("ref_number", "session_name",)
@@ -42,3 +46,4 @@ admin.site.register(Ret)
 admin.site.register(Document)
 admin.site.register(Process)
 admin.site.register(Technology)
+admin.site.register(Screenshot)

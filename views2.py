@@ -274,6 +274,60 @@ def upload_file(request):
     else:
         return render(request, 'index.html')
 
+
+
+form = request.FILES['imgfield']
+validate = 
+#form = GeeksForm(request.POST, request.FILES) 
+
+
+#Screenshot : 
+
+if request.POST.get("target this form"):
+
+my_antennae_variable = request.FILES[variable Name]
+
+form = ScrenshotForm(initial={'antenna_position': my_antenna_variable})
+
+if form.is_valid():  
+            object = Screenshot(imgfile = request.FILES['imgfile'])
+            object.save()
+
+
+# obj = GeeksModel.objects.create( 
+#                                  title = name,  
+#                                  img = img 
+#                                  ) 
+
+alpha_pos_4 = rets.filter(sector_id__contains='ALPHA POS 4')
+ if request.method == "POST":
+      #work inside this 
+      #is_private = request.POST.get('is_private', False)
+      
+      If Request.POST.Get("general_screenshot_form")
+            #position_name = request.POST.get("Custom_Name")
+            form = ScreenShotForm(prefix="a1") 
+
+            #form = ScrenshotForm(initial={'antenna_position': position_name})
+            if form.is_valid():  
+                object = Screenshot(imgfile = request.FILES['imgfile'], parent_file = alpha_pos_4 )
+                object.save()
+      #MyLoginForm = LoginForm(request.POST)
+      
+
+# This works for image:
+# {% for a in alpha4 %}  
+#       <p>{{alpha4.parent_antenna_file.image.url}}</p>
+#       <p>{{a.image}}</p>
+#       <p>There is something her</p>
+#       <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+#      {% endfor %} 
+
+
+
+      
+# <input type="hidden" name="success_url" value="http://localhost:8000/payment/success" />
+
 def create_object_form(request, *args, **kwargs):
     
     #Using ModelForm to create OBJECTS
