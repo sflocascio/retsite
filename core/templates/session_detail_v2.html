@@ -6,6 +6,14 @@ Detail - {{ block.super }} {% endblock title %}
 
  <div class="section">  
  <br>
+  {% if messages %}
+      {% for message in messages %}
+        <div class="notification  ">
+            <button class="delete"></button>
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
 
  <h1 class="title"> Session Detail </h1>
 
@@ -154,10 +162,8 @@ Detail - {{ block.super }} {% endblock title %}
           <br>
           <!-- Basic RET CARD info -->
           {% if alpha4 %}
-            {% with alpha_pos_4|first as first_object %}
-                <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ first_object.parent_file.document.name }} </p>
-                <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ first_object.parent_file.connected_rrh_serial }} </p>
-            {% endwith %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ alpha4.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ alpha4.connected_rrh_serial }} </p>
           {% for a in alpha4.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
@@ -238,12 +244,10 @@ Detail - {{ block.super }} {% endblock title %}
             <div class="dropdown-menu" id="dropdown-menu4" role="menu">
               <div class="dropdown-content">
                 <div class="dropdown-item">
-                <button class="button is-small is-fullwidth">
-                      {% with alpha_pos_4|first as file %}
-                      <a href="{{file.parent_file.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
-                      {% endwith %}
-                      <i class="fa fa-download"></i>
-                </button>
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{alpha4.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
                       {% if alpha4.parent_antenna_file.all %}
                       <button class="button is-small is-fullwidth">
                             {% with alpha4.parent_antenna_file.all|first as screen_file %}
@@ -404,7 +408,10 @@ Detail - {{ block.super }} {% endblock title %}
           {% endif %}
         {% endfor %}
       {% if technologies %}
-      <button type="submit" name="delete_tech" value="Send" class="button is-small is-danger is-light">Clear Technologies </button> <i class="fa fa-trash"></i>
+      <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+      {% csrf_token %}  
+         <button type="submit" name="delete_tech" value="Send" class="button is-small is-danger is-light">Clear Technologies </button> <i class="fa fa-trash"></i>
+      </form> 
       {% else %}
       <p> ** Upload antennae files to generate Technologies ** </p> 
       {% endif %}

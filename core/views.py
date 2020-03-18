@@ -7,10 +7,12 @@ from django.contrib import messages
 import csv
 import json
 import os
+import boto3
 from django.conf import settings
 from django.http import JsonResponse, HttpResponse
 from django.views.decorators.http import require_POST
 from core.forms import *
+from retfile import settings as set
 from django.core.files.storage import FileSystemStorage
 from django.utils import timezone
 from core.utils import *
@@ -114,7 +116,7 @@ def upload_screenshot(request, pk):
             
         })   
 
-#View of Parent Session Detail
+#Current View of Parent Session Detail, this processes the uploads the Ret files
 def session_detail_v2(request, pk):
     refs = Process.objects.get(pk=pk) #Get the related Session object
     docs = refs.process.all() #Get all the related Antenna(document) Objects based off foreign Key
@@ -127,6 +129,10 @@ def session_detail_v2(request, pk):
         alpha4 = docs.get(antenna_position='Alpha Position 4') #Get all Document objects in a position
     except:
         alpha4 = None
+    try:
+        alpha2 = docs.get(antenna_position='Alpha Position 4') #Get all Document objects in a position
+    except:
+        alpha2 = None
     #alpha4 = docs.parent_antenna_file.get(antenna_position__contains='Alpha Position 4')
     #alpha4 = Screenshot.objects.all()
     # alpha5 = alpha4.parent_antenna_file.all()
@@ -265,8 +271,16 @@ def session_detail_v2(request, pk):
     for input_file in modified_file_list:
         uploaded_file_name = Document.objects.get(document = input_file)
         print("Current FILER document name", uploaded_file_name.document)
+        print("Current  document DOT name", uploaded_file_name.document.name)
+        s3 = boto3.client('s3',
+         aws_access_key_id=set.AWS_ACCESS_KEY_ID,
+         aws_secret_access_key=set.AWS_SECRET_ACCESS_KEY)
+        #obj = s3.Object('ret-file1', 'alpha1_deWMuAR.txtrpt',)
+        s3.download_file('ret-file1', uploaded_file_name.document.name, 'new.txt')
+        #body = obj.get()['Body'].read()
         #Splits the Input File in individual RET.Txt files 
-        with open(uploaded_file_name.document.path) as fo:
+        with open('new.txt') as fo:
+        #with open(uploaded_file_name.document.path) as fo:
             print("entered Parsing Block ")
             op = ''
             start = 0
@@ -374,7 +388,7 @@ def session_detail_v2(request, pk):
                 object.save()
             print("JSON file list created:", json_files_created)
 
-        messages.success(request,  "Rets Detected: {} ".format(total_rets_created))
+        messages.success(request,  "File Connected to ' {} ' ......   Rets Detected: {} ".format(ret_position, total_rets_created))
         return redirect('session_detail_v2', pk=session_id)
 
     print("TOTAL REST CREATED", total_rets_created)
@@ -386,7 +400,6 @@ def session_detail_v2(request, pk):
         'docs'  : docs,
         'rets'  : rets,
         'technologies'  : technologies,
-        'alpha_pos_4' : alpha_pos_4,
         'gamma_pos_2' : gamma_pos_2,
         'beta_pos_2' : beta_pos_2,
         'form1'  : form1 ,
@@ -403,6 +416,7 @@ def session_detail_v2(request, pk):
         'form12'  : form12 ,
         'screen_form' : screen_form,
         'alpha4' : alpha4,
+        'alpha_pos_4' : alpha_pos_4,
         # 'alpha5' : alpha5,
     })
       
@@ -659,7 +673,7 @@ def create_object_form(request, pk, *args, **kwargs):
     return redirect('home')
     #return render(request, 'index.html')
 
-#New version of independent Antenna Uploads
+#New version of independent Antenna Uploads, not working 
 def process_antenna_file(request, *args, **kwargs):
     #Using ModelForm to create OBJECTS
     #Saved off of create_object_form - New version that doesnt create them all at the same time 
