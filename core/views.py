@@ -75,8 +75,50 @@ def session_detail(request, pk):
         'gamma_pos_2' : gamma_pos_2,
     })
 
-def upload_screenshot(request, pk):
+def delete_antenna(request, pk):
+    print("etered delete antenna")
+    refs = Process.objects.get(pk=pk) #Get the related Session object
+    docs = refs.process.all() #Get all the related Antenna(document) Objects based off foreign Key
+    screenshots = Screenshot.objects.all()
+    process = Process.objects.get(pk=pk)
+    session_id = refs.id
+    rets = refs.parent_ref_number.all() #Get all Ret objects related to Parent using ForeignKey
+    technologies = refs.parent_ref_number_tech.all()
 
+    try:
+        alpha1 = docs.get(antenna_position='Alpha Position 1') #Get all Document objects in a position
+    except:
+        alpha1 = None
+    try:
+        alpha2 = docs.get(antenna_position='Alpha Position 2') #Get all Document objects in a position
+    except:
+        alpha2 = None
+    try:
+        alpha3 = docs.get(antenna_position='Alpha Position 3') #Get all Document objects in a position
+    except:
+        alpha3 = None
+
+    if request.POST.get("sendinfo"):  
+            alpha1.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(alpha1.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_alpha_2"):  
+            alpha2.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(alpha2.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_alpha_3"):  
+            alpha3.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(alpha3.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_tech"):  
+            technologies.delete()
+            return redirect('session_detail_v2', pk=session_id)
+
+    return render(request, 'session_detail_v2.html', {
+
+        }) 
+
+def upload_screenshot(request, pk):
     print("Activated the upload screenshotttttt")
     refs = Process.objects.get(pk=pk) #Get the related Session object
     docs = refs.process.all() #Get all the related Antenna(document) Objects based off foreign Key
@@ -86,28 +128,25 @@ def upload_screenshot(request, pk):
     rets = refs.parent_ref_number.all() #Get all Ret objects related to Parent using ForeignKey
     technologies = refs.parent_ref_number_tech.all()
     screen_form = ScreenshotForm(prefix="screen") 
-    
     #alpa = Document.objects.get(antenna_position__contains='Alpha Position 4')
-    alpa = refs.process.get(antenna_position__contains='Alpha Position 4')
     #alpa = docs.objects.all()
 
     if request.method == "POST":
-        newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screen" )
+        if request.POST.get("screen_alpha_1"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screen" )
+            position = refs.process.get(antenna_position__contains='Alpha Position 1')
+        if request.POST.get("screenshot_alpha_2"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_alpha_2" )
+            position = refs.process.get(antenna_position__contains='Alpha Position 2')
+        if request.POST.get("screenshot_alpha_3"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_alpha_3" )
+            position = refs.process.get(antenna_position__contains='Alpha Position 3')
+
         if newfile.is_valid(): 
             #object = Screenshot.objects.create(parent_file = alpa)#<----this works
-            #newdoc = Document(image = request.FILES['imagey'])
             object = newfile.save(commit=False)
-            object.parent_file = alpa
-            
-            #object.parent_file = alpa
+            object.parent_file = position
             object.save()
-            #save_her = object.save()
-
-            print("This is alpa:", alpa)
-            print("Activated the upload screenshotttttt")
-        
-            print("This is object:", object)
-            #return redirect('home')
             return redirect('session_detail_v2', pk=session_id)
 
     return render(request, 'upload_screenshot.html', {
@@ -126,13 +165,17 @@ def session_detail_v2(request, pk):
     rets = refs.parent_ref_number.all() #Get all Ret objects related to Parent using ForeignKey
     technologies = refs.parent_ref_number_tech.all()
     try:
-        alpha4 = docs.get(antenna_position='Alpha Position 4') #Get all Document objects in a position
+        alpha1 = docs.get(antenna_position='Alpha Position 1') #Get all Document objects in a position
     except:
-        alpha4 = None
+        alpha1 = None
     try:
-        alpha2 = docs.get(antenna_position='Alpha Position 4') #Get all Document objects in a position
+        alpha2 = docs.get(antenna_position='Alpha Position 2') #Get all Document objects in a position
     except:
         alpha2 = None
+    try:
+        alpha3 = docs.get(antenna_position='Alpha Position 3') #Get all Document objects in a position
+    except:
+        alpha3 = None
     #alpha4 = docs.parent_antenna_file.get(antenna_position__contains='Alpha Position 4')
     #alpha4 = Screenshot.objects.all()
     # alpha5 = alpha4.parent_antenna_file.all()
@@ -141,16 +184,19 @@ def session_detail_v2(request, pk):
     beta_pos_2 = rets.filter(sector_id__contains='BETA POS 2')
 
     screen_form = ScreenshotForm(prefix="screen") 
+    screenshot_alpha2_form = ScreenshotForm(prefix="screenshot_alpha_2") 
+    screenshot_alpha3_form = ScreenshotForm(prefix="screenshot_alpha_3") 
     #if request.FILES.has_key('image_1'):
     
                 # modified_file_name = the_file.save()
                 # modified_file_name.process = process
 
-    if request.POST.get("sendinfo"):  
-            alpha4.delete()
-            return redirect('session_detail_v2', pk=session_id)
-    if request.POST.get("delete_tech"):  
-            technologies.delete()
+    # if request.POST.get("sendinfo"):  
+    #         alpha1.delete()
+    #         return redirect('session_detail_v2', pk=session_id)
+    # if request.POST.get("delete_tech"):  
+    #         technologies.delete()
+
     #try expanding across based on: a, b = 100, 200
     form1 = DocumentForm(prefix="a1") 
     form2 = DocumentForm(prefix="a2")
@@ -170,24 +216,6 @@ def session_detail_v2(request, pk):
 
     #Handle All Ret ANTENNA FILE Uploads HERE
     if request.method == "POST":
-
-        # newfile = ScreenshotForm(request.POST, request.FILES, prefix="screen")
-        # if newfile.is_valid():  
-        #     alpa = docs.get(antenna_position__contains='Alpha Position 4')
-        #     object = newfile.save()
-
-        #     help = object.parent_file
-        #     save_her = object.save()
-            #newfile.parent_file = alpa
-            
-            #uploaded_file_name = Document.objects.get(document = input_file)
-            
-            # print("This is alpa:", alpa)
-        
-            # print("This is object:", object)
-            
-            #updated_object = object.save()
-        
         print(" \n === Entered New Upload Block === Method is POST ... ")
         newfile = DocumentForm(request.POST, request.FILES, prefix="a2")
         newfile2 = DocumentForm(request.POST, request.FILES, prefix="a1")
@@ -214,54 +242,25 @@ def session_detail_v2(request, pk):
         uploaded_file_list.append(newfile11)
         uploaded_file_list.append(newfile12)
 
-        print("UploadedFileList:::: ", uploaded_file_list)
-        #session_name = request.POST.get('session')
-
-        #process = Process(session_name = session_name)
-        #happy = process.save()
-
-        print("New process REF NUMBER :", process.ref_number)
-            #print("This is the Newfile that is created in loop", newfile.document)
-            #newfile = Document(document = formfile) #Using model. not Form
-        #if newfile.is_valid() or newfile2.is_valid():
         for the_file in uploaded_file_list:
             if the_file.is_valid():
                 print("Entering for Loop. current variable", the_file)
-                
                 print("New process REF NUMBER in loop:", process.ref_number)
-                # if not you can only using `obj = form.save()`
                 original_file_name = the_file.cleaned_data['document']
-                #connected_rrh_serial = the_file.cleaned_data['']
-
                 print("Original FILE NAME:", original_file_name)
+
                 if original_file_name != None: #exclude empty forms 
-                    #original_file_name2 = newfile2.cleaned_data['document']
-                    #initial_obj = the_file.save(commit=False)
-                    #print("HELP", initial_obj.document)
                     modified_file_name = the_file.save()
                     modified_file_name.process = process
                     print("THE FILE.PROCESS:", modified_file_name.process)
-                    #modified_file_name2 = newfile2.save()
                     updated_file = modified_file_name.save()
                     print("Original File Name", original_file_name)
-                    #print("Modified File Name ", modified_file_name.document)
-                
-                    #print("Document Object saved, from file that was renamed:", newfile)
-                    
-                    #cleaned_file = newfile
-                    #print("CLEANED FILE:", cleaned_file)
-                    #cleaned_file = newfile.document
-                    #print("cleanedFILE:", cleaned_file.document)
                     modified_file_list.append(modified_file_name.document)
-                    #modified_file_list.append(modified_file_name2.document)
-                    #print("Current Cleaned FILE LIST", cleaned_file_list)
                     print(" Modified LIST ", modified_file_list)
                     print(" repeating FOR loop ")
                     # print("Inital OBject.document.url:", initial_obj.document.url)
             else:
                 print("Form NOT valid")
-
-
     else:
         file = DocumentForm()
         print("Entered Else Block of FORM validation")
@@ -415,8 +414,12 @@ def session_detail_v2(request, pk):
         'form11'  : form11 ,
         'form12'  : form12 ,
         'screen_form' : screen_form,
-        'alpha4' : alpha4,
+        'alpha2' : alpha2,
+        'alpha1' : alpha1,
+        'alpha3' : alpha3,
         'alpha_pos_4' : alpha_pos_4,
+        'screenshot_alpha2_form' : screenshot_alpha2_form,
+        'screenshot_alpha3_form' : screenshot_alpha3_form,
         # 'alpha5' : alpha5,
     })
       

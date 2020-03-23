@@ -11,9 +11,10 @@ def get_sector_and_position_code(base_station_id):
 # Turn Sector and Position Code into human readable position, ie: Alpha Position 4
 def get_ret_position(sector_and_position): 
     ret_position = { 
+        'A1' : 'Alpha Position 1', 
+        'A2' : 'Alpha Position 2', 
+        'A3' : 'Alpha Position 3', 
         'A4' : 'Alpha Position 4', 
-        1: "one", 
-        2: "two", 
     } 
     # get() method of dictionary data type returns  
     # value of passed argument if it is present  
@@ -41,11 +42,36 @@ def get_operating_band(band, technology):
 
     else:
         operating_band = { 
-            'K' : '700/850', 
+            '2' : '2100', 
+            '3' : '2300', 
+            '6' : '2100',
+            '7' : '700', 
+            '8' : '850',  
             '9' : '1900', 
+            'A' : '2100', 
+            'B' : '1900', 
+            'C' : '2100 / 2300', 
+            'D' : '1900 / 2100', 
+            'E' : '2300', 
+            'F' : '1900 / 2300', 
+            'G' : '1900 / 2100', 
+            'H' : '2100 /2300', 
+            'I' : '1900 / 2300', 
+            'J' : '1900 / 2100 / 2300', 
+            'K' : '700 / 850', 
+            'M' : '1900 / 2100 / 2300', 
             'P' : 'FNET', 
+            'Q' : '700', 
+            'R' : '700 / 850', 
+            'S' : '700 / 850', 
+            'T' : 'FNET', 
+            'U' : 'FNET / 700 / 850', 
+            'W' : 'FNET', 
+            'X' : 'FNET', 
+            'Y' : '700 / 850', 
+            'Z' : 'FNET / 850', 
         } 
-    return operating_band.get(band, "no match") 
+    return operating_band.get(band, "no match")
 
 #This Updates or Creates Technology objects when Rets are creates, Update so no duplicates! 
 def update_or_create_technology_object(operating_band, tech_parent_ref):
