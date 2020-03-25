@@ -34,6 +34,9 @@ def index(request):
         'files'  : files,
     })
 
+def new(request):
+    return render(request, 'new.html')
+
 def session_table(request, pk):
     # refs = Process.objects.get('process').all()
     # files = Document.objects.prefetch_related('process').all()

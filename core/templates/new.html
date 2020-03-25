@@ -1,0 +1,560 @@
+{% load static %}
+
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html>
+  <head>
+  {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}" /> {% block header %}{% endblock header %} {% endcomment %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+            Retfile
+        {% endblock title %}
+    </title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" /> 
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+  </head>
+  <body class= "has-background-white-ter">
+  
+
+       <nav class="navbar ">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="http://bulma.io">
+<i class="fab fa-connectdevelop"></i>    <h1 class="title is-4"> &nbsp; RetSmooth</h1> 
+      {% comment %} <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> {% endcomment %}
+    </a>
+    <p class="is-size-7">beta</p>
+
+    <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+      <span class="icon" style="color: #333;">
+        <i class="fa fa-github"></i>
+      </span>
+    </a>
+
+    <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+      <span class="icon" style="color: #55acee;">
+        <i class="fa fa-twitter"></i>
+      </span>
+    </a>
+
+    <div class="navbar-burger burger" data-target="navMenubd-example">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenubd-example" class="navbar-menu">
+    <div class="navbar-start">
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link  is-active" href="/documentation/overview/start/">
+          Docs
+        </a>
+        <div class="navbar-dropdown ">
+          <a class="navbar-item " href="/documentation/overview/start/">
+            Overview
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+            Modifiers
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
+            Columns
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
+            Layout
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/form/general/">
+            Form
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/elements/box/">
+            Elements
+          </a>
+          
+            <a class="navbar-item is-active" href="http://bulma.io/documentation/components/breadcrumb/">
+              Components
+            </a>
+          
+          <hr class="navbar-divider">
+          <div class="navbar-item">
+            <div>
+              <p class="is-size-6-desktop">
+                <strong class="has-text-info">0.5.1</strong>
+              </p>
+              
+                <small>
+                  <a class="bd-view-all-versions" href="/versions">View all versions</a>
+                </small>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link " href="http://bulma.io/blog/">
+          Blog
+        </a>
+        <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
+          
+            <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">03 Aug 2017</small>
+                </p>
+                <p>New feature: list of tags</p>
+              </div>
+            </a>
+          
+            <a class="navbar-item" href="/2017/08/01/bulma-bootstrap-comparison/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">01 Aug 2017</small>
+                </p>
+                <p>Bulma / Bootstrap comparison</p>
+              </div>
+            </a>
+          
+            <a class="navbar-item" href="/2017/07/24/access-previous-bulma-versions/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">24 Jul 2017</small>
+                </p>
+                <p>Access previous Bulma versions</p>
+              </div>
+            </a>
+          
+          <a class="navbar-item" href="http://bulma.io/blog/">
+            More posts
+          </a>
+          <hr class="navbar-divider">
+          <div class="navbar-item">
+            <div class="navbar-content">
+              <div class="level is-mobile">
+                <div class="level-left">
+                  <div class="level-item">
+                    <strong>Stay up to date!</strong>
+                  </div>
+                </div>
+                <div class="level-right">
+                  <div class="level-item">
+                    <a class="button bd-is-rss is-small" href="http://bulma.io/atom.xml">
+                      <span class="icon is-small">
+                        <i class="fa fa-rss"></i>
+                      </span>
+                      <span>Subscribe</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+    </div>
+
+    <div class="navbar-end">
+      <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
+       
+      </a>
+      
+      <div class="navbar-item">
+        <div class="field is-grouped">
+          <p class="control">
+            
+  
+
+          </p>
+          <p class="control">
+            <a class="button is-primary" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+              <span>Download</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+
+<div class="section ">
+  <div class="columns ">
+    <aside class="column is-2 ">
+      <nav class="menu ">
+        <p class="menu-label">
+          General
+        </p>
+        <ul class="menu-list">
+          <li><a class="is-active">Dashboard</a></li>
+          <li><a>Customers</a></li>
+        </ul>
+        <p class="menu-label">
+          Administration
+        </p>
+        <ul class="menu-list">
+          <li><a>Team Settings</a></li>
+          <li>
+            <a class="">Manage Your Team</a>
+            <ul>
+              <li><a>Members</a></li>
+              <li><a>Plugins</a></li>
+              <li><a>Add a member</a></li>
+            </ul>
+          </li>
+          <li><a>Invitations</a></li>
+          <li><a>Cloud Storage Environment Settings</a></li>
+          <li><a>Authentication</a></li>
+        </ul>
+        <p class="menu-label">
+          Transactions
+        </p>
+        <ul class="menu-list">
+          <li><a>Payments</a></li>
+          <li><a>Transfers</a></li>
+          <li><a>Balance</a></li>
+        </ul>
+      </nav>
+    </aside>
+    
+    <main class="column">
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="title">Dashboard</div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          
+          <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
+              &nbsp;&nbsp; Create New Session 
+            </button>
+           &nbsp; &nbsp;
+            <button type="button" class="button is-small">
+              March 8, 2017 - April 6, 2017
+            </button>
+          </div>
+        </div>
+      </div>
+      <h4> Viewing Most recent Sessions </h4>
+      <br>
+      
+      {% comment %} <div class="columns is-multiline">
+        <div class="column">
+          <div class="box">
+            <div class="heading">Top Seller Total</div>
+            <div class="title">56,950</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Sales $</div>
+                  <div class="title is-5">250,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Overall $</div>
+                  <div class="title is-5">750,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Sales %</div>
+                  <div class="title is-5">25%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Revenue / Expenses</div>
+            <div class="title">55% / 45%</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Rev Prod $</div>
+                  <div class="title is-5">30%</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Rev Serv $</div>
+                  <div class="title is-5">25%</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Exp %</div>
+                  <div class="title is-5">45%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Feedback Activity</div>
+            <div class="title">78% &uarr;</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Positive</div>
+                  <div class="title is-5">1560</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Negative</div>
+                  <div class="title is-5">368</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Pos/Neg %</div>
+                  <div class="title is-5">77% / 23%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Orders / Returns</div>
+            <div class="title">75% / 25%</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Orders $</div>
+                  <div class="title is-5">425,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Returns $</div>
+                  <div class="title is-5">106,250</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Success %</div>
+                  <div class="title is-5">+ 28,5%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+      
+
+      <div class="panel box">
+
+    
+
+           <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="subtitle">Site 54 Working </div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          <button type="button" class="button is-small"> <i class="fas fa-map-marker-alt"></i>
+              &nbsp;&nbsp;  Palatine Illionis
+            </button>
+           &nbsp; &nbsp;
+          
+          
+            <button type="button" class="button is-small">
+              March 8, 2017 - April 6, 2017
+            </button>
+
+
+            <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    &nbsp; &nbsp;
+    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+      <span>Options</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+        <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+         
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+            
+
+
+
+
+            <div class="block">
+            <div class="columns is-multiline">
+        <div class="column is-6">
+          <p class="is-size-6 is-family-code"><b>FCC ID:</b> r230984234mj</p>
+                  <p class="is-size-6 is-family-code"><b>Site Common Name:</b> Site 54</p>
+                  <p class="is-size-6 is-family-code"><b>PTN:</b> rere98kkk43</p>
+                  <p class="is-size-6 is-family-code"><b>Release:</b> rere98kkk43</p>
+        </div>
+        <div class="column is-6">
+          <p class="is-size-6 is-family-code"><b>Enode B Id: </b> re3454655</p>
+          <p class="is-size-6 is-family-code"><b>Market:</b> rereggrerge</p>
+          <p class="is-size-6 is-family-code"><b>Internal Session ID: </b>3459875349875349753487</p>
+                  <p class="is-size-6 is-family-code"><b>Cross Sector Redundency: </b> <span class="tag is-info is-light">True</span></p>
+                  
+                  
+        </div>  
+      </div>
+       <nav class="level is-mobile">
+        <div class="level-left">
+       
+          <button class="button is-link is-light is-small">  <i class="fas fa-broadcast-tower"></i>&nbsp;&nbsp; Details </button></a>
+          &nbsp;&nbsp;
+    
+          <button class="button is-primary is-light is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button>
+          &nbsp;&nbsp;
+
+        </div>
+      </nav>
+      </div>
+      </div>
+      <br>
+
+       <div class="panel box">
+            <p class="panel-heading">
+              Expenses: Daily - $700
+            </p>
+            <div class="block">
+            <div class="columns is-multiline">
+          
+        </div>
+        <div class="column is-6">
+          <p> hi </p>
+        </div>  
+      </div>
+      </div>
+      </div>
+
+      
+
+      
+
+      
+
+      
+      
+      {% comment %} <div class="columns is-multiline">
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Expenses: Daily - $700
+            </p>
+            <div class="panel-block">
+            <p> some content </p>
+ 
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Refunds: Daily - $200
+            </p>
+            <div class="panel-block">
+              <figure class="image is-16x9">
+                <img src="https://placehold.it/1280x720">
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Something
+            </p>
+            <div class="panel-block">
+              <figure class="image is-16x9">
+                <img src="https://placehold.it/1280x720">
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Something Else
+            </p>
+            <div class="panel-block">
+              <figure class="image is-16x9">
+                <img src="https://placehold.it/1280x720">
+              </figure>
+            </div>
+          </div>
+        </div> {% endcomment %}
+      
+    </main>
+  </div>
+</div>
+
+
+
+
+
+
+
+        
+
+
+        {% block content %}{% endblock content %}
+        
+
+        
+        {% block footer %}{% endblock footer %}
+        <br>
+        <br> 
+        <br> 
+        <br>
+        <br> 
+        <br> 
+        	<!-- these js files are used for making PDF -->
+ <script src="{% static 'js/jspdf.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+	<script src="{% static 'js/jquery-2.1.3.js' %}"></script>
+	<script src="{% static 'js/pdfFromHTML.js' %}"></script> 
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+ 
+  <footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Footer</strong> by <a href="https://jgthms.com">Footer</a>.
+    </p>
+  </div>
+</footer>
+</html>

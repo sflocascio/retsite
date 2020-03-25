@@ -37,6 +37,7 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     path('', views.index, name='home'),
+    path('new/', views.new, name='new'),
     path('process', views.process, name='process'),
     path('process_v2', views.process_v2, name='process_v2'),
     #path('create_object', views.create_object, name='create_object'),
