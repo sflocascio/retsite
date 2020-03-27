@@ -6,55 +6,41 @@
 {% block content %}
 
 
-{% comment %} <div class="title container tabs is-toggle-rounded avenir">
-  <ul>
-    <li >
-      <a class="has-text-grey-lighter" href="{% url 'home' %}">
-        <span class="icon is-small "><i class="fas fa-arrow-left"> </i></span>
-        <span>Go Back</span>
-      </a>
-    </li >
-   
-    <li class="is-active ">
-      <a class="has-text-grey-lighter" href= "#">
-        <span class="icon is-small"><i class="fas fa-edit"></i></span>
-        <span>Edit tech</span>
-      </a>
-    </li>
-      
-  </ul>
-</div>
-
-<div class ="box container has-background-light avenir"> 
-     <h1 class= "title"> Edit {{refs.technology_operating_band}}</h1>
-    <form role="form" action="" method="post" class="subtitle">
-        {% csrf_token %}
-        {{ form.as_p}}
-        <br>
-        <br>
-        <br>
-
-        <button class= " button is-outlined" type="submit">Submit</button>
-    </form>
 
 
-    
-</div> {% endcomment %}
+<main class="column">
+
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="title">Edit</div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          
+          <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
+              &nbsp;&nbsp; Create New Session 
+            </button>
+           &nbsp; &nbsp;
+            <button type="button" class="button is-small">
+              {{ now | date:"D d M Y -  h:i:s"}} 
+            </button>
+          </div>
+        </div>
+      </div>
 
 
 
 
- <div class="section">  
- <br>
 
- <h1 class="title"> Session Detail </h1>
-
-<div class="tabs is-boxed">
+      <div class="tabs is-boxed">
   <ul>
     <li >
       <a>
         <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
-        <span>Home</span>
+        <span>Back</span>
       </a>
     </li>
     <li >
@@ -69,22 +55,15 @@
         <span> Editing Operating Band : {{ refs.technology_operating_band }}</span>
       </a>
     </li>
-    <li>
-      <a>
-        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-        <span>Documents</span>
-      </a>
-    </li>
   </ul>
 </div>
 
 
 
 
+   
 
-
-
-<div class="tile is-ancestor">
+   <div class="tile is-ancestor">
   <div class="tile is-8 is-parent">
     <article class="tile is-child box">
       
@@ -131,34 +110,93 @@
   </div>
   <div class="tile is-parent">
     <article class="tile is-child box">
-       <p>
-          <strong>Session Name </strong> <small>{{session.site_common_name}} </small>  &nbsp;&nbsp;&nbsp;&nbsp;<span class="tag is-rounded"> Created: {{session.created_date}} </span>
-          <br>
-        </p>
       
-  
-        <p>
-          <strong>Owner: </strong> <small>@johnsmith</small>  
-          <br>
-        </p>
-        <p>
-          <strong> Ref Id: </strong> <small>{{session.ref_number}}</small> 
-          <br>
-        </p>
-        <p>
-          <strong> Session Location: </strong> <small> Working on site 54 in Peoria, Illinois</small> 
-          <br>
-        </p>
-        <p>
-          <strong> FCC ID  </strong> <small>  {{session.fcc_id}}  </small> 
-          <br>
-        </p>
-      
+          <p class="is-size-6 is-family-code"><b>FCC ID:</b> {{session.fcc_id}} </p>
+                  <p class="is-size-6 is-family-code"><b>Site Common Name:</b> {{session.site_common_name}} </p>
+                  <p class="is-size-6 is-family-code"><b>PTN:</b> {{session.ptn}} </p>
+                  <p class="is-size-6 is-family-code"><b>Release:</b>{{session.release}} </p>
+   
 
     </article>
   </div>
   
 </div>
+
+    
+    
+    
+
+</div> 
+
+
+
+     
+
+     
+
+
+
+    </div>
+</div>
+      
+    </main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ <div class="section">  
+ <br>
+
+ <h1 class="title"> Session Detail </h1>
+
+<div class="tabs is-boxed">
+  <ul>
+    <li >
+      <a>
+        <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+        <span>Home</span>
+      </a>
+    </li>
+    <li >
+      <a>
+        <span class="icon is-small"><i class="fas fa-broadcast-tower" aria-hidden="true"></i></span>
+        <span> Session "{{ session.site_common_name }}"</span>
+      </a>
+    </li>
+    <li class="is-active">
+      <a>
+        <span class="icon is-small"><i class="fas fa-pen" aria-hidden="true"></i></span>
+        <span> Editing Operating Band : {{ refs.technology_operating_band }}</span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+        <span>Documents</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
+
+
+
+
+
 
 
 

@@ -19,8 +19,9 @@ from core.utils import *
 #from core.forms import FileForm
 
 def index(request):
+    now = timezone.now()
     refs = Process.objects.prefetch_related('process').order_by('-created_date')
-    files = Document.objects.prefetch_related('process').all()
+    #files = Document.objects.prefetch_related('process').all()
     rets = Ret.objects.select_related('parent_ref_number').all()
     # docs = Document.objects.get(process__exact = files.ref_number)
     
@@ -28,10 +29,11 @@ def index(request):
     # files = os.listdir(cwd)  # Get all the files in that directory
     # print("Files in %r: %s" % (cwd, files))
    
-    return render(request, 'index.html', {
+    return render(request, 'indexV2.html', {
         'refs'  : refs,
         'rets'  : rets,
-        'files'  : files,
+        'now'  : now,
+
     })
 
 def new(request):
@@ -101,7 +103,7 @@ def delete_antenna(request, pk):
     except:
         alpha3 = None
 
-    if request.POST.get("sendinfo"):  
+    if request.POST.get("delete_alpha_1"):  
             alpha1.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(alpha1.antenna_position))
             return redirect('session_detail_v2', pk=session_id)
@@ -397,7 +399,7 @@ def session_detail_v2(request, pk):
     total_rets_created = 0
     print("TOTAL REST CREATED after 0", total_rets_created)
 
-    return render(request, 'session_detail_v2.html', {
+    return render(request, 'session_detailv3.html', {
         'refs'  : refs,
         'docs'  : docs,
         'rets'  : rets,
@@ -911,6 +913,7 @@ def update_technology_cell_id(request, pk):
                     
 
             # return redirect('home')
+            messages.success(request,  "Set Cell ID to '{}' for Operating Band '{}' ".format(technology_cell_id, technology_operating_band))
             return redirect('session_detail_v2', pk=session_id)
     else:
         form = form_class(instance=refs)

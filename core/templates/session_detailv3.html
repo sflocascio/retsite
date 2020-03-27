@@ -1,0 +1,879 @@
+{% extends 'base.html' %} {% block title %}
+Detail - {{ block.super }} {% endblock title %}
+{% block content %}
+{% load crispy_forms_tags %}
+
+
+
+ <br>
+  
+
+
+
+<main class="column">
+{% if messages %}
+      {% for message in messages %}
+        <div class="notification is-success ">
+            <button class="delete"></button>
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="title">Detail</div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          
+          <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
+              &nbsp;&nbsp; Create New Session 
+            </button>
+           &nbsp; &nbsp;
+            <button type="button" class="button is-small">
+              March 8, 2017 - April 6, 2017
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+     <div class="tabs is-boxed ">
+  <ul >
+    <li >
+      <a href="{% url 'home' %}"> 
+        <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+        <span>Back</span>
+      </a>
+    </li>
+    <li class="is-active ">
+      <a>
+        <span class="icon is-small"><i class="fas fa-broadcast-tower" aria-hidden="true"></i></span>
+        <span>Editing "{{ refs.site_common_name }}"</span>
+      </a>
+    </li>
+    <li>
+      <a href="#grid">
+        <span class="icon is-small"><i class="fas fa-table" aria-hidden="true"></i></span>
+        <span> Grid View </span>
+      </a>
+    </li>
+    <li>
+      <a>
+        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
+        <span>Documents</span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+      {% comment %} Keeping in case I need the 4 boxes {% endcomment %}
+     {% comment %} <div class="columns is-multiline">
+        <div class="column">
+          <div class="box">
+            <div class="heading">Top Seller Total</div>
+            <div class="title">56,950</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Sales $</div>
+                  <div class="title is-5">250,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Overall $</div>
+                  <div class="title is-5">750,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Sales %</div>
+                  <div class="title is-5">25%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Revenue / Expenses</div>
+            <div class="title">55% / 45%</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Rev Prod $</div>
+                  <div class="title is-5">30%</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Rev Serv $</div>
+                  <div class="title is-5">25%</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Exp %</div>
+                  <div class="title is-5">45%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Feedback Activity</div>
+            <div class="title">78% &uarr;</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Positive</div>
+                  <div class="title is-5">1560</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Negative</div>
+                  <div class="title is-5">368</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Pos/Neg %</div>
+                  <div class="title is-5">77% / 23%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Orders / Returns</div>
+            <div class="title">75% / 25%</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Orders $</div>
+                  <div class="title is-5">425,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Returns $</div>
+                  <div class="title is-5">106,250</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Success %</div>
+                  <div class="title is-5">+ 28,5%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>  {% endcomment %}
+      
+
+      <div class="panel box">
+           <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="subtitle">{{refs.site_common_name}} </div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          <button type="button" class="button is-small"> <i class="fas fa-map-marker-alt"></i>
+              &nbsp;&nbsp;  {{refs.market}} 
+            </button>
+           &nbsp; &nbsp;
+          
+          
+            <button type="button" class="button is-small">
+             Created:  {{refs.created_date}} 
+            </button>
+
+
+            <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    &nbsp; &nbsp;
+    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+      <span>Options</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+        <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+         
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+            
+
+
+
+
+            <div class="block">
+            <div class="columns is-multiline">
+        <div class="column is-6">
+          <p class="is-size-6 is-family-code"><b>FCC ID:</b> {{refs.fcc_id}} </p>
+                  <p class="is-size-6 is-family-code"><b>Site Common Name:</b> {{refs.site_common_name}} </p>
+                  <p class="is-size-6 is-family-code"><b>PTN:</b> {{refs.ptn}} </p>
+                  <p class="is-size-6 is-family-code"><b>Release:</b>{{refs.release}} </p>
+        </div>
+        <div class="column is-6">
+          <p class="is-size-6 is-family-code"><b>Enode B Id: </b> {{refs.enode_b_id}} </p>
+          <p class="is-size-6 is-family-code"><b>Market:</b> {{refs.market}} </p>
+          <p class="is-size-6 is-family-code"><b>Internal Session ID: </b>{{refs.ref_number}} </p>
+                  <p class="is-size-6 is-family-code"><b>Cross Sector Redundency: </b> <span class="tag is-info is-light">{{refs.cross_sector_redundency}} </span></p>
+                  
+                  
+        </div>  
+      </div>
+       <nav class="level is-mobile">
+        <div class="level-left">
+     
+          <button class="button is-link is-light is-outlined is-small">  <i class="fas fa-pen"></i>&nbsp;&nbsp; Edit </button></a>
+          &nbsp;&nbsp;
+    
+          <button class="button is-success is-light is-outlined is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button>
+          &nbsp;&nbsp;
+
+        </div>
+      </nav>
+      </div>
+      </div>
+
+
+      <!-- START RET ALPHA 1 CARD -->
+<div class="tile is-ancestor">
+  <div class="tile is-vertical is-9">
+    <div class="tile">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+        <span class="tag is-link"><b>Alpha Position 1</b></span>
+          <div class="content">
+          <br>
+          <!-- Basic RET CARD info -->
+          {% if alpha1 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ alpha1.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ alpha1.connected_rrh_serial }} </p>
+          {% for a in alpha1.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in alpha1.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if alpha1.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs1.modalEdicion1.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion1">
+        <div onclick="refs1.modalEdicion1.close()" class="modal-background"></div>
+        <div class="modal-content">
+        <br>
+        <p> &nbsp; Alpha Position 1 </p>
+            <p class="image is-4by3">
+            
+
+            {% for a in alpha1.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs1.modalEdicion1.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screen_form|crispy }} 
+                <input class="button is-small" name="screen_alpha_1" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{alpha1.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if alpha1.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with alpha1.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_alpha_1" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form1|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+        </article>
+      </div>
+<!-- END ALPHA 1  -->
+
+<!-- START ALPHA 2  -->
+      <div class="tile is-8 is-vertical">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+            <span class="tag is-link"><b>Alpha Position 2</b></span>
+          <div class="content">
+          <br>
+          <!-- Basic RET AlPHA 2CARD info -->
+          {% if alpha2 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ alpha2.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ alpha2.connected_rrh_serial }} </p>
+          {% for a in alpha2.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in alpha2.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if alpha2.parent_antenna_file.all %}
+        <!-- Button trigger modal -->
+        <button class="button is-small " onclick="refs.modalEdicion.open()">
+                <span>View Screenshot</span>
+            </button>
+            <div class="modal" id="modalEdicion">
+                <div onclick="refs.modalEdicion.close()" class="modal-background"></div>
+                <div class="modal-content">
+                    <p class="image is-4by3">
+
+                    {% for a in alpha2.parent_antenna_file.all %}  
+                              <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                            {% endfor %}  
+                    </p>
+                </div>
+                <button class="modal-close is-large" aria-label="close" onclick="refs.modalEdicion.close()"></button>
+            </div>
+
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_alpha2_form|crispy }} 
+                <input class="button is-small" name="screenshot_alpha_2" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{alpha2.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if alpha2.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with alpha2.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_alpha_2" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form2|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+            </article>
+          </div>
+          <!-- END ALPHA 2 -->
+
+
+<!-- Start ALPHA 3 -->
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+        <span class="tag is-link"><b>Alpha Position 3</b></span>
+          <div class="content">
+          <br>
+          <!-- Basic RET CARD info -->
+          {% if alpha3 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ alpha3.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ alpha3.connected_rrh_serial }} </p>
+          {% for a in alpha3.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in alpha3.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if alpha3.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs3.modalEdicion3.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion3">
+        <div onclick="refs3.modalEdicion3.close()" class="modal-background"></div>
+        <div class="modal-content">
+            <p class="image is-4by3">
+
+            {% for a in alpha3.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs3.modalEdicion3.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_alpha3_form|crispy }} 
+                <input class="button is-small" name="screenshot_alpha_3" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{alpha3.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if alpha3.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with alpha3.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_alpha_3" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form1|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+        </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+     <div class="tile">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title">Five</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+          <p>content  </p>
+          </div>
+        </article>
+      </div>
+      <div class="tile is-8 is-vertical">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Six</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Seven</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+     <div class="tile">
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title">Five</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+          <p>content  </p>
+          </div>
+        </article>
+      </div>
+      <div class="tile is-8 is-vertical">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Six</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box">
+              <p class="title">Seven</p>
+              <p class="subtitle">Subtitle</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+
+    {% comment %} <div class="tile">
+      <div class="tile is-8 is-parent">
+        <article class="tile is-child box">
+          <p class="title">Nine</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+          </div>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child box">
+          <p class="title">Ten</p>
+          <p class="subtitle">Subtitle</p>
+          <div class="content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
+          </div>
+        </article>
+      </div>
+    </div> {% endcomment %}
+  </div>
+  
+  <div class="tile is-parent is-2">
+    <article class="tile is-child box ">
+      <div class="content">
+      <div class="heading"><i class="fas fa-broadcast-tower"></i> &nbsp; Technologies</div>
+       
+        </div>
+        
+        <div class="content">
+
+        {% for t in technologies %}
+          {% if t.technology_operating_band != '--' %}
+          <div class = "box">
+          
+            <p class="is-size-7"><b> Operating Band :</b> <span class="tag is-info is-light">{{ t.technology_operating_band}}</span></p>
+            <p class="is-size-7"><b>Cell Id :</b> <span class="tag is-success is-light">{{ t.technology_cell_id}}</span></p>
+            <a class="button is-small is-info is-outlined" href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit this technology</a>
+            <br>
+            </div>
+          {% endif %}
+        {% endfor %}
+      {% if technologies %}
+      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">
+      {% csrf_token %}  
+         <button type="submit" name="delete_tech" value="Send" class="button is-small is-danger is-light"> <i class="fa fa-trash"></i> &nbsp; Clear Technologies </button> 
+      </form> 
+      {% else %}
+      <p> ** Upload antennae files to generate Technologies ** </p> 
+      {% endif %}
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<a id="grid">
+{% comment %}  =====================  TABLE SECTION ========================== {% endcomment %}
+ <div class="box"> </a>  
+ 
+ <h1 class="title"> Grid      </h1> 
+<div class="scrolling-wrapper" id="HTMLtoPDF">
+<table class="table is-striped is-hoverable is-bordered">
+  <thead>
+    <tr>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      <th><abbr title="Position">Sector ID</abbr></th>
+      <th><abbr title="Played">Address</abbr></th>
+      <th><abbr title="Won">Station ID</abbr></th>
+      <th><abbr title="Drawn">HW Version</abbr></th>
+      <th><abbr title="Lost">Bearing</abbr></th>
+      <th><abbr title="Goals for">AISG Version</abbr></th>
+      <th><abbr title="Goals against">Ret Name</abbr></th>
+      {% comment %} <th><abbr title="Goal difference">GD</abbr></th>
+      <th><abbr title="Points">Pts</abbr></th>
+      <th>Qualification or relegation</th> {% endcomment %}
+    </tr>
+  </thead>
+
+  <tbody>
+   <th> Gamma Position 2 </th>
+  {% if gamma_pos_2 %}
+    {% for g in gamma_pos_2 %} 
+      <tr>
+        <td>{{ g.sector_id  }}</td>
+        <td>{{ g.address  }}</td>
+        <td>{{ g.station_id  }}</td>
+        <td>{{ g.hw_version  }}</td>
+        <td>{{ g.bearing  }}</td>
+        <td>{{ g.aisg_version  }}</td>
+        <td>{{ g.ret_name }}</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data </td>
+          </tr>
+      {% endif %}
+    <th> Beta Position 2 </th>
+    {% if beta_pos_2 %}
+      {% for a in beta_pos_2 %} 
+      <tr>
+        <td>{{ a.sector_id  }}</td>
+        <td>{{ a.address  }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.hw_version  }}</td>
+        <td>{{ a.bearing  }}</td>
+        <td>{{ a.aisg_version  }}</td>
+        <td>{{ a.ret_name }}</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+          <tr>
+        <td> No Data Beta 2</td>
+        </tr>
+      {% endif %}
+    <th> Alpha Position 4 </th>
+    {% if alpha_pos_4%}
+        {% for a in alpha_pos_4 %} 
+          <tr>
+            <td>{{ a.sector_id  }}</td>
+            <td>{{ a.address  }}</td>
+            <td>{{ a.station_id  }}</td>
+            <td>{{ a.hw_version  }}</td>
+            <td>{{ a.bearing  }}</td>
+            <td>{{ a.aisg_version  }}</td>
+            <td>{{ a.ret_name }}</td>
+          </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+      <th> No Data Alha 4</th>
+      </tr>
+    {% endif %}
+
+    
+  </tbody>
+</table>
+</div>  
+</div>
+
+
+
+    </div>
+</div>
+      </div>
+    </main>
+
+
+
+
+
+
+{% endblock content %}

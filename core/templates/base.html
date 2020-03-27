@@ -2,9 +2,8 @@
 
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
-<html>
+<html class="has-navbar-fixed-top">
   <head>
-  {% comment %} <link rel="stylesheet" href="{% static 'css/style.css' %}" /> {% block header %}{% endblock header %} {% endcomment %}
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>
@@ -13,103 +12,213 @@
         {% endblock title %}
     </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" /> 
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-
+    <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/simplex/bulmaswatch.min.css">
+    {% comment %} themes I like: Materia, Lux,  Yeti {% endcomment %}
 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-  </head>
-
-
-
-
+</head>
 
 
 
   <body class= "has-background-white-ter">
-  <br>
-    <nav class="navbar is-black is-fixed-top" role="navigation" aria-label="main navigation">
-        <div class="navbar-brand">
-        <a class="#">
-          <span class="icon is-large mdi mdi-light"><i class="fas fa-signal mdi mdi-light icon is-medium"></i>
-        </span>
-        </a>
-            <a class="navbar-item" href="{% url 'home' %}" >
-                <h1 class="title has-text-white">RetSmooth Beta </h1> 
-                {% comment %} <img src="#" width="112" height="28"> {% endcomment %}
-            </a>
-            <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            </a>
-        </div>
- 
-  <div id="navbarBasicExample" class="navbar-menu">
+       <nav class="navbar is-light is-fixed-top">
+  <div class="navbar-brand">
+    <a class="navbar-item" href="http://bulma.io">
+<i class="fab fa-connectdevelop"></i>    <h1 class="title is-4"> &nbsp; RetSmooth</h1> 
+      {% comment %} <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> {% endcomment %}
+    </a>
+    <p class="is-size-7">beta</p>
+
+    <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+      <span class="icon" style="color: #333;">
+        <i class="fa fa-github"></i>
+      </span>
+    </a>
+
+    <a class="navbar-item is-hidden-desktop" href="https://twitter.com/jgthms" target="_blank">
+      <span class="icon" style="color: #55acee;">
+        <i class="fa fa-twitter"></i>
+      </span>
+    </a>
+
+    <div class="navbar-burger burger" data-target="navMenubd-example">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
+
+  <div id="navMenubd-example" class="navbar-menu">
     <div class="navbar-start">
-      <a class="navbar-item" href="{% url 'home' %}">
-        Home
-      </a>
- 
-      <a class="navbar-item" href="{% url 'process_v2' %}">
-      <button class="button is-light">
-        Process Ret
-        </button>
-      </a>
-      {% comment %} <a class="navbar-item" href="{% url 'registration_register' %}">
-      <button class="button is-light">
-        create
-        </button>
-      </a> {% endcomment %}
-      
- 
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link">
-          More
+        <a class="navbar-link  is-active" href="/documentation/overview/start/">
+          Resources
         </a>
- 
-        <div class="navbar-dropdown">
-          <a class="navbar-item">
-          {% comment %} <a href="{% url 'session_detail_v2' pk=ref.pk %}"> {% endcomment %}
-            About
+        <div class="navbar-dropdown ">
+          <a class="navbar-item " href="/documentation/overview/start/">
+            Overview
           </a>
-          <a class="navbar-item">
-            Jobs
+          <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+            Modifiers
           </a>
-          <a class="navbar-item" href="{% url 'new' %}">
-            Neww
+          <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
+            Columns
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
+            Layout
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/form/general/">
+            Form
+          </a>
+          <a class="navbar-item " href="http://bulma.io/documentation/elements/box/">
+            Elements
+          </a>
+          
+            <a class="navbar-item is-active" href="http://bulma.io/documentation/components/breadcrumb/">
+              Components
+            </a>
+          
+          <hr class="navbar-divider">
+          <div class="navbar-item">
+            <div>
+              <p class="is-size-6-desktop">
+                <strong class="has-text-info">0.5.1</strong>
+              </p>
+              
+                <small>
+                  <a class="bd-view-all-versions" href="/versions">View all versions</a>
+                </small>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link " href="http://bulma.io/blog/">
+          Blog
+        </a>
+        <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
+          
+            <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">03 Aug 2017</small>
+                </p>
+                <p>New feature: list of tags</p>
+              </div>
+            </a>
+          
+            <a class="navbar-item" href="/2017/08/01/bulma-bootstrap-comparison/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">01 Aug 2017</small>
+                </p>
+                <p>Bulma / Bootstrap comparison</p>
+              </div>
+            </a>
+          
+            <a class="navbar-item" href="/2017/07/24/access-previous-bulma-versions/">
+              <div class="navbar-content">
+                <p>
+                  <small class="has-text-info">24 Jul 2017</small>
+                </p>
+                <p>Access previous Bulma versions</p>
+              </div>
+            </a>
+          
+          <a class="navbar-item" href="http://bulma.io/blog/">
+            More posts
           </a>
           <hr class="navbar-divider">
-          <a class="navbar-item" href="{% url 'process' %}">
-            Old Process
-          </a>
+          <div class="navbar-item">
+            <div class="navbar-content">
+              <div class="level is-mobile">
+                <div class="level-left">
+                  <div class="level-item">
+                    <strong>Stay up to date!</strong>
+                  </div>
+                </div>
+                <div class="level-right">
+                  <div class="level-item">
+                    <a class="button bd-is-rss is-small" href="http://bulma.io/atom.xml">
+                      <span class="icon is-small">
+                        <i class="fa fa-rss"></i>
+                      </span>
+                      <span>Subscribe</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
- 
     <div class="navbar-end">
+      <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
+      </a>
       <div class="navbar-item">
-        <div class="buttons">
-          <a class="button is-dark">
-            <strong>Sign up</strong>
-          </a>
-          <a class="button is-dark">
-            Log in
-          </a>
+        <div class="field is-grouped">
+          <p class="control">
+          </p>
+          <p class="control">
+            <a class="button is-info" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+              <span>Sign In</span>
+            </a>
+          </p>
         </div>
       </div>
     </div>
   </div>
 </nav>
+<div class="section ">
+  <div class="columns ">
+    <aside class="column is-2 ">
+      <nav class="menu ">
+        <p class="menu-label">
+          General
+        </p>
+        <ul class="menu-list">
+          <li><a class="is-active">Dashboard</a></li>
+          <li><a>Create Session</a></li>
+          <li><a>Favorites</a></li>
+        </ul>
+        <p class="menu-label">
+          Administration
+        </p>
+        <ul class="menu-list">
+          <li><a>My Notes</a></li>
+          <li>
+            <a class="">Manage Your Team</a>
+            <ul>
+              <li><a>Members</a></li>
+              <li><a>My Team</a></li>
+              <li><a>Add a member</a></li>
+            </ul>
+          </li>
+          {% comment %} <li><a>Invitations</a></li>
+          <li><a>Cloud Storage Environment Settings</a></li>
+          <li><a>Authentication</a></li> {% endcomment %}
+        </ul>
+        <p class="menu-label">
+          Manage
+        </p>
+        <ul class="menu-list">
+          <li><a>Settings</a></li>
+          <li><a>My Account</a></li>
+          {% comment %} <li><a>Balance</a></li> {% endcomment %}
+        </ul>
+      </nav>
+    </aside>
+    {% block content %}{% endblock content %}
+  </div>
+</div>
 
-        
-
-
-        {% block content %}{% endblock content %}
-        
-
-        
         {% block footer %}{% endblock footer %}
         <br>
         <br> 
@@ -125,8 +234,9 @@
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script> 
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+  
   </body>
- 
   <footer class="footer">
   <div class="content has-text-centered">
     <p>

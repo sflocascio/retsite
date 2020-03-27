@@ -7,17 +7,70 @@
 {% block content %} 
 
 
-{% comment %} <form method="post" class="uniForm">
-    {{ my_formset|crispy }}
-</form> {% endcomment %}
 
-<section class="section">
-    <div class="container">
-    <br>
-    <h2 class = "title"> Process <h2> 
+
+
+
+
+ <br>
+  {% if messages %}
+      {% for message in messages %}
+        <div class="notification is-success ">
+            <button class="delete"></button>
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+
+
+<main class="column">
+
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="title">Create Session</div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          
+          <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
+              &nbsp;&nbsp; Create New Session 
+            </button>
+           &nbsp; &nbsp;
+            <button type="button" class="button is-small">
+              {{ now | date:"D d M Y -  h:i:s"}} 
+            </button>
+          </div>
+        </div>
+      </div>
+
+
+
+
+
+       <div class="tabs is-boxed ">
+  <ul >
+    <li >
+      <a href="{% url 'home' %}"> 
+        <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
+        <span>Back</span>
+      </a>
+    </li>
+    <li class="is-active ">
+      <a>
+        <span class="icon is-small"><i class="fas fa-broadcast-tower" aria-hidden="true"></i></span>
+        <span> Create </span>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+
 <div class = "box">
-
-    <h3 class = "subtitle"> Create Session  </h3> 
     <p class = "#">  {{ now | date:"D d M Y -  h:i:s"}} </p> 
     <br>
     {% comment %} {% for tower in towers %} {% endcomment %}
@@ -26,8 +79,8 @@
         {% csrf_token %} 
         
          
-         <div class="columns">
-            <div class="column">
+         <div class="columns is-8">
+            <div class="column is-8">
   
 
         <input class="input is-hovered" placeholder="site common name" type="text" name="site_common_name" required id="id_document" >
@@ -60,42 +113,6 @@
             </div> 
 
          
-         
-         
-         
-         
-         {% comment %} <div class="columns">
-            <div class="column">
-                {{ form1|crispy }} 
-                    <br>
-                    {{ form2|crispy }}   
-                    <br>
-                    {{ form3|crispy }}  
-                    <br>
-                    {{ form4|crispy }}   
-                    <br>
-                            </div>
-            <div class="column">
-            {{ form5|crispy }}   
-                    <br>
-                    {{ form6|crispy }}   
-                    <br>
-                    {{ form7|crispy }}   
-                    <br>
-                    {{ form8|crispy }}   
-                    <br>
-            </div>
-            <div class="column">
-                
-                    {{ form9|crispy }}   
-                    <br>
-                    {{ form10|crispy }}   
-                    <br>
-                    {{ form11|crispy }}   
-                    <br>
-                    {{ form12|crispy }}   
-                    <br>
-            </div> {% endcomment %}
 
 </div>
          
@@ -104,33 +121,12 @@
          
         
         
-        
-        {% comment %} <input type="file"  name="alpha_pos_1"/> {% endcomment %}
-        {% comment %} <input type="file" name="document" required id="id_document" value="{{tower.name}}">
-        <input type="dropdown" name="position" required id="id_document" value="{{tower.name}}"> {% endcomment %}
- {% comment %} {% endfor %} {% endcomment %}
 
-         {% comment %} <select name="servers">
-                <option value="" disabled="disabled" selected="selected">Please select the server</option>
-                <option value="x.x.x.x">server_name</option>
-                <option value="x.x.x.x">server_name</option>
-        </select> {% endcomment %}
-
-
-
-        {% comment %} {{ form.as_p }} {% endcomment %}
-        {% comment %} <input type="file" name="document" required id="id_document" value="alpha_pos">  {% endcomment %}
-        {% comment %} {{ form.as_p }} {% endcomment %}
         
         <br> 
         <br> 
         <input class="button is-medium" type="submit" value="Submit" />
    
-
-    {% comment %} <h3 class = "subtitle" > Position 2 </h3> 
-    <form enctype="multipart/form-data" action="upload_file" method="post"> 
-        <input type="file"  name="alpha_pos_2"/> 
-        {% csrf_token %}  {% endcomment %}
     </form>
 
     
@@ -139,8 +135,21 @@
     
 
 </div> 
+
+
+
+     
+
+     
+
+
+
+    </div>
 </div>
-</section>
+      </div>
+    </main>
+
+
 
 
 

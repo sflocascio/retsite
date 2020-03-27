@@ -1,0 +1,309 @@
+{% extends 'base.html' %} {% block title %}
+  Homepage - {{ block.super }} {% endblock title %}
+{% block content %}
+
+
+<main class="column">
+
+     {% if messages %}
+      {% for message in messages %}
+        <div class="notification is-success ">
+            <button class="delete"></button>
+            {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+
+      <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="title">Dashboard</div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          <a href="{% url 'process_v2' %}"> 
+          <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
+              &nbsp;&nbsp; Create New Session 
+            </button></a>
+           &nbsp; &nbsp;
+            <button type="button" class="button is-small">
+             {{ now | date:"D d M Y -  h:i:s"}}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      
+      <h4> Viewing Most recent Sessions </h4>
+      
+      <br>
+      
+      {% comment %} <div class="columns is-multiline">
+        <div class="column">
+          <div class="box">
+            <div class="heading">Top Seller Total</div>
+            <div class="title">56,950</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Sales $</div>
+                  <div class="title is-5">250,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Overall $</div>
+                  <div class="title is-5">750,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Sales %</div>
+                  <div class="title is-5">25%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Revenue / Expenses</div>
+            <div class="title">55% / 45%</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Rev Prod $</div>
+                  <div class="title is-5">30%</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Rev Serv $</div>
+                  <div class="title is-5">25%</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Exp %</div>
+                  <div class="title is-5">45%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Feedback Activity</div>
+            <div class="title">78% &uarr;</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Positive</div>
+                  <div class="title is-5">1560</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Negative</div>
+                  <div class="title is-5">368</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Pos/Neg %</div>
+                  <div class="title is-5">77% / 23%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="box">
+            <div class="heading">Orders / Returns</div>
+            <div class="title">75% / 25%</div>
+            <div class="level">
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Orders $</div>
+                  <div class="title is-5">425,000</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Returns $</div>
+                  <div class="title is-5">106,250</div>
+                </div>
+              </div>
+              <div class="level-item">
+                <div class="">
+                  <div class="heading">Success %</div>
+                  <div class="title is-5">+ 28,5%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> {% endcomment %}
+      
+{% for ref in refs %} 
+      <div class="panel box">
+           <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="subtitle"> {{ref.fcc_id}} </div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          <button type="button" class="button is-small"> <i class="fas fa-map-marker-alt"></i>
+              &nbsp;&nbsp;  {{ref.site_common_name}}
+            </button>
+           &nbsp; &nbsp;
+          
+          
+            <button type="button" class="button is-small">
+             {{ref.created_date}}
+            </button>
+
+
+            <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    &nbsp; &nbsp;
+    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+      <span>Options</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+        <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+         
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+            
+
+
+
+
+            <div class="block">
+            <div class="columns is-multiline">
+        <div class="column is-6">
+          <p class="is-size-6 is-family-code"><b>FCC ID:</b> {{ref.fcc_id}}</p>
+                  <p class="is-size-6 is-family-code"><b>Site Common Name:</b> {{ref.site_common_name}}</p>
+                  <p class="is-size-6 is-family-code"><b>PTN:</b> {{ref.ptn}}</p>
+                  <p class="is-size-6 is-family-code"><b>Release:</b> r{{ref.release}}</p>
+        </div>
+        <div class="column is-6">
+          <p class="is-size-6 is-family-code"><b>Enode B Id: </b> {{ref.enode_b_id}}</p>
+          <p class="is-size-6 is-family-code"><b>Market:</b> {{ref.market}}</p>
+          <p class="is-size-6 is-family-code"><b>Internal Session ID: </b>{{ref.ref_number}}</p>
+                  <p class="is-size-6 is-family-code"><b>Cross Sector Redundency: </b> <span class="tag is-info is-light">{{ref.cross_sector_redundency}}</span></p>
+                  
+                  
+        </div>  
+      </div>
+       <nav class="level is-mobile">
+        <div class="level-left">
+       <a href="{% url 'session_detail_v2' pk=ref.pk %}">
+          <button class="button is-link is-light is-small">  <i class="fas fa-broadcast-tower"></i>&nbsp;&nbsp; Details </button></a>
+          &nbsp;&nbsp;
+    
+          <button class="button is-primary is-light is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button>
+          &nbsp;&nbsp;
+
+        </div>
+      </nav>
+      </div>
+      </div>
+      <br>
+      {% endfor %}
+
+     
+      </div>
+
+      
+
+      
+
+      
+
+      
+      
+      {% comment %} <div class="columns is-multiline">
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Expenses: Daily - $700
+            </p>
+            <div class="panel-block">
+            <p> some content </p>
+ 
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Refunds: Daily - $200
+            </p>
+            <div class="panel-block">
+              <figure class="image is-16x9">
+                <img src="https://placehold.it/1280x720">
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Something
+            </p>
+            <div class="panel-block">
+              <figure class="image is-16x9">
+                <img src="https://placehold.it/1280x720">
+              </figure>
+            </div>
+          </div>
+        </div>
+        <div class="column is-6">
+          <div class="panel">
+            <p class="panel-heading">
+              Something Else
+            </p>
+            <div class="panel-block">
+              <figure class="image is-16x9">
+                <img src="https://placehold.it/1280x720">
+              </figure>
+            </div>
+          </div>
+        </div> {% endcomment %}
+      
+    </main>
+
+
+
+
+
+
+
+
+
+
+    
+{% endblock content %}
