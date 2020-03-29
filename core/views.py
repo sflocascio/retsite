@@ -90,6 +90,7 @@ def delete_antenna(request, pk):
     rets = refs.parent_ref_number.all() #Get all Ret objects related to Parent using ForeignKey
     technologies = refs.parent_ref_number_tech.all()
 
+    # SET VARIABLES FOR ANTENNA OBJECTS
     try:
         alpha1 = docs.get(antenna_position='Alpha Position 1') #Get all Document objects in a position
     except:
@@ -102,7 +103,33 @@ def delete_antenna(request, pk):
         alpha3 = docs.get(antenna_position='Alpha Position 3') #Get all Document objects in a position
     except:
         alpha3 = None
+    try:
+        beta1 = docs.get(antenna_position='Beta Position 1') #Get all Document objects in a position
+    except:
+        beta1 = None
+    try:
+        beta2 = docs.get(antenna_position='Beta Position 2') #Get all Document objects in a position
+    except:
+        beta2 = None
+    try:
+        beta3 = docs.get(antenna_position='Beta Position 3') #Get all Document objects in a position
+    except:
+        beta3 = None
+    try:
+        gamma1 = docs.get(antenna_position='Gamma Position 1') #Get all Document objects in a position
+    except:
+        gamma1 = None
+    try:
+        gamma2 = docs.get(antenna_position='Gamma Position 2') #Get all Document objects in a position
+    except:
+        gamma2 = None
+    try:
+        gamma3 = docs.get(antenna_position='Gamma Position 3') #Get all Document objects in a position
+    except:
+        gamma3 = None
+    # END - SET VARIABLES FOR ANTENNA OBJECTS
 
+    #Route Delete Antenna Requests
     if request.POST.get("delete_alpha_1"):  
             alpha1.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(alpha1.antenna_position))
@@ -115,6 +142,33 @@ def delete_antenna(request, pk):
             alpha3.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(alpha3.antenna_position))
             return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_beta_1"):  
+            beta1.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(beta1.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_beta_2"):  
+            beta2.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(beta2.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_beta_3"):  
+            beta3.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(beta3.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_gamma_1"):  
+            gamma1.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(gamma1.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_gamma_2"):  
+            gamma2.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(gamma2.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_gamma_3"):  
+            gamma3.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(gamma3.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    #END - Route Delete Antenna Requests
+
+    #Delete Technologies 
     if request.POST.get("delete_tech"):  
             technologies.delete()
             return redirect('session_detail_v2', pk=session_id)
@@ -136,6 +190,7 @@ def upload_screenshot(request, pk):
     #alpa = Document.objects.get(antenna_position__contains='Alpha Position 4')
     #alpa = docs.objects.all()
 
+    #Route Upload Screenshot 
     if request.method == "POST":
         if request.POST.get("screen_alpha_1"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screen" )
@@ -146,6 +201,25 @@ def upload_screenshot(request, pk):
         if request.POST.get("screenshot_alpha_3"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_alpha_3" )
             position = refs.process.get(antenna_position__contains='Alpha Position 3')
+        if request.POST.get("screenshot_beta_1"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_beta_1" )
+            position = refs.process.get(antenna_position__contains='Beta Position 1')
+        if request.POST.get("screenshot_beta_2"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_beta_2" )
+            position = refs.process.get(antenna_position__contains='Beta Position 2')
+        if request.POST.get("screenshot_beta_3"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_beta_3" )
+            position = refs.process.get(antenna_position__contains='Beta Position 3')
+        if request.POST.get("screenshot_gamma_1"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_gamma_1" )
+            position = refs.process.get(antenna_position__contains='Gamma Position 1')
+        if request.POST.get("screenshot_gamma_2"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_gamma_2" )
+            position = refs.process.get(antenna_position__contains='Gamma Position 2')
+        if request.POST.get("screenshot_gamma_3"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_gamma_3" )
+            position = refs.process.get(antenna_position__contains='Gamma Position 3')
+        #END - Route Upload Screenshot 
 
         if newfile.is_valid(): 
             #object = Screenshot.objects.create(parent_file = alpa)#<----this works
@@ -169,6 +243,8 @@ def session_detail_v2(request, pk):
     session_id = refs.id
     rets = refs.parent_ref_number.all() #Get all Ret objects related to Parent using ForeignKey
     technologies = refs.parent_ref_number_tech.all()
+
+    # SET VARIABLES FOR ANTENNA OBJECTS
     try:
         alpha1 = docs.get(antenna_position='Alpha Position 1') #Get all Document objects in a position
     except:
@@ -181,9 +257,32 @@ def session_detail_v2(request, pk):
         alpha3 = docs.get(antenna_position='Alpha Position 3') #Get all Document objects in a position
     except:
         alpha3 = None
-    #alpha4 = docs.parent_antenna_file.get(antenna_position__contains='Alpha Position 4')
-    #alpha4 = Screenshot.objects.all()
-    # alpha5 = alpha4.parent_antenna_file.all()
+    try:
+        beta1 = docs.get(antenna_position='Beta Position 1') #Get all Document objects in a position
+    except:
+        beta1 = None
+    try:
+        beta2 = docs.get(antenna_position='Beta Position 2') #Get all Document objects in a position
+    except:
+        beta2 = None
+    try:
+        beta3 = docs.get(antenna_position='Beta Position 3') #Get all Document objects in a position
+    except:
+        beta3 = None
+    try:
+        gamma1 = docs.get(antenna_position='Gamma Position 1') #Get all Document objects in a position
+    except:
+        gamma1 = None
+    try:
+        gamma2 = docs.get(antenna_position='Gamma Position 2') #Get all Document objects in a position
+    except:
+        gamma2 = None
+    try:
+        gamma3 = docs.get(antenna_position='Gamma Position 3') #Get all Document objects in a position
+    except:
+        gamma3 = None
+    # END - SET VARIABLES FOR ANTENNA OBJECTS
+   
     alpha_pos_4 = rets.filter(sector_id__contains='ALPHA POS 4')
     gamma_pos_2 = rets.filter(sector_id__contains='GAMMA POS 2')
     beta_pos_2 = rets.filter(sector_id__contains='BETA POS 2')
@@ -191,6 +290,13 @@ def session_detail_v2(request, pk):
     screen_form = ScreenshotForm(prefix="screen") 
     screenshot_alpha2_form = ScreenshotForm(prefix="screenshot_alpha_2") 
     screenshot_alpha3_form = ScreenshotForm(prefix="screenshot_alpha_3") 
+    screenshot_beta1_form = ScreenshotForm(prefix="screenshot_beta_1")
+    screenshot_beta2_form = ScreenshotForm(prefix="screenshot_beta_2") 
+    screenshot_beta3_form = ScreenshotForm(prefix="screenshot_beta_3")
+    screenshot_gamma1_form = ScreenshotForm(prefix="screenshot_gamma_1")
+    screenshot_gamma2_form = ScreenshotForm(prefix="screenshot_gamma_2") 
+    screenshot_gamma3_form = ScreenshotForm(prefix="screenshot_gamma_3")
+
     #if request.FILES.has_key('image_1'):
     
                 # modified_file_name = the_file.save()
@@ -350,7 +456,8 @@ def session_detail_v2(request, pk):
 
             for values in data['Data']:
                 station_id = values['Station ID']
-
+                tilt_range = values['Min Tilt']
+                tilt_range = get_tilt_range(tilt_range)
 
                 print("StationID HERE::", station_id)
                 #All are set using util functions 
@@ -359,6 +466,8 @@ def session_detail_v2(request, pk):
                 technology = get_technology(station_id)
                 operating_band = get_operating_band(band, technology)
                 ret_position = get_ret_position(position_code)
+                relative_antenna_position = get_relative_antenna_position(station_id)
+                usid = get_usid(station_id)
                 uploaded_file_name.antenna_position = ret_position #Setting the position of the RET
                 save = uploaded_file_name.save()
 
@@ -381,12 +490,21 @@ def session_detail_v2(request, pk):
                 ret_sub_unit = ret_sub_unit,
                 technology = technology, #set above 
                 parent_ref_number = process, #set to parent ref 
-                address=values['Address'],
-                ret_name=file , 
+                address=values['Address'], #This is the actuator
+                antenna_serial_number=values['Antenna Serial'],
+                device_serial=values['Device Serial'],
+                antenna_model=values['Antenna Model'],
+                tilt_range=tilt_range,
+                electrical_tilt=values['Electrical Tilt'],
+                usid=usid,#Set above
+                relative_antenna_position=relative_antenna_position, #Set above
+                ret_name=file, 
                 aisg_version=values['AISG Version'], 
                 bearing=values['Bearing'],
-                station_id=values['Station ID'], 
+                station_id=values['Station ID'],
+                installation_date=values['Install Date'],
                 sector_id=values['Sector ID'], 
+                installer_id=values['Installer ID'], 
                 hw_version=values['HW Version'])
                 print("object ADdress: ", object.address)
                 object.save()
@@ -422,9 +540,21 @@ def session_detail_v2(request, pk):
         'alpha2' : alpha2,
         'alpha1' : alpha1,
         'alpha3' : alpha3,
+        'beta2' : beta2,
+        'beta1' : beta1,
+        'beta3' : beta3,
+        'gamma2' : gamma2,
+        'gamma1' : gamma1,
+        'gamma3' : gamma3,
         'alpha_pos_4' : alpha_pos_4,
         'screenshot_alpha2_form' : screenshot_alpha2_form,
         'screenshot_alpha3_form' : screenshot_alpha3_form,
+        'screenshot_beta1_form' : screenshot_beta1_form,
+        'screenshot_beta2_form' : screenshot_beta2_form,
+        'screenshot_beta3_form' : screenshot_beta3_form,
+        'screenshot_gamma1_form' : screenshot_gamma1_form,
+        'screenshot_gamma2_form' : screenshot_gamma2_form,
+        'screenshot_gamma3_form' : screenshot_gamma3_form,
         # 'alpha5' : alpha5,
     })
       

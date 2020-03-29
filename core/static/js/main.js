@@ -42,6 +42,67 @@ var refs = {
 	}
   };
 
+  var refs4 = {
+	modalEdicion4: {
+	  open: function() { document.getElementById('modalEdicion4').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion4').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs5 = {
+	modalEdicion5: {
+	  open: function() { document.getElementById('modalEdicion5').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion5').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs6 = {
+	modalEdicion6: {
+	  open: function() { document.getElementById('modalEdicion6').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion6').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs7 = {
+	modalEdicion7: {
+	  open: function() { document.getElementById('modalEdicion7').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion7').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs8 = {
+	modalEdicion8: {
+	  open: function() { document.getElementById('modalEdicion8').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion8').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs9 = {
+	modalEdicion9: {
+	  open: function() { document.getElementById('modalEdicion9').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion9').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  
 
 
 // class BulmaModal {

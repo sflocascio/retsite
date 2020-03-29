@@ -71,7 +71,7 @@ class Ret(models.Model):
     ret_position = models.CharField(max_length=500, null=True) #Alpha Gamma Beta, Pos 1,2,3 ETC
     antenna_serial_number = models.CharField(max_length=500, null=True)
     device_serial = models.CharField(max_length=500, null=True)
-    antenna_serial_number = models.CharField(max_length=500, null=True)
+    #antenna_serial_number = models.CharField(max_length=500, null=True)
     antenna_model = models.CharField(max_length=500, null=True)
     aisg_version = models.CharField(max_length=500)
     ret_name = models.CharField(max_length=500, null=True)
@@ -80,7 +80,7 @@ class Ret(models.Model):
     electrical_tilt = models.CharField(max_length=500, null=True)
     
     usid = models.CharField(max_length=500, null=True)
-    base_station_id = models.CharField(max_length=500, null=True)
+    #base_station_id = models.CharField(max_length=500, null=True) #repeat
     sector_id = models.CharField(max_length=500, null=True)
     
     relative_antenna_position = models.CharField(max_length=500, null=True)

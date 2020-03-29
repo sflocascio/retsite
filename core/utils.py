@@ -1,4 +1,5 @@
 from core.models import *
+import string
 
 #Returns only Sector and Position code, ie: A4
 def get_sector_and_position_code(base_station_id):
@@ -8,19 +9,42 @@ def get_sector_and_position_code(base_station_id):
     print("Sector + Position", sector_and_position )
     return sector_and_position
 
+#returns the USID 
+def get_usid(station_id):
+    usid = station_id[0:5]
+    return usid
+
+#Returns Relative Antenna Position
+def get_relative_antenna_position(station_id):
+    relative_antenna_position = station_id[9]
+    return relative_antenna_position
+
 # Turn Sector and Position Code into human readable position, ie: Alpha Position 4
 def get_ret_position(sector_and_position): 
     ret_position = { 
         'A1' : 'Alpha Position 1', 
         'A2' : 'Alpha Position 2', 
         'A3' : 'Alpha Position 3', 
-        'A4' : 'Alpha Position 4', 
+        'A4' : 'Alpha Position 4',
+        'B1' : 'Beta Position 1', 
+        'B2' : 'Beta Position 2', 
+        'B3' : 'Beta Position 3', 
+        'B4' : 'Beta Position 4',
+        'C1' : 'Gamma Position 1', 
+        'C2' : 'Gamma Position 2', 
+        'C3' : 'Gamma Position 3', 
+        'C4' : 'Gamma Position 4',  
     } 
     # get() method of dictionary data type returns  
     # value of passed argument if it is present  
     # in dictionary otherwise second argument will 
     # be assigned as default value of passed argument 
-    return ret_position.get(sector_and_position, "no match") 
+    return ret_position.get(sector_and_position, "no position match") 
+
+def get_tilt_range(tilt_range):
+    adjust = tilt_range.replace(",", "  -")
+    line = adjust.translate(str.maketrans('', '','MaxTilt:'))
+    return line
 
 #this method returns simply A, B, or C 
 def get_eutran_prefix(base_station_id):
@@ -85,10 +109,39 @@ def update_or_create_technology_object(operating_band, tech_parent_ref):
 
 #Sets the Eutran Cell ID for RETS when a technology Cell_ID is updated
 def set_eutran_cell_id(operating_band, cell_id, prefix):
+    #operating band = reference for matching 
+    #cell id = leading reference
+    #prefix = A,B,C
+
     eutran_cell_id = { 
-        '9' : cell_id+'_7'+prefix+'_1;'+cell_id+'_8'+prefix, 
-        '8' : '1900', 
-        'P' : 'FNET', 
+        '2' : cell_id+'_2'+prefix+'_1',  
+        '3' : cell_id+'_3'+prefix+'_1', 
+        '6' : cell_id+'_2'+prefix+'_1', 
+        '7' : cell_id+'_7'+prefix+'_1', 
+        '8' : cell_id+'_8'+prefix+'_1', 
+        '9' : cell_id+'_9'+prefix+'_1',  
+        'A' : cell_id+'_2'+prefix+'_1;'+cell_id+'_2'+prefix+'_2', 
+        'B' : cell_id+'_9'+prefix+'_1;'+cell_id+'_2'+prefix+'_2', 
+        'C' : cell_id+'_2'+prefix+'_1;'+cell_id+'_2'+prefix+'_2;'+cell_id+'_3'+prefix+'_1', 
+        'D' : cell_id+'_9'+prefix+'_1;'+cell_id+'_2'+prefix+'_1', 
+        'E' : cell_id+'_2'+prefix+'_2;'+cell_id+'_3'+prefix+'_1',
+        'F' : cell_id+'_9'+prefix+'_1;'+cell_id+'_3'+prefix+'_1',
+        'G' : cell_id+'_9'+prefix+'_1;'+cell_id+'_2'+prefix+'_1;'+cell_id+'_2'+prefix+'_2',
+        'H' : cell_id+'_2'+prefix+'_1;'+cell_id+'_3'+prefix+'_1',
+        'I' : cell_id+'_9'+prefix+'_1;'+cell_id+'_2'+prefix+'_2;'+cell_id+'_3'+prefix+'_1',
+        'J' : cell_id+'_9'+prefix+'_1;'+cell_id+'_2'+prefix+'_1;'+cell_id+'_3'+prefix+'_1',
+        'K' : cell_id+'_7'+prefix+'_1;'+cell_id+'_8'+prefix+'_1', 
+        'M' : cell_id+'_9'+prefix+'_1;'+cell_id+'_2'+prefix+'_1;'+cell_id+'_3'+prefix+'_1', 
+        'P' : cell_id+'_7'+prefix+'_2_F',  
+        'Q' : cell_id+'_7'+prefix+'_2_E', 
+        'R' : cell_id+'_7'+prefix+'_1;'+cell_id+'_7'+prefix+'_2_F;'+cell_id+'_8'+prefix+'_1', 
+        'S' : cell_id+'_7'+prefix+'_1;'+cell_id+'_8'+prefix+'_1;'+cell_id+'_7'+prefix+'_2_E',
+        'T' : cell_id+'_7'+prefix+'_1;'+cell_id+'_7'+prefix+'_2_F;'+cell_id+'_7'+prefix+'_1_E',
+        'U' : cell_id+'_7'+prefix+'_1;'+cell_id+'_7'+prefix+'_2_F;'+cell_id+'_7'+prefix+'_1_E;'+cell_id+'_8'+prefix+'_1',
+        'W' : cell_id+'_7'+prefix+'_E;__'+cell_id+'_7'+prefix+'_2_F', 
+        'X' : cell_id+'_7'+prefix+'_1;'+cell_id+'_7'+prefix+'_2_F', 
+        'Y' : cell_id+'_7'+prefix+'_2_E;'+cell_id+'_8'+prefix+'_1',  
+        'Z' : cell_id+'_7'+prefix+'_2_F;'+cell_id+'_8'+prefix+'_1', 
     } 
     return eutran_cell_id.get(operating_band, "no matching bands") 
 
@@ -99,19 +152,3 @@ def set_ret_sub_unit(base_station_id, eutran_cell_id):
 
 
 
-# Update RET implentation:
-
-# ret = ret.objects.all()
-
-# if method == POST:
-#     technology = Something to get the specific technology 
-#       Need to set the Foreign Keys to each otheer 
-#     technology_cell_id = user input on this specfic form 
-#     technolgy_cell_id.save()
-
-#     for ret in rets:
-#         if ret.operating_band == tecnology.operating_band:
-#             ret.cell_id = technology_cell_id 
-#             ret.save() or update   
-#         else: 
-#             pass
