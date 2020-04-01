@@ -182,7 +182,8 @@
   <div class="dropdown-menu" id="dropdown-menu4" role="menu">
     <div class="dropdown-content">
       <div class="dropdown-item">
-        <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+      <a href="{% url 'delete_all_files' pk=ref.pk %}">
+        <p> Delete this Session </p> </a>
       </div>
     </div>
   </div>
@@ -221,10 +222,10 @@
        <nav class="level is-mobile">
         <div class="level-left">
        <a href="{% url 'session_detail_v2' pk=ref.pk %}">
-          <button class="button is-link is-light is-small">  <i class="fas fa-broadcast-tower"></i>&nbsp;&nbsp; Details </button></a>
+          <button class="button is-link is-outlined is-light is-small">  <i class="fas fa-broadcast-tower"></i>&nbsp;&nbsp; Details </button></a>
           &nbsp;&nbsp;
     
-          <button class="button is-primary is-light is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button>
+          <a href="{% url 'export_csv' pk=ref.pk %}"><button class="button is-success is-light is-outlined is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button></a>
           &nbsp;&nbsp;
 
         </div>

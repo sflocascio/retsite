@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
     <link rel="stylesheet" href="https://unpkg.com/bulmaswatch/simplex/bulmaswatch.min.css">
-    {% comment %} themes I like: Materia, Lux,  Yeti {% endcomment %}
+    {% comment %} themes I like: Simplex,  Materia, Lux,  Yeti {% endcomment %}
 
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </head>
@@ -25,13 +25,13 @@
   <body class= "has-background-white-ter">
        <nav class="navbar is-light is-fixed-top">
   <div class="navbar-brand">
-    <a class="navbar-item" href="http://bulma.io">
-<i class="fab fa-connectdevelop"></i>    <h1 class="title is-4"> &nbsp; RetSmooth</h1> 
+    <a class="navbar-item" href="{% url 'home' %} ">
+<i class="fab fa-connectdevelop"></i>   <h1 class="title is-4"> &nbsp; RetSmooth</h1> 
       {% comment %} <img src="http://bulma.io/images/bulma-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28"> {% endcomment %}
     </a>
     <p class="is-size-7">beta</p>
 
-    <a class="navbar-item is-hidden-desktop" href="https://github.com/jgthms/bulma" target="_blank">
+    <a class="navbar-item is-hidden-desktop" href="{% url 'home' %} " target="_blank">
       <span class="icon" style="color: #333;">
         <i class="fa fa-github"></i>
       </span>
@@ -57,26 +57,18 @@
           Resources
         </a>
         <div class="navbar-dropdown ">
-          <a class="navbar-item " href="/documentation/overview/start/">
+          <a class="navbar-item " href="#">
             Overview
           </a>
-          <a class="navbar-item " href="http://bulma.io/documentation/modifiers/syntax/">
+          <a class="navbar-item " href="#">
             Modifiers
           </a>
-          <a class="navbar-item " href="http://bulma.io/documentation/columns/basics/">
+          <a class="navbar-item " href="#">
             Columns
           </a>
-          <a class="navbar-item " href="http://bulma.io/documentation/layout/container/">
-            Layout
-          </a>
-          <a class="navbar-item " href="http://bulma.io/documentation/form/general/">
-            Form
-          </a>
-          <a class="navbar-item " href="http://bulma.io/documentation/elements/box/">
-            Elements
-          </a>
           
-            <a class="navbar-item is-active" href="http://bulma.io/documentation/components/breadcrumb/">
+          
+            <a class="navbar-item is-active" href="#">
               Components
             </a>
           
@@ -88,7 +80,7 @@
               </p>
               
                 <small>
-                  <a class="bd-view-all-versions" href="/versions">View all versions</a>
+                  <a class="bd-view-all-versions" href="#">View all versions</a>
                 </small>
               
             </div>
@@ -96,12 +88,12 @@
         </div>
       </div>
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link " href="http://bulma.io/blog/">
+        <a class="navbar-link " href="#">
           Blog
         </a>
         <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
           
-            <a class="navbar-item" href="/2017/08/03/list-of-tags/">
+            <a class="navbar-item" href="#">
               <div class="navbar-content">
                 <p>
                   <small class="has-text-info">03 Aug 2017</small>
@@ -110,7 +102,7 @@
               </div>
             </a>
           
-            <a class="navbar-item" href="/2017/08/01/bulma-bootstrap-comparison/">
+            <a class="navbar-item" href="#">
               <div class="navbar-content">
                 <p>
                   <small class="has-text-info">01 Aug 2017</small>
@@ -119,7 +111,7 @@
               </div>
             </a>
           
-            <a class="navbar-item" href="/2017/07/24/access-previous-bulma-versions/">
+            <a class="navbar-item" href="#">
               <div class="navbar-content">
                 <p>
                   <small class="has-text-info">24 Jul 2017</small>
@@ -128,7 +120,7 @@
               </div>
             </a>
           
-          <a class="navbar-item" href="http://bulma.io/blog/">
+          <a class="navbar-item" href="#">
             More posts
           </a>
           <hr class="navbar-divider">
@@ -142,7 +134,7 @@
                 </div>
                 <div class="level-right">
                   <div class="level-item">
-                    <a class="button bd-is-rss is-small" href="http://bulma.io/atom.xml">
+                    <a class="button bd-is-rss is-small" href="#">
                       <span class="icon is-small">
                         <i class="fa fa-rss"></i>
                       </span>
@@ -157,14 +149,14 @@
       </div>
     </div>
     <div class="navbar-end">
-      <a class="navbar-item is-hidden-desktop-only" href="https://github.com/jgthms/bulma" target="_blank">
+      <a class="navbar-item is-hidden-desktop-only" href="#" target="_blank">
       </a>
       <div class="navbar-item">
         <div class="field is-grouped">
           <p class="control">
           </p>
           <p class="control">
-            <a class="button is-info" href="https://github.com/jgthms/bulma/archive/0.5.1.zip">
+            <a class="button is-info" href="#">
               <span class="icon">
                 <i class="fa fa-download"></i>
               </span>
@@ -184,8 +176,8 @@
           General
         </p>
         <ul class="menu-list">
-          <li><a class="is-active">Dashboard</a></li>
-          <li><a>Create Session</a></li>
+          <li><a class="is-active" href="{% url 'home' %}">Dashboard</a></li>
+          <li><a href="{% url 'process_v2' %}"> Create Session</a></li>
           <li><a>Favorites</a></li>
         </ul>
         <p class="menu-label">

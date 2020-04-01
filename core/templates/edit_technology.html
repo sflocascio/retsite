@@ -5,24 +5,20 @@
 
 {% block content %}
 
-
-
-
 <main class="column">
 
       <div class="level">
         <div class="level-left">
           <div class="level-item">
             <div class="title">Edit</div>
-            
           </div>
         </div>
         <div class="level-right">
           <div class="level-item">
-          
-          <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
+          <a href="{% url 'process_v2' %}"> 
+         <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
               &nbsp;&nbsp; Create New Session 
-            </button>
+            </button></a>
            &nbsp; &nbsp;
             <button type="button" class="button is-small">
               {{ now | date:"D d M Y -  h:i:s"}} 
@@ -31,23 +27,19 @@
         </div>
       </div>
 
-
-
-
-
       <div class="tabs is-boxed">
   <ul>
     <li >
-      <a>
+      <a href="{% url 'session_detail_v2' pk=session.pk %}">
         <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
         <span>Back</span>
       </a>
     </li>
     <li >
-      <a>
+      &nbsp;
         <span class="icon is-small"><i class="fas fa-broadcast-tower" aria-hidden="true"></i></span>
         <span> Session "{{ session.site_common_name }}"</span>
-      </a>
+      &nbsp;
     </li>
     <li class="is-active">
       <a>
@@ -57,11 +49,6 @@
     </li>
   </ul>
 </div>
-
-
-
-
-   
 
    <div class="tile is-ancestor">
   <div class="tile is-8 is-parent">
@@ -86,9 +73,6 @@
 
         <button class= " button is-outlined" type="submit">Submit</button>
     </form>
-
-
-     
       </div>
       <nav class="level is-mobile">
         <div class="level-left">
@@ -98,10 +82,6 @@
     </div>
 
   </article>
-
-
-
-
 
     </article>
   
@@ -121,84 +101,15 @@
   </div>
   
 </div>
-
-    
-    
-    
+ 
 
 </div> 
-
-
-
-     
-
-     
-
-
 
     </div>
 </div>
       
     </main>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
- <div class="section">  
- <br>
-
- <h1 class="title"> Session Detail </h1>
-
-<div class="tabs is-boxed">
-  <ul>
-    <li >
-      <a>
-        <span class="icon is-small"><i class="fas fa-arrow-left" aria-hidden="true"></i></span>
-        <span>Home</span>
-      </a>
-    </li>
-    <li >
-      <a>
-        <span class="icon is-small"><i class="fas fa-broadcast-tower" aria-hidden="true"></i></span>
-        <span> Session "{{ session.site_common_name }}"</span>
-      </a>
-    </li>
-    <li class="is-active">
-      <a>
-        <span class="icon is-small"><i class="fas fa-pen" aria-hidden="true"></i></span>
-        <span> Editing Operating Band : {{ refs.technology_operating_band }}</span>
-      </a>
-    </li>
-    <li>
-      <a>
-        <span class="icon is-small"><i class="far fa-file-alt" aria-hidden="true"></i></span>
-        <span>Documents</span>
-      </a>
-    </li>
-  </ul>
-</div>
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 {% endblock %}

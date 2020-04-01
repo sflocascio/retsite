@@ -11,6 +11,13 @@ psycopg2 = "*"
 django-extensions = "*"
 django-debug-toolbar = "*"
 django-crispy-forms = "*"
+pillow = "*"
+django-storages = "*"
+python-decouple = "*"
+boto3 = "*"
+whitenoise = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.7"

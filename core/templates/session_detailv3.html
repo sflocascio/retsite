@@ -29,13 +29,13 @@ Detail - {{ block.super }} {% endblock title %}
         </div>
         <div class="level-right">
           <div class="level-item">
-          
-          <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
+          <a href="{% url 'process_v2' %}"> 
+         <button type="button" class="button is-small"> <i class="fas fa-plus-circle"></i>
               &nbsp;&nbsp; Create New Session 
-            </button>
+            </button></a>
            &nbsp; &nbsp;
             <button type="button" class="button is-small">
-              March 8, 2017 - April 6, 2017
+              {{ now | date:"D d M Y -  h:i:s"}} 
             </button>
           </div>
         </div>
@@ -217,7 +217,8 @@ Detail - {{ block.super }} {% endblock title %}
   <div class="dropdown-menu" id="dropdown-menu4" role="menu">
     <div class="dropdown-content">
       <div class="dropdown-item">
-        <p>You can insert <strong>any type of content</strong> within the dropdown menu.</p>
+        <a href="{% url 'delete_all_files' pk=refs.pk %}">
+        <p> Delete this session </p> </a>
       </div>
     </div>
   </div>
@@ -259,7 +260,7 @@ Detail - {{ block.super }} {% endblock title %}
           <button class="button is-link is-light is-outlined is-small">  <i class="fas fa-pen"></i>&nbsp;&nbsp; Edit </button></a>
           &nbsp;&nbsp;
     
-          <button class="button is-success is-light is-outlined is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button>
+          <a href="{% url 'export_csv' pk=refs.pk %}"><button class="button is-success is-light is-outlined is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button></a>
           &nbsp;&nbsp;
 
         </div>
@@ -1462,8 +1463,32 @@ Detail - {{ block.super }} {% endblock title %}
 <a id="grid">
 {% comment %}  =====================  TABLE SECTION =========================================== {% endcomment %}
  <div class="box"> </a>  
+
+ <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="title"> Grid </div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          <p>
+          <i class="fas fa-map-marker-alt"></i>
+              &nbsp;&nbsp;  {{refs.market}} 
+               &nbsp;&nbsp; | &nbsp;&nbsp;</p>
+                     <a href="{% url 'export_csv' pk=refs.pk %}"><button class="button is-success is-light is-outlined is-small"><i class="fas fa-download"></i> &nbsp;&nbsp; Export CSV</button></a>
+
+           &nbsp; &nbsp;
+            <button type="button" class="button is-small">
+             {{refs.created_date}}
+            </button>
+          </div>
+        </div>
+      </div>
  
- <h1 class="title"> Grid      </h1> 
+ 
+ 
 <div class="scrolling-wrapper" id="HTMLtoPDF">
 <table class="table is-striped is-hoverable is-bordered">
   <thead>

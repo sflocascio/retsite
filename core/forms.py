@@ -17,7 +17,7 @@ class TechnologyForm(forms.ModelForm):
         fields = ('technology_operating_band', 'technology_cell_id',)
 
 class ScreenshotForm(forms.ModelForm):
-    #imagey = forms.ImageField(required = False, widget=forms.ClearableFileInput(attrs={'class': 'narrow-select'}))
+    image = forms.ImageField(required = True, widget=forms.ClearableFileInput(attrs={'class': 'narrow-select'}))
 
     class Meta:
         model = Screenshot
@@ -32,7 +32,7 @@ class DocumentForm(forms.ModelForm):
     #position = forms.ChoiceField(choices=POSITION_OPTIONS, required=True )
     document = forms.FileField(required = False, widget=forms.ClearableFileInput(attrs={'multiple': True, 'class': 'narrow-select'}))
  
-    connected_rrh_serial = forms.CharField(required=False) #This comes from user entry
+    connected_rrh_serial = forms.CharField(required=True) #This comes from user entry
 
     #document = forms.FileField()
     class Meta:

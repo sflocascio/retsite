@@ -226,6 +226,8 @@ def upload_screenshot(request, pk):
             object = newfile.save(commit=False)
             object.parent_file = position
             object.save()
+            messages.success(request,  " Uploaded Screenshot to {} ".format(object.parent_file.antenna_position))
+
             return redirect('session_detail_v2', pk=session_id)
 
     return render(request, 'upload_screenshot.html', {
@@ -236,6 +238,7 @@ def upload_screenshot(request, pk):
 
 #Current View of Parent Session Detail, this processes the uploads the Ret files
 def session_detail_v2(request, pk):
+    now = timezone.now()
     refs = Process.objects.get(pk=pk) #Get the related Session object
     docs = refs.process.all() #Get all the related Antenna(document) Objects based off foreign Key
     screenshots = Screenshot.objects.all()
@@ -518,6 +521,7 @@ def session_detail_v2(request, pk):
     print("TOTAL REST CREATED after 0", total_rets_created)
 
     return render(request, 'session_detailv3.html', {
+        'now'  : now, 
         'refs'  : refs,
         'docs'  : docs,
         'rets'  : rets,
@@ -999,24 +1003,343 @@ def export_csv(request, pk):
     refs = Process.objects.get(pk=pk)
     docs = refs.process.all()
     rets = refs.parent_ref_number.all()
-    alpha_pos_4 = rets.filter(sector_id__contains='ALPHA POS 4')
-    gamma_pos_2 = rets.filter(sector_id__contains='GAMMA POS 2')
-    beta_pos_2 = rets.filter(sector_id__contains='BETA POS 2')
+    alpha1 = rets.filter(ret_position__contains='Alpha Position 1')
+    alpha2 = rets.filter(ret_position__contains='Alpha Position 2')
+    alpha3 = rets.filter(ret_position__contains='Alpha Position 3')
+    beta1 = rets.filter(ret_position__contains='Beta Position 1')
+    beta2 = rets.filter(ret_position__contains='Beta Position 2')
+    beta3 = rets.filter(ret_position__contains='Beta Position 3')
+    gamma1 = rets.filter(ret_position__contains='Gamma Position 1')
+    gamma2 = rets.filter(ret_position__contains='Gamma Position 2')
+    gamma3 = rets.filter(ret_position__contains='Gamma Position 3')
+
+   
 
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attatchment; filename="export.csv"'
     writer = csv.writer(response, delimiter=",")
-    writer.writerow(['SectorID', 'Address', 'StationID', 'HW Version', 'Bearing', 'AISG Version', 'RetName'])
+    #Create the header columns
+    writer.writerow(['Antenn Position', 
+                        'Actuator', 
+                        'Cross Sector Redundency Implemented (Y/N)', 
+                        'Antenna Serial Number', 
+                        'Antenna ALD Serial Number', 
+                        'Antenna Model', 
+                        'AISG Type',
+                        'Tilt Range (From Scan)',
+                        'Electrical Tilt',
+                        'USID',
+                        'Base Station ID',
+                        'Sector ID',
+                        'Relative Antenna Sector Position',
+                        'Orientation',
+                        'Operating Band (MHz)',
+                        'Band',
+                        'Technology',
+                        'LTE Cell ID / EUTRAN_CELL_FDD_ID',
+                        'Installed Mech Tilt',
+                        'Connected RRH Serial Number',
+                        'Fiber # at Base Band Unit',
+                        'Fiber # at Squid Junction',
+                        'Installation Date',
+                        'Installer ID',
+                        'E// for OSS RetSubUnit',
+                        'Nokia for OSS userNote2(FL17A)',
+                        'Notes',
+                       
+                        ])
 
-    for a in gamma_pos_2:
-        writer.writerow([a.sector_id, a.address, a.station_id, a.hw_version, a.bearing, a.aisg_version, a.ret_name])
+    for a in alpha1:
+        writer.writerow([
+            'Alpha Position 1',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
     writer.writerow([" "])
-    writer.writerow(["Hello"])
-    for a in gamma_pos_2:
-        writer.writerow([a.sector_id, a.address, a.station_id, a.hw_version, a.bearing, a.aisg_version, a.ret_name])
+
+    for a in alpha2:
+        writer.writerow([
+            'Alpha Position 2',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in alpha3:
+        writer.writerow([
+            'Alpha Position 3',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in beta1:
+        writer.writerow([
+            'Beta Position 1',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+    
+    for a in beta2:
+        writer.writerow([
+            'Beta Position 2',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in beta3:
+        writer.writerow([
+            'Beta Position 3',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in gamma1:
+        writer.writerow([
+            'Gamma Position 1',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in gamma2:
+        writer.writerow([
+            'Gamma Position 2',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in gamma3:
+        writer.writerow([
+            'Gamma Position 3',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+    
+    
     return(response)
-
-
+ 
 def update_technology_cell_id(request, pk):
     refs = Technology.objects.get(pk=pk)
     session_id = refs.parent_ref_number.id
@@ -1024,6 +1347,7 @@ def update_technology_cell_id(request, pk):
     parent_session = refs.parent_ref_number
     rets = parent_session.parent_ref_number.all()
     session = refs.parent_ref_number
+    now = timezone.now()
     #rets = refs.parent_ref_number.all()
 
     if request.method =='POST':
@@ -1047,7 +1371,7 @@ def update_technology_cell_id(request, pk):
             return redirect('session_detail_v2', pk=session_id)
     else:
         form = form_class(instance=refs)
-    return render(request, 'edit_technology.html', {'refs': refs, 'form': form, 'session': session,})
+    return render(request, 'edit_technology.html', {'refs': refs, 'form': form, 'session': session, 'now': now})
 
 
 def delete_all_files(request, pk):
@@ -1056,24 +1380,9 @@ def delete_all_files(request, pk):
     # session_id = refs.id
     refs.delete()
     # docs = refs.process.all()
-    # process = Process.objects.get(pk=pk)
-    # rets = parent_session.parent_ref_number.all()
-    # technologies = Technology.objects.get(pk=pk)
+    messages.success(request,  "Deleted Session  '{}' and all associated files".format(refs.fcc_id))
 
-
-    # card = Document.objects.get(pk=pk)
-    # quiz_id = card.quiz.id
-    # if (request.user == quiz.author) or (request.user.is_staff):
-    # for d in docs:
-    #     print("docs ptined:", d.document)
-    #     d.delete()
-    # for t in technologies:
-    #     t.delete()
-    # for r in rets:
-    #     r.delete()
-
-    #messages.success(request, f'Card "{card.answer}" Deleted')
-    #return redirect('session_detail_v2', pk=session_id)
+   
     return redirect('home')
     # return render(request, 'quizzes/quiz_detail.html',)
 
