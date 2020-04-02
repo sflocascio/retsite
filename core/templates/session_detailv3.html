@@ -360,7 +360,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_alpha_1" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -437,6 +437,8 @@ Detail - {{ block.super }} {% endblock title %}
             <div class="modal" id="modalEdicion">
                 <div onclick="refs.modalEdicion.close()" class="modal-background"></div>
                 <div class="modal-content">
+                <br>
+                  <p> &nbsp; Alpha Position 2 </p>
                     <p class="image is-4by3">
 
                     {% for a in alpha2.parent_antenna_file.all %}  
@@ -485,7 +487,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_alpha_2" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -560,7 +562,10 @@ Detail - {{ block.super }} {% endblock title %}
     <div class="modal" id="modalEdicion3">
         <div onclick="refs3.modalEdicion3.close()" class="modal-background"></div>
         <div class="modal-content">
-            <p class="image is-4by3">
+                <br>
+                <p> &nbsp; Alpha Position 3 </p>
+              <p class="image is-4by3">
+            
 
             {% for a in alpha3.parent_antenna_file.all %}  
                       <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
@@ -607,7 +612,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_alpha_3" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -735,7 +740,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_beta_1" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -860,7 +865,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_beta_2" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -983,7 +988,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_beta_3" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -1109,7 +1114,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_gamma_1" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -1233,7 +1238,7 @@ Detail - {{ block.super }} {% endblock title %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
                         <button type="submit" name="delete_gamma_2" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
@@ -1354,8 +1359,8 @@ Detail - {{ block.super }} {% endblock title %}
                       {% endif %}
                       <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
                         {% csrf_token %}  
-                        <button type="submit" name="delete_beta_1" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
-                        <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button> 
+                        <button type="submit" name="delete_gamma_3" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
                       </form>
                     </div>
                   </div>
