@@ -1,7 +1,7 @@
 {% extends 'base.html' %} {% block title %}
   Homepage - {{ block.super }} {% endblock title %}
 {% block content %}
-
+ <br>
 
 <main class="column">
 
@@ -145,8 +145,147 @@
             </div>
           </div>
         </div>
-      </div> {% endcomment %}
+      </div>  {% endcomment %}
+
+{% for ref in refs %} 
+
+      <div class="panel box">
       
+           <div class="level">
+        <div class="level-left">
+          <div class="level-item">
+            <div class="subtitle">{{ref.site_common_name }} - {{ ref.fcc_id}} </div>
+            
+          </div>
+        </div>
+        <div class="level-right">
+          <div class="level-item">
+          <button type="button" class="button is-small"> <i class="fas fa-map-marker-alt"></i>
+              &nbsp;&nbsp;  {{ref.site_common_name}}
+            </button>
+           &nbsp; &nbsp;
+          
+          
+            <button type="button" class="button is-small">
+             {{ref.created_date}}
+            </button>
+
+
+            <div class="dropdown is-hoverable is-right">
+  <div class="dropdown-trigger">
+    &nbsp; &nbsp;
+    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+      <span>Options</span>
+      <span class="icon is-small">
+        <i class="fas fa-angle-down" aria-hidden="true"></i>
+      </span>
+    </button>
+  </div>
+  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+    <div class="dropdown-content">
+      <div class="dropdown-item">
+      <a href="{% url 'delete_all_files' pk=ref.pk %}">
+        <p> Delete this Session </p> </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+         
+
+          </div>
+          
+        </div>
+        
+      </div>
+      
+            
+
+
+
+
+            <div class="block">
+            <table class="table is-narrow">
+  <thead>
+    <tr>
+      {% comment %} <th><abbr title="Position">Pos</abbr></th>
+      <th>Team</th> {% endcomment %}
+    </tr>
+  </thead>
+  {% comment %} <tfoot>
+    <tr>
+      <th><abbr title="Position">Pos</abbr></th>
+      <th>Team</th>
+    </tr>
+  </tfoot> {% endcomment %}
+  <tbody>
+     <tr>
+      <th>FCC ID:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.fcc_id}} </p>
+      </td>
+    </tr>
+    <tr>
+      <th>Site Common Name:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.site_common_name}} </p>
+      </td>
+    </tr>
+     <tr>
+      <th>PTN:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.ptn}} </p>
+      </td>
+    </tr>
+    <tr>
+      <th>Release:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.release}} </p>
+      </td>
+    </tr>
+     <tr>
+      <th>Enode B ID:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.enode_b_id}} </p>
+      </td>
+    </tr>
+    <tr>
+      <th>Market:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.market}} </p>
+      </td>
+    </tr>
+     <tr>
+      <th>Session Reference Number:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.ref_number}} </p>
+      </td>
+    </tr>
+    <tr>
+      <th>Cross Sector Redundency:</th>
+      <td><p class="is-size-6 is-family-code"> {{ref.cross_sector_redundency}} </p>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
+         
+       <nav class="level is-mobile">
+        <div class="level-left">
+       <a href="{% url 'session_detail_v2' pk=ref.pk %}">
+          <button class="button is-link is-outlined is-light is-small">  <i class="fas fa-broadcast-tower"></i>&nbsp;&nbsp; Details </button></a>
+          &nbsp;&nbsp;
+    
+          <a href="{% url 'export_csv' pk=ref.pk %}"><button class="button is-success is-light is-outlined is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button></a>
+          &nbsp;&nbsp;
+
+        </div>
+      </nav>
+      </div>
+      </div>
+      <br>
+      {% endfor %}
+
+     
+      </div>
+
+
+
+{% comment %} orginal box  {% endcomment %}
+{% comment %}       
 {% for ref in refs %} 
       <div class="panel box">
            <div class="level">
@@ -233,7 +372,7 @@
       </div>
       </div>
       <br>
-      {% endfor %}
+      {% endfor %} {% endcomment %}
 
      
       </div>
