@@ -247,6 +247,9 @@ Detail - {{ block.super }} {% endblock title %}
       {% csrf_token %}  
          <button type="submit" name="delete_tech" value="Send" class="button is-outlined is-small is-primary is-light"> <i class="fa fa-trash"></i> &nbsp; Clear Technologies </button> 
       </form> 
+      {% else %}
+      <p> ** Upload antennae files to generate Technologies ** </p> 
+{% endif %}
         
       </div>
     </div>
@@ -261,6 +264,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% comment %} <p class="subtitle">With some content</p>  {% endcomment %}
       
       <div class="content">
+     
       
       
 
@@ -286,7 +290,7 @@ Detail - {{ block.super }} {% endblock title %}
 
     <tr>
       <th><span class="tag is-info is-light">{{ t.technology_operating_band}}</span></th>
-      <td><span class="tag is-dark is-light ">{{ t.technology_cell_id}}</span></td>
+      <th><span class="tag is-success is-light ">{{ t.technology_cell_id}}</span></th>
       <td><a class="is-small is-info " href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit</a></td>
     </tr>
     {% endif %}
@@ -300,9 +304,13 @@ Detail - {{ block.super }} {% endblock title %}
 
   
 </table>
-{% else %}
-      <p> ** Upload antennae files to generate Technologies ** </p> 
+
+ {% if technologies  %}
+      {% else%}
+<p> ** Upload antennae files to generate Technologies ** </p> 
 {% endif %}
+
+
 
       </div>
       
@@ -328,179 +336,8 @@ Detail - {{ block.super }} {% endblock title %}
      <div class="columns is-multiline">
         <div class="column">
           <div class="box">
-            <div class="heading">Top Seller Total</div>
-
-          </div>
-        </div>
-        <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-      </div> 
-
-      <div class="columns is-multiline">
-        <div class="column">
-          <div class="box">
-            <div class="heading">Top Seller Total</div>
-
-          </div>
-        </div>
-        <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-      </div> 
-
-
-      <div class="columns is-multiline">
-        <div class="column">
-          <div class="box">
-            <div class="heading">Top Seller Total</div>
-
-          </div>
-        </div>
-        <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-          <div class="column">
-            <div class="box">
-              <div class="heading">Top Seller Total</div>
-  
-            </div>
-          </div>
-      </div> 
-      
-      
-
-
-
-
-
-
-
-
-
-
-
-      
-
-      <div class="panel box">
-           <div class="level">
-        <div class="level-left">
-          <div class="level-item">
-            <div class="subtitle">{{refs.site_common_name}} </div>
-            
-          </div>
-        </div>
-        <div class="level-right">
-          <div class="level-item">
-          {% comment %} <button type="button" class="button is-small">  {% endcomment %}
-          <p>
-          <i class="fas fa-map-marker-alt"></i>
-              &nbsp;&nbsp;  {{refs.market}} 
-               &nbsp;&nbsp; | </p>
-            {% comment %} </button> {% endcomment %}
-           &nbsp; &nbsp;
-            <button type="button" class="button is-small">
-             Created:  {{refs.created_date}} 
-            </button>
-            <div class="dropdown is-hoverable is-right">
-  <div class="dropdown-trigger">
-    &nbsp; &nbsp;
-    <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
-      <span>Options</span>
-      <span class="icon is-small">
-        <i class="fas fa-angle-down" aria-hidden="true"></i>
-      </span>
-    </button>
-  </div>
-  <div class="dropdown-menu" id="dropdown-menu4" role="menu">
-    <div class="dropdown-content">
-      <div class="dropdown-item">
-        <a href="{% url 'delete_all_files' pk=refs.pk %}">
-        <p> Delete this session </p> </a>
-      </div>
-    </div>
-  </div>
-</div>
-          </div>
-        </div>
-      </div>
-            <div class="block">
-            <div class="columns is-multiline">
-        <div class="column is-6">
-          <p class="is-size-6 is-family-code"><b>FCC ID:</b> {{refs.fcc_id}} </p>
-                  <p class="is-size-6 is-family-code"><b>Site Common Name:</b> {{refs.site_common_name}} </p>
-                  <p class="is-size-6 is-family-code"><b>PTN:</b> {{refs.ptn}} </p>
-                  <p class="is-size-6 is-family-code"><b>Release:</b>{{refs.release}} </p>
-        </div>
-        <div class="column is-6">
-          <p class="is-size-6 is-family-code"><b>Enode B Id: </b> {{refs.enode_b_id}} </p>
-          <p class="is-size-6 is-family-code"><b>Market:</b> {{refs.market}} </p>
-          <p class="is-size-6 is-family-code"><b>Internal Session ID: </b>{{refs.ref_number}} </p>
-                  <p class="is-size-6 is-family-code"><b>Cross Sector Redundency: </b> <span class="tag is-info is-light">{{refs.cross_sector_redundency}} </span></p>
-                          
-        </div>  
-      </div>
-       <nav class="level is-mobile">
-        <div class="level-left">
-     
-          <button class="button is-link is-light is-outlined is-small">  <i class="fas fa-pen"></i>&nbsp;&nbsp; Edit </button></a>
-          &nbsp;&nbsp;
-    
-          <a href="{% url 'export_csv' pk=refs.pk %}"><button class="button is-success is-light is-outlined is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button></a>
-          &nbsp;&nbsp;
-
-        </div>
-      </nav>
-      </div>
-      </div>
-
-
-      <!-- START RET ALPHA 1 CARD -->
-<div class="tile is-ancestor">
-  <div class="tile is-vertical is-9">
-    <div class="tile">
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-        <span class="tag is-link"><b>Alpha Position 1</b></span>
+            {% comment %} <div class="heading">ONE GOES HERE</div> {% endcomment %}
+             <span class="tag is-primary is-light"><b>Alpha Position 1</b></span> 
           <div class="content">
           <br>
           <!-- Basic RET CARD info -->
@@ -617,16 +454,12 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
-      </div>
-<!-- END ALPHA 1  -->
-
-<!-- START ALPHA 2  -->
-      <div class="tile is-8 is-vertical">
-        <div class="tile">
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-            <span class="tag is-link"><b>Alpha Position 2</b></span>
+          </div>
+        </div>
+        <div class="column">
+            <div class="box">
+{% comment %} __________________<div class="heading">INSERT TWO HERE</div> {% endcomment %}
+              <span class="tag is-primary is-light"><b>Alpha Position 2</b></span> 
           <div class="content">
           <br>
           <!-- Basic RET AlPHA 2CARD info -->
@@ -744,15 +577,12 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-            </article>
+            </div>
           </div>
-          <!-- END ALPHA 2 -->
-
-
-<!-- Start ALPHA 3 -->
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-        <span class="tag is-link"><b>Alpha Position 3</b></span>
+          <div class="column">
+            <div class="box">
+{% comment %} <div class="heading">INSERT ALPHA 3 HERE</div> {% endcomment %}
+            <span class="tag is-primary is-light"><b>Alpha Position 3</b></span> 
           <div class="content">
           <br>
           <!-- Basic RET CARD info -->
@@ -869,18 +699,145 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
+            </div>
           </div>
-        </div>
-      </div>
-    </div>
-    <!-- END ALPHA 3 section  -->
+          <div class="column">
+            <div class="box">
+{% comment %} ____________________<div class="heading">INsert Alpha 4 Here</div> _________________{% endcomment %}
+                
+         {% comment %} <div class="heading">ALPHA </div>  {% endcomment %}
+          <span class="tag is-primary is-light"><b>Alpha Position 4</b></span> 
+          <div class="content">
+          <br>
+          <!-- Basic RET CARD info -->
+          {% if alpha4 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ alpha4.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ alpha4.connected_rrh_serial }} </p>
+          {% for a in alpha4.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in alpha4.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if alpha4.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs10.modalEdicion10.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion10">
+        <div onclick="refs10.modalEdicion10.close()" class="modal-background"></div>
+        <div class="modal-content">
+                <br>
+                <p> &nbsp; Alpha Position 4 </p>
+              <p class="image is-4by3">
+            
 
-<!--___________________________ START BETA 1 section  ___________________________-->
-     <div class="tile">
-      <div class="tile is-parent">
-      <article class="tile is-child box">
-        <span class="tag is-success"><b>Beta Position 1</b></span>
+            {% for a in alpha4.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs10.modalEdicion10.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_alpha4_form|crispy }} 
+                <input class="button is-small" name="screenshot_alpha_4" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{alpha4.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if alpha4.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with alpha4.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_alpha_4" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="sendinfo" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form10|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+
+
+
+
+
+  
+            </div>
+          </div>
+      </div> 
+
+      <div class="columns is-multiline">
+        <div class="column">
+          <div class="box">
+            {% comment %} <div class="heading"> BETA 1 GOES HERE</div> {% endcomment %}
+           <span class="tag is-info is-light"><b>Beta Position 1</b></span> 
           <div class="content">
           <br>
           <!-- Basic RET CARD info -->
@@ -997,15 +954,13 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
-        <!-- END BETA 1 section  -->
-        
-      </div>
-      <div class="tile is-8 is-vertical">
-        <div class="tile">
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-        <span class="tag is-success"><b>Beta Position 2</b></span>
+
+          </div>
+        </div>
+        <div class="column">
+            <div class="box">
+{% comment %} ________________________<div class="heading">Beta 2 goes here</div> {% endcomment %}
+<span class="tag is-info is-light"><b>Beta Position 2</b></span> 
           <div class="content">
           <br>
 <!--______________________________ START BETA 2 _________________________________________________________________-->
@@ -1122,13 +1077,13 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
-        <!-- END BETA 2  -->
-
+  
+            </div>
           </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-        <span class="tag is-success"><b>Beta Position 3</b></span>
+          <div class="column">
+            <div class="box">
+{% comment %} ________________________<div class="heading">Beta 3 goes here</div> {% endcomment %}
+<span class="tag is-link is-light"><b>Beta Position 3</b></span> 
           <div class="content">
           <br>
 <!--_______________________________ START BETA 3 _____________________________-->
@@ -1245,16 +1200,140 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
+  
+            </div>
           </div>
+          <div class="column">
+            <div class="box">
+{% comment %} ________________________<div class="heading">Beta 4 goes here</div> {% endcomment %}
+<span class="tag is-link is-light"><b>Beta Position 4</b></span> 
+          <div class="content">
+          <br>
+<!--_______________________________ START BETA 4 _____________________________-->
+          {% if beta4 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ beta4.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ beta4.connected_rrh_serial }} </p>
+          {% for a in beta4.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in beta4.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if beta4.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs11.modalEdicion11.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion11">
+        <div onclick="refs11.modalEdicion11.close()" class="modal-background"></div>
+        <div class="modal-content">
+        <br>
+        <p> &nbsp; Beta Position 4 </p>
+            <p class="image is-4by3">
+            
+
+            {% for a in beta4.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
         </div>
-      </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs11.modalEdicion11.close()"></button>
     </div>
-    <!-- END BETA 3 -->
-     <div class="tile">
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-        <span class="tag is-primary"><b>Gamma Position 1</b></span>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_beta4_form|crispy }} 
+                <input class="button is-small" name="screenshot_beta_4" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{beta4.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if beta4.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with beta4.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_beta_4" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form11|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+  
+            </div>
+          </div>
+      </div> 
+
+
+      <div class="columns is-multiline">
+        <div class="column">
+          <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 1 GOES HERE</div> {% endcomment %}
+<span class="tag is-success is-light"><b>Gamma Position 1</b></span> 
           <div class="content">
           <br>
 <!--____________________________ START GAMMA 1 _____________________________________________-->
@@ -1371,14 +1450,13 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
-        {% comment %} End Gamma 1 {% endcomment %}
-      </div>
-      <div class="tile is-8 is-vertical">
-        <div class="tile">
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-        <span class="tag is-primary"><b>Gamma Position 2</b></span>
+
+          </div>
+        </div>
+        <div class="column">
+            <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 2 GOES HERE</div> {% endcomment %}
+<span class="tag is-success is-light"><b>Gamma Position 2</b></span> 
           <div class="content">
           <br>
 <!--________________________________________ START GAMMA 2 _____________________________________-->
@@ -1495,12 +1573,13 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
-        {% comment %} END GAMMA 2 {% endcomment %}
+  
+            </div>
           </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box">
-        <span class="tag is-primary"><b>Gamma Position 3</b></span>
+          <div class="column">
+            <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 3 GOES HERE</div> {% endcomment %}
+<span class="tag is-success is-light"><b>Gamma Position 4</b></span> 
           <div class="content">
           <br>
 <!--__________________________________ START GAMMA 3 ____________________________________________-->
@@ -1617,70 +1696,136 @@ Detail - {{ block.super }} {% endblock title %}
             {% endif %}
             </form>
           </div>
-        </article>
-        {% comment %} END GAMMA 3 {% endcomment %}
-          </div>
-        </div>
-      </div>
-    </div>
-
-
-
-
-    {% comment %} <div class="tile">
-      <div class="tile is-8 is-parent">
-        <article class="tile is-child box">
-          <p class="title">Nine</p>
-          <p class="subtitle">Subtitle</p>
-          <div class="content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-          </div>
-        </article>
-      </div>
-      <div class="tile is-parent">
-        <article class="tile is-child box">
-          <p class="title">Ten</p>
-          <p class="subtitle">Subtitle</p>
-          <div class="content">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.</p>
-          </div>
-        </article>
-      </div>
-    </div> {% endcomment %}
-  </div>
   
-  <div class="tile is-parent is-2">
-    <article class="tile is-child box ">
-      <div class="content">
-      <div class="heading"><i class="fas fa-broadcast-tower"></i> &nbsp; Technologies</div>
-       
-        </div>
-        
-        <div class="content">
-
-        {% for t in technologies %}
-          {% if t.technology_operating_band != '--' %}
-          <div class = "box">
-          
-            <p class="is-size-7"><b> Operating Band :</b> <span class="tag is-info is-light">{{ t.technology_operating_band}}</span></p>
-            <p class="is-size-7"><b>Cell Id :</b> <span class="tag is-success is-light">{{ t.technology_cell_id}}</span></p>
-            <a class="button is-small is-info is-outlined" href= "{% url 'update_technology_cell_id' pk=t.pk %}"> <i class="fas fa-wrench"></i> &nbsp; Edit this technology</a>
-            <br>
             </div>
-          {% endif %}
-        {% endfor %}
-      {% if technologies %}
-      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">
-      {% csrf_token %}  
-         <button type="submit" name="delete_tech" value="Send" class="button is-outlined is-small is-primary is-light"> <i class="fa fa-trash"></i> &nbsp; Clear Technologies </button> 
-      </form> 
-      {% else %}
-      <p> ** Upload antennae files to generate Technologies ** </p> 
-      {% endif %}
+          </div>
+          <div class="column">
+            <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 4 GOES HERE</div> {% endcomment %}
+<span class="tag is-success is-light"><b>Gamma Position 4</b></span> 
+          <div class="content">
+          <br>
+<!--__________________________________ START GAMMA 4 ____________________________________________-->
+          {% if gamma4 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ gamma4.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ gamma4.connected_rrh_serial }} </p>
+          {% for a in gamma4.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in gamma4.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if gamma4.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs12.modalEdicion12.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion12">
+        <div onclick="refs12.modalEdicion12.close()" class="modal-background"></div>
+        <div class="modal-content">
+        <br>
+        <p> &nbsp; Gamma Position 4</p>
+            <p class="image is-4by3">
+            
+
+            {% for a in gamma4.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
         </div>
-      </div>
-    </article>
-  </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs12.modalEdicion12.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_gamma4_form|crispy }} 
+                <input class="button is-small" name="screenshot_gamma_4" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{gamma4.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if gamma4.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with gamma4.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_gamma_4" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form12|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+  
+            </div>
+          </div>
+      </div> 
+      
+  
+
 </div>
 
 
@@ -1868,7 +2013,45 @@ Detail - {{ block.super }} {% endblock title %}
       {% endfor %}
         {% else %}
             <tr>
-          <td> No Data Alpha 3  </td>
+          <td> No Data Alpha Position 3  </td>
+          </tr>
+      {% endif %}
+      <th> Alpha Position 4 </th>
+  {% if alpha4 %}
+    {% for a in alpha4.parent_file.all %} 
+      <tr>
+        <td>Alpha Position 4</td>
+        <td>{{ a.address  }}</td>
+        <td>{{refs.cross_sector_redundency}} </td>
+        <td>{{ a.antenna_serial_number }}</td>
+        <td>{{ a.device_serial }}</td>
+        <td>{{ a.antenna_model  }}</td>
+        <td>{{ a.aisg_version}}</td>
+        <td>{{ a.tilt_range }}</td>
+        <td>{{ a.electrical_tilt }}</td>
+        <td>{{ a.usid }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.sector_id }}</td>
+        <td>{{ a.relative_antenna_position  }}</td>
+        <td>{{ a.bearing }}</td>
+        <td>{{ a.operating_band  }}</td>
+        <td>{{ a.band  }}</td>
+        <td>{{ a.technology }}</td>
+        <td>{{ a.eutran_cell_id }}</td>
+        <td>N/A</td>
+        <td>{{a.parent_file.connected_rrh_serial}} </td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installer_id}}</td>
+        <td>{{ a.ret_sub_unit  }}</td>
+        <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data Alpha Position 4  </td>
           </tr>
       {% endif %}
       <th> Beta Position 1 </th>
@@ -1985,6 +2168,44 @@ Detail - {{ block.super }} {% endblock title %}
           <td> No Data Beta Position 3 </td>
           </tr>
       {% endif %}
+      <th> Beta Position 4 </th>
+  {% if beta4 %}
+    {% for a in beta4.parent_file.all %} 
+      <tr>
+        <td>Beta Position 4</td>
+        <td>{{ a.address  }}</td>
+        <td>{{refs.cross_sector_redundency}} </td>
+        <td>{{ a.antenna_serial_number }}</td>
+        <td>{{ a.device_serial }}</td>
+        <td>{{ a.antenna_model  }}</td>
+        <td>{{ a.aisg_version}}</td>
+        <td>{{ a.tilt_range }}</td>
+        <td>{{ a.electrical_tilt }}</td>
+        <td>{{ a.usid }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.sector_id }}</td>
+        <td>{{ a.relative_antenna_position  }}</td>
+        <td>{{ a.bearing }}</td>
+        <td>{{ a.operating_band  }}</td>
+        <td>{{ a.band  }}</td>
+        <td>{{ a.technology }}</td>
+        <td>{{ a.eutran_cell_id }}</td>
+        <td>N/A</td>
+        <td>{{a.parent_file.connected_rrh_serial}} </td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installer_id}}</td>
+        <td>{{ a.ret_sub_unit  }}</td>
+        <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data Beta Position 4 </td>
+          </tr>
+      {% endif %}
       <th> Gamma Position 1 </th>
   {% if gamma1 %}
     {% for a in gamma1.parent_file.all %} 
@@ -2096,7 +2317,45 @@ Detail - {{ block.super }} {% endblock title %}
       {% endfor %}
         {% else %}
             <tr>
-          <td> No Data Gamma 3  </td>
+          <td> No Data Gamma Position 3  </td>
+          </tr>
+      {% endif %}
+      <th> Gamma Position 4 </th>
+  {% if gamma4 %}
+    {% for a in gamma4.parent_file.all %} 
+      <tr>
+        <td>Gamma Position 4</td>
+        <td>{{ a.address  }}</td>
+        <td>{{refs.cross_sector_redundency}} </td>
+        <td>{{ a.antenna_serial_number }}</td>
+        <td>{{ a.device_serial }}</td>
+        <td>{{ a.antenna_model  }}</td>
+        <td>{{ a.aisg_version}}</td>
+        <td>{{ a.tilt_range }}</td>
+        <td>{{ a.electrical_tilt }}</td>
+        <td>{{ a.usid }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.sector_id }}</td>
+        <td>{{ a.relative_antenna_position  }}</td>
+        <td>{{ a.bearing }}</td>
+        <td>{{ a.operating_band  }}</td>
+        <td>{{ a.band  }}</td>
+        <td>{{ a.technology }}</td>
+        <td>{{ a.eutran_cell_id }}</td>
+        <td>N/A</td>
+        <td>{{a.parent_file.connected_rrh_serial}} </td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installer_id}}</td>
+        <td>{{ a.ret_sub_unit  }}</td>
+        <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data Gamma Position 4 </td>
           </tr>
       {% endif %}
 

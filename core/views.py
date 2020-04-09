@@ -104,6 +104,10 @@ def delete_antenna(request, pk):
     except:
         alpha3 = None
     try:
+        alpha4 = docs.get(antenna_position='Alpha Position 4') #Get all Document objects in a position
+    except:
+        alpha4 = None
+    try:
         beta1 = docs.get(antenna_position='Beta Position 1') #Get all Document objects in a position
     except:
         beta1 = None
@@ -116,6 +120,10 @@ def delete_antenna(request, pk):
     except:
         beta3 = None
     try:
+        beta4 = docs.get(antenna_position='Beta Position 4') #Get all Document objects in a position
+    except:
+        beta4 = None
+    try:
         gamma1 = docs.get(antenna_position='Gamma Position 1') #Get all Document objects in a position
     except:
         gamma1 = None
@@ -127,6 +135,10 @@ def delete_antenna(request, pk):
         gamma3 = docs.get(antenna_position='Gamma Position 3') #Get all Document objects in a position
     except:
         gamma3 = None
+    try:
+        gamma4 = docs.get(antenna_position='Gamma Position 4') #Get all Document objects in a position
+    except:
+        gamma4 = None
     # END - SET VARIABLES FOR ANTENNA OBJECTS
 
     #Route Delete Antenna Requests
@@ -201,6 +213,9 @@ def upload_screenshot(request, pk):
         if request.POST.get("screenshot_alpha_3"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_alpha_3" )
             position = refs.process.get(antenna_position__contains='Alpha Position 3')
+        if request.POST.get("screenshot_alpha_4"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_alpha_4" )
+            position = refs.process.get(antenna_position__contains='Alpha Position 4')
         if request.POST.get("screenshot_beta_1"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_beta_1" )
             position = refs.process.get(antenna_position__contains='Beta Position 1')
@@ -210,6 +225,9 @@ def upload_screenshot(request, pk):
         if request.POST.get("screenshot_beta_3"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_beta_3" )
             position = refs.process.get(antenna_position__contains='Beta Position 3')
+        if request.POST.get("screenshot_beta_4"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_beta_4" )
+            position = refs.process.get(antenna_position__contains='Beta Position 4')
         if request.POST.get("screenshot_gamma_1"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_gamma_1" )
             position = refs.process.get(antenna_position__contains='Gamma Position 1')
@@ -219,6 +237,9 @@ def upload_screenshot(request, pk):
         if request.POST.get("screenshot_gamma_3"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_gamma_3" )
             position = refs.process.get(antenna_position__contains='Gamma Position 3')
+        if request.POST.get("screenshot_gamma_4"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_gamma_4" )
+            position = refs.process.get(antenna_position__contains='Gamma Position 4')
         #END - Route Upload Screenshot 
 
         if newfile.is_valid(): 
@@ -261,6 +282,10 @@ def session_detail_v2(request, pk):
     except:
         alpha3 = None
     try:
+        alpha4 = docs.get(antenna_position='Alpha Position 4') #Get all Document objects in a position
+    except:
+        alpha4 = None
+    try:
         beta1 = docs.get(antenna_position='Beta Position 1') #Get all Document objects in a position
     except:
         beta1 = None
@@ -273,6 +298,10 @@ def session_detail_v2(request, pk):
     except:
         beta3 = None
     try:
+        beta4 = docs.get(antenna_position='Beta Position 4') #Get all Document objects in a position
+    except:
+        beta4 = None
+    try:
         gamma1 = docs.get(antenna_position='Gamma Position 1') #Get all Document objects in a position
     except:
         gamma1 = None
@@ -284,6 +313,10 @@ def session_detail_v2(request, pk):
         gamma3 = docs.get(antenna_position='Gamma Position 3') #Get all Document objects in a position
     except:
         gamma3 = None
+    try:
+        gamma4 = docs.get(antenna_position='Gamma Position 4') #Get all Document objects in a position
+    except:
+        gamma4 = None
     # END - SET VARIABLES FOR ANTENNA OBJECTS
    
     alpha_pos_4 = rets.filter(sector_id__contains='ALPHA POS 4')
@@ -293,12 +326,15 @@ def session_detail_v2(request, pk):
     screen_form = ScreenshotForm(prefix="screen") 
     screenshot_alpha2_form = ScreenshotForm(prefix="screenshot_alpha_2") 
     screenshot_alpha3_form = ScreenshotForm(prefix="screenshot_alpha_3") 
+    screenshot_alpha4_form = ScreenshotForm(prefix="screenshot_alpha_4") 
     screenshot_beta1_form = ScreenshotForm(prefix="screenshot_beta_1")
     screenshot_beta2_form = ScreenshotForm(prefix="screenshot_beta_2") 
     screenshot_beta3_form = ScreenshotForm(prefix="screenshot_beta_3")
+    screenshot_beta4_form = ScreenshotForm(prefix="screenshot_beta_4")
     screenshot_gamma1_form = ScreenshotForm(prefix="screenshot_gamma_1")
     screenshot_gamma2_form = ScreenshotForm(prefix="screenshot_gamma_2") 
     screenshot_gamma3_form = ScreenshotForm(prefix="screenshot_gamma_3")
+    screenshot_gamma4_form = ScreenshotForm(prefix="screenshot_gamma_4")
 
     #if request.FILES.has_key('image_1'):
     
@@ -321,9 +357,10 @@ def session_detail_v2(request, pk):
     form7 = DocumentForm(prefix="a7")
     form8 = DocumentForm(prefix="a8")
     form9 = DocumentForm(prefix="a9")
-    form10 = DocumentForm(prefix="a10")
-    form11 = DocumentForm(prefix="a11")
-    form12 = DocumentForm(prefix="a12")
+    form10 = DocumentForm(prefix="a10")#alpha 4
+    form11 = DocumentForm(prefix="a11")#beta 4
+    form12 = DocumentForm(prefix="a12")#gamma 4
+    
 
     modified_file_list = []
     uploaded_file_list = []
@@ -520,7 +557,7 @@ def session_detail_v2(request, pk):
     total_rets_created = 0
     print("TOTAL REST CREATED after 0", total_rets_created)
 
-    return render(request, 'session_detailv3.html', {
+    return render(request, 'session_detailv4.html', {
         'now'  : now, 
         'refs'  : refs,
         'docs'  : docs,
@@ -544,21 +581,27 @@ def session_detail_v2(request, pk):
         'alpha2' : alpha2,
         'alpha1' : alpha1,
         'alpha3' : alpha3,
+        'alpha4' : alpha4,
         'beta2' : beta2,
         'beta1' : beta1,
         'beta3' : beta3,
+        'beta4' : beta4,
         'gamma2' : gamma2,
         'gamma1' : gamma1,
         'gamma3' : gamma3,
+        'gamma4' : gamma4,
         'alpha_pos_4' : alpha_pos_4,
         'screenshot_alpha2_form' : screenshot_alpha2_form,
         'screenshot_alpha3_form' : screenshot_alpha3_form,
+        'screenshot_alpha4_form' : screenshot_alpha4_form,
         'screenshot_beta1_form' : screenshot_beta1_form,
         'screenshot_beta2_form' : screenshot_beta2_form,
         'screenshot_beta3_form' : screenshot_beta3_form,
+        'screenshot_beta4_form' : screenshot_beta4_form,
         'screenshot_gamma1_form' : screenshot_gamma1_form,
         'screenshot_gamma2_form' : screenshot_gamma2_form,
         'screenshot_gamma3_form' : screenshot_gamma3_form,
+        'screenshot_gamma4_form' : screenshot_gamma4_form,
         # 'alpha5' : alpha5,
     })
       
@@ -1006,12 +1049,15 @@ def export_csv(request, pk):
     alpha1 = rets.filter(ret_position__contains='Alpha Position 1')
     alpha2 = rets.filter(ret_position__contains='Alpha Position 2')
     alpha3 = rets.filter(ret_position__contains='Alpha Position 3')
+    alpha4 = rets.filter(ret_position__contains='Alpha Position 4')
     beta1 = rets.filter(ret_position__contains='Beta Position 1')
     beta2 = rets.filter(ret_position__contains='Beta Position 2')
     beta3 = rets.filter(ret_position__contains='Beta Position 3')
+    beta4 = rets.filter(ret_position__contains='Beta Position 4')
     gamma1 = rets.filter(ret_position__contains='Gamma Position 1')
     gamma2 = rets.filter(ret_position__contains='Gamma Position 2')
     gamma3 = rets.filter(ret_position__contains='Gamma Position 3')
+    gamma4 = rets.filter(ret_position__contains='Gamma Position 4')
 
    
 
@@ -1019,7 +1065,7 @@ def export_csv(request, pk):
     response['Content-Disposition'] = 'attatchment; filename="export.csv"'
     writer = csv.writer(response, delimiter=",")
     #Create the header columns
-    writer.writerow(['Antenn Position', 
+    writer.writerow(['Antenna Position', 
                         'Actuator', 
                         'Cross Sector Redundency Implemented (Y/N)', 
                         'Antenna Serial Number', 
@@ -1145,6 +1191,38 @@ def export_csv(request, pk):
             ])
     writer.writerow([" "])
 
+    for a in alpha4:
+        writer.writerow([
+            'Alpha Position 4',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
     for a in beta1:
         writer.writerow([
             'Beta Position 1',
@@ -1241,6 +1319,38 @@ def export_csv(request, pk):
             ])
     writer.writerow([" "])
 
+    for a in beta4:
+        writer.writerow([
+            'Beta Position 4',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
     for a in gamma1:
         writer.writerow([
             'Gamma Position 1',
@@ -1308,6 +1418,38 @@ def export_csv(request, pk):
     for a in gamma3:
         writer.writerow([
             'Gamma Position 3',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in gamma4:
+        writer.writerow([
+            'Gamma Position 4',
             a.address, 
             refs.cross_sector_redundency, 
             a.antenna_serial_number, 

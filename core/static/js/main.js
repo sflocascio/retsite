@@ -11,6 +11,7 @@
 //   });
 
 
+
 var refs = {
 	modalEdicion: {
 	  open: function() { document.getElementById('modalEdicion').classList.add('is-active');
@@ -97,6 +98,36 @@ var refs = {
 	  open: function() { document.getElementById('modalEdicion9').classList.add('is-active');
 	  },
 	  close:function() { document.getElementById('modalEdicion9').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs10 = {
+	modalEdicion10: {
+	  open: function() { document.getElementById('modalEdicion10').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion10').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs11 = {
+	modalEdicion11: {
+	  open: function() { document.getElementById('modalEdicion11').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion11').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs12 = {
+	modalEdicion12: {
+	  open: function() { document.getElementById('modalEdicion12').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion12').classList.remove('is-active');
 						
 	  }
 	}
