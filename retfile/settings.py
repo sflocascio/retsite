@@ -43,6 +43,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'django.contrib.sites',
+    'registration', #pipenv install django-registration-redux==2.0
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -53,6 +55,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'crispy_forms',
     'storages',
+    
     
 
 ]
@@ -95,8 +98,9 @@ WSGI_APPLICATION = 'retfile.wsgi.application'
 
 #Recreate DB , 2 mins to input 
 # Create new instance in Elephant SQL
-# Input new values in Settings 
+# Input new values in Settings , .Env and BASH 
 # Delete migrations
+# stop Shell , restart to load .env
 # Migrate
 # Make migrations
 # Migrate
@@ -114,6 +118,7 @@ DATABASES = {
 'PORT': config('DATABASE_PORT'),
 }
 }
+
 
 
 
@@ -205,16 +210,18 @@ MEDIA_URL = 'https://{}/{}/'.format(AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
 
 CRISPY_TEMPLATE_PACK = 'uni_form'
 
-# ACCOUNT_ACTIVATION_DAYS = 7
-# STATIC_URL = '/static/'
-# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# DEFAULT_FROM_EMAIL = 'sflocascio01@gmail.com'
-# EMAIL_HOST_USER = ''
-# EMAIL_HOST_PASSWORD = ''
-# EMAIL_USE_TLS = False
-# EMAIL_PORT = 1025
-# LOGIN_REDIRECT_URL = "home"
+# For Registration
+ACCOUNT_ACTIVATION_DAYS = 7
+STATIC_URL = '/static/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+EMAIL_PORT = 1025
+LOGIN_REDIRECT_URL = "home"
 
-#INTERNAL_IPS = ['127.0.0.1']
+INTERNAL_IPS = ['127.0.0.1']
+#End registration 
 
 django_heroku.settings(locals())
