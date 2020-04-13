@@ -4,6 +4,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
 from core.models import  *
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 import csv
 import json
 import os
@@ -18,9 +19,11 @@ from django.utils import timezone
 from core.utils import *
 #from core.forms import FileForm
 
+@login_required
 def index(request):
     now = timezone.now()
     refs = Process.objects.prefetch_related('process').order_by('-created_date')
+    sessions = refs.filter(author=request.user)
     #files = Document.objects.prefetch_related('process').all()
     rets = Ret.objects.select_related('parent_ref_number').all()
     # docs = Document.objects.get(process__exact = files.ref_number)
@@ -33,6 +36,7 @@ def index(request):
         'refs'  : refs,
         'rets'  : rets,
         'now'  : now,
+        'sessions' : sessions,
 
     })
 
@@ -139,6 +143,22 @@ def delete_antenna(request, pk):
         gamma4 = docs.get(antenna_position='Gamma Position 4') #Get all Document objects in a position
     except:
         gamma4 = None
+    try:
+        delta1 = docs.get(antenna_position='Delta Position 1') #Get all Document objects in a position
+    except:
+        delta1 = None
+    try:
+        delta2 = docs.get(antenna_position='Delta Position 2') #Get all Document objects in a position
+    except:
+        delta2 = None
+    try:
+        delta3 = docs.get(antenna_position='Delta Position 3') #Get all Document objects in a position
+    except:
+        delta3 = None
+    try:
+        delta4 = docs.get(antenna_position='Delta Position 4') #Get all Document objects in a position
+    except:
+        delta4 = None
     # END - SET VARIABLES FOR ANTENNA OBJECTS
 
     #Route Delete Antenna Requests
@@ -154,6 +174,10 @@ def delete_antenna(request, pk):
             alpha3.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(alpha3.antenna_position))
             return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_alpha_4"):  
+            alpha4.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(alpha4.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
     if request.POST.get("delete_beta_1"):  
             beta1.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(beta1.antenna_position))
@@ -166,6 +190,10 @@ def delete_antenna(request, pk):
             beta3.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(beta3.antenna_position))
             return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_beta_4"):  
+            beta4.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(beta4.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
     if request.POST.get("delete_gamma_1"):  
             gamma1.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(gamma1.antenna_position))
@@ -177,6 +205,26 @@ def delete_antenna(request, pk):
     if request.POST.get("delete_gamma_3"):  
             gamma3.delete()
             messages.success(request,  " Deleted {} and all associated Rets ".format(gamma3.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_gamma_4"):  
+            gamma3.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(gamma4.antenna_position))
+            return redirect('session_detail_v4', pk=session_id)
+    if request.POST.get("delete_delta_1"):  
+            delta1.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(delta1.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_delta_2"):  
+            delta2.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(delta2.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_delta_3"):  
+            delta3.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(delta3.antenna_position))
+            return redirect('session_detail_v2', pk=session_id)
+    if request.POST.get("delete_delta_4"):  
+            delta4.delete()
+            messages.success(request,  " Deleted {} and all associated Rets ".format(delta4.antenna_position))
             return redirect('session_detail_v2', pk=session_id)
     #END - Route Delete Antenna Requests
 
@@ -240,6 +288,18 @@ def upload_screenshot(request, pk):
         if request.POST.get("screenshot_gamma_4"):  
             newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_gamma_4" )
             position = refs.process.get(antenna_position__contains='Gamma Position 4')
+        if request.POST.get("screenshot_delta_1"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_delta_1" )
+            position = refs.process.get(antenna_position__contains='Delta Position 1')
+        if request.POST.get("screenshot_delta_2"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_delta_2" )
+            position = refs.process.get(antenna_position__contains='Delta Position 2')
+        if request.POST.get("screenshot_delta_3"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_delta_3" )
+            position = refs.process.get(antenna_position__contains='Delta Position 3')
+        if request.POST.get("screenshot_delta_4"):  
+            newfile = ScreenshotForm(request.POST,  request.FILES, prefix="screenshot_delta_4" )
+            position = refs.process.get(antenna_position__contains='Delta Position 4')
         #END - Route Upload Screenshot 
 
         if newfile.is_valid(): 
@@ -258,6 +318,7 @@ def upload_screenshot(request, pk):
         })   
 
 #Current View of Parent Session Detail, this processes the uploads the Ret files
+@login_required
 def session_detail_v2(request, pk):
     now = timezone.now()
     refs = Process.objects.get(pk=pk) #Get the related Session object
@@ -317,6 +378,22 @@ def session_detail_v2(request, pk):
         gamma4 = docs.get(antenna_position='Gamma Position 4') #Get all Document objects in a position
     except:
         gamma4 = None
+    try:
+        delta1 = docs.get(antenna_position='Delta Position 1') #Get all Document objects in a position
+    except:
+        delta1 = None
+    try:
+        delta2 = docs.get(antenna_position='Delta Position 2') #Get all Document objects in a position
+    except:
+        delta2 = None
+    try:
+        delta3 = docs.get(antenna_position='Delta Position 3') #Get all Document objects in a position
+    except:
+        delta3 = None
+    try:
+        delta4 = docs.get(antenna_position='Delta Position 4') #Get all Document objects in a position
+    except:
+        delta4 = None
     # END - SET VARIABLES FOR ANTENNA OBJECTS
    
     alpha_pos_4 = rets.filter(sector_id__contains='ALPHA POS 4')
@@ -335,6 +412,10 @@ def session_detail_v2(request, pk):
     screenshot_gamma2_form = ScreenshotForm(prefix="screenshot_gamma_2") 
     screenshot_gamma3_form = ScreenshotForm(prefix="screenshot_gamma_3")
     screenshot_gamma4_form = ScreenshotForm(prefix="screenshot_gamma_4")
+    screenshot_delta1_form = ScreenshotForm(prefix="screenshot_delta_1")
+    screenshot_delta2_form = ScreenshotForm(prefix="screenshot_delta_2") 
+    screenshot_delta3_form = ScreenshotForm(prefix="screenshot_delta_3")
+    screenshot_delta4_form = ScreenshotForm(prefix="screenshot_delta_4")
 
     #if request.FILES.has_key('image_1'):
     
@@ -360,6 +441,10 @@ def session_detail_v2(request, pk):
     form10 = DocumentForm(prefix="a10")#alpha 4
     form11 = DocumentForm(prefix="a11")#beta 4
     form12 = DocumentForm(prefix="a12")#gamma 4
+    form13 = DocumentForm(prefix="a13")#delta 1
+    form14 = DocumentForm(prefix="a14")#delta 2
+    form15 = DocumentForm(prefix="a15")#delta 3
+    form16 = DocumentForm(prefix="a16")#delta 4
     
 
     modified_file_list = []
@@ -380,6 +465,10 @@ def session_detail_v2(request, pk):
         newfile10 = DocumentForm(request.POST, request.FILES, prefix="a10")
         newfile11 = DocumentForm(request.POST, request.FILES, prefix="a11")
         newfile12 = DocumentForm(request.POST, request.FILES, prefix="a12")
+        newfile13 = DocumentForm(request.POST, request.FILES, prefix="a13")
+        newfile14 = DocumentForm(request.POST, request.FILES, prefix="a14")
+        newfile15 = DocumentForm(request.POST, request.FILES, prefix="a15")
+        newfile16 = DocumentForm(request.POST, request.FILES, prefix="a16")
         uploaded_file_list.append(newfile)
         uploaded_file_list.append(newfile2)
         uploaded_file_list.append(newfile3)
@@ -392,6 +481,10 @@ def session_detail_v2(request, pk):
         uploaded_file_list.append(newfile10)
         uploaded_file_list.append(newfile11)
         uploaded_file_list.append(newfile12)
+        uploaded_file_list.append(newfile13)
+        uploaded_file_list.append(newfile14)
+        uploaded_file_list.append(newfile15)
+        uploaded_file_list.append(newfile16)
 
         for the_file in uploaded_file_list:
             if the_file.is_valid():
@@ -577,6 +670,10 @@ def session_detail_v2(request, pk):
         'form10'  : form10 ,
         'form11'  : form11 ,
         'form12'  : form12 ,
+        'form13'  : form13 ,
+        'form14'  : form14 ,
+        'form15'  : form15 ,
+        'form16'  : form16 ,
         'screen_form' : screen_form,
         'alpha2' : alpha2,
         'alpha1' : alpha1,
@@ -590,6 +687,10 @@ def session_detail_v2(request, pk):
         'gamma1' : gamma1,
         'gamma3' : gamma3,
         'gamma4' : gamma4,
+        'delta2' : delta2,
+        'delta1' : delta1,
+        'delta3' : delta3,
+        'delta4' : delta4,
         'alpha_pos_4' : alpha_pos_4,
         'screenshot_alpha2_form' : screenshot_alpha2_form,
         'screenshot_alpha3_form' : screenshot_alpha3_form,
@@ -602,6 +703,10 @@ def session_detail_v2(request, pk):
         'screenshot_gamma2_form' : screenshot_gamma2_form,
         'screenshot_gamma3_form' : screenshot_gamma3_form,
         'screenshot_gamma4_form' : screenshot_gamma4_form,
+        'screenshot_delta1_form' : screenshot_delta1_form,
+        'screenshot_delta2_form' : screenshot_delta2_form,
+        'screenshot_delta3_form' : screenshot_delta3_form,
+        'screenshot_delta4_form' : screenshot_delta4_form,
         # 'alpha5' : alpha5,
     })
       
@@ -641,6 +746,7 @@ def process(request):
     })    
 
 #View for Creating Parent Session
+@login_required
 def process_v2(request):
     now = timezone.now()
 
@@ -667,7 +773,8 @@ def create_session_form(request, *args, **kwargs):
         market = market,
         enode_b_id = enode_b_id,
         ptn = ptn, 
-        release =release
+        release =release,
+        author = request.user
         )
         happy = process.save()
 
@@ -1042,6 +1149,7 @@ def process_antenna_file(request, *args, **kwargs):
     #return render(request, 'index.html')
 
 #Exports CSV file
+@login_required
 def export_csv(request, pk):
     refs = Process.objects.get(pk=pk)
     docs = refs.process.all()
@@ -1058,6 +1166,10 @@ def export_csv(request, pk):
     gamma2 = rets.filter(ret_position__contains='Gamma Position 2')
     gamma3 = rets.filter(ret_position__contains='Gamma Position 3')
     gamma4 = rets.filter(ret_position__contains='Gamma Position 4')
+    delta1 = rets.filter(ret_position__contains='Delta Position 1')
+    delta2 = rets.filter(ret_position__contains='Delta Position 2')
+    delta3 = rets.filter(ret_position__contains='Delta Position 3')
+    delta4 = rets.filter(ret_position__contains='Delta Position 4')
 
    
 
@@ -1479,9 +1591,137 @@ def export_csv(request, pk):
             ])
     writer.writerow([" "])
     
+    for a in delta1:
+        writer.writerow([
+            'Delta Position 1',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in delta2:
+        writer.writerow([
+            'Delta Position 2',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in delta3:
+        writer.writerow([
+            'Delta Position 3',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
+
+    for a in delta4:
+        writer.writerow([
+            'Delta Position 4',
+            a.address, 
+            refs.cross_sector_redundency, 
+            a.antenna_serial_number, 
+            a.device_serial, 
+            a.antenna_model, 
+            a.aisg_version, 
+            a.tilt_range,
+            a.electrical_tilt, 
+            a.usid, 
+            a.station_id,
+            a.sector_id, 
+            a.relative_antenna_position, 
+            a.bearing,
+            a.operating_band, 
+            a.band,
+            a.technology,
+            a.eutran_cell_id, 
+            'N/A', 
+            a.parent_file.connected_rrh_serial,
+            'N/A', 
+            'N/A', 
+            a.installation_date, 
+            a.installer_id,
+            a.ret_sub_unit, 
+            a.ret_cell_id,
+            'N/A', 
+            ])
+    writer.writerow([" "])
     
     return(response)
- 
+
+@login_required
 def update_technology_cell_id(request, pk):
     refs = Technology.objects.get(pk=pk)
     session_id = refs.parent_ref_number.id
@@ -1515,7 +1755,7 @@ def update_technology_cell_id(request, pk):
         form = form_class(instance=refs)
     return render(request, 'edit_technology.html', {'refs': refs, 'form': form, 'session': session, 'now': now})
 
-
+@login_required
 def delete_all_files(request, pk):
     refs = Process.objects.get(pk=pk)
     print("entered DELETE All files")

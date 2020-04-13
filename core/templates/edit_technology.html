@@ -91,10 +91,59 @@
   <div class="tile is-parent">
     <article class="tile is-child box">
       
-          <p class="is-size-6 is-family-code"><b>FCC ID:</b> {{session.fcc_id}} </p>
-                  <p class="is-size-6 is-family-code"><b>Site Common Name:</b> {{session.site_common_name}} </p>
-                  <p class="is-size-6 is-family-code"><b>PTN:</b> {{session.ptn}} </p>
-                  <p class="is-size-6 is-family-code"><b>Release:</b>{{session.release}} </p>
+          <table class="table is-narrow">
+  <thead>
+    <tr>
+      {% comment %} <th><abbr title="Position">Pos</abbr></th>
+      <th>Team</th> {% endcomment %}
+    </tr>
+  </thead>
+  {% comment %} <tfoot>
+    <tr>
+      <th><abbr title="Position">Pos</abbr></th>
+      <th>Team</th>
+    </tr>
+  </tfoot> {% endcomment %}
+  <tbody>
+     <tr>
+      <th>FCC ID:</th>
+      <td><p class="is-size-6 is-family-code"> {{session.fcc_id}} </p>
+      </td>
+    </tr>
+    <tr>
+      <th>Site Common Name:</th>
+      <td><p class="is-size-6 is-family-code"> {{session.site_common_name}} </p>
+      </td>
+    </tr>
+     <tr>
+      <th>PTN:</th>
+      <td><p class="is-size-6 is-family-code"> {{session.ptn}} </p>
+      </td>
+    </tr>
+    <tr>
+      <th>Release:</th>
+      <td><p class="is-size-6 is-family-code"> {{session.release}} </p>
+      </td>
+    </tr>
+     <tr>
+      <th>Enode B ID:</th>
+      <td><p class="is-size-6 is-family-code"> {{session.enode_b_id}} </p>
+      </td>
+    </tr>
+    <tr>
+      <th>Market:</th>
+      <td><p class="is-size-6 is-family-code"> {{session.market}} </p>
+      </td>
+    </tr>
+     
+    <tr>
+      <th>Cross Sector Redundency:</th>
+      <td><p class="is-size-6 is-family-code"> {{session.cross_sector_redundency}} </p>
+      </td>
+    </tr>
+    
+  </tbody>
+</table>
    
 
     </article>

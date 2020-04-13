@@ -111,8 +111,9 @@ Detail - {{ block.super }} {% endblock title %}
   <div class="dropdown-menu" id="dropdown-menu4" role="menu">
     <div class="dropdown-content">
       <div class="dropdown-item">
+       <p> <i class="fas fa-user"></i> &nbsp; Created by: {{refs.author}} </p> </a>
         <a href="{% url 'delete_all_files' pk=refs.pk %}">
-        <p> Delete this session </p> </a>
+        <p> <i class="fas fa-trash"></i> &nbsp; Delete this session </p> </a>
       </div>
     </div>
   </div>
@@ -1501,11 +1502,11 @@ Detail - {{ block.super }} {% endblock title %}
            <br>
            <!-- MODAL Section -->
           {% if gamma2.parent_antenna_file.all %}
-    <button class="button is-small" onclick="refs8.modalEdicion8.open()">
+    <button class="button is-small" onclick="refs14.modalEdicion14.open()">
         <span>View Screenshot</span>
     </button>
-    <div class="modal" id="modalEdicion8">
-        <div onclick="refs8.modalEdicion8.close()" class="modal-background"></div>
+    <div class="modal" id="modalEdicion14">
+        <div onclick="refs14.modalEdicion14.close()" class="modal-background"></div>
         <div class="modal-content">
         <br>
         <p> &nbsp; Gamma Position 2</p>
@@ -1824,6 +1825,507 @@ Detail - {{ block.super }} {% endblock title %}
           </div>
       </div> 
       
+      <div class="columns is-multiline">
+        <div class="column">
+          <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 1 GOES HERE</div> {% endcomment %}
+<span class="tag is-light"><b>Delta Position 1</b></span> 
+          <div class="content">
+          <br>
+<!--____________________________ START DELTA 1 _____________________________________________-->
+          {% if delta1 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ delta1.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ delta1.connected_rrh_serial }} </p>
+          {% for a in delta1.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in delta1.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if delta1.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs13.modalEdicion13.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion13">
+        <div onclick="refs13.modalEdicion13.close()" class="modal-background"></div>
+        <div class="modal-content">
+        <br>
+        <p> &nbsp; Delta Position 1 </p>
+            <p class="image is-4by3">
+            
+
+            {% for a in delta1.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs13.modalEdicion13.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_delta1_form|crispy }} 
+                <input class="button is-small" name="screenshot_delta_1" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{delta1.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if delta1.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with delta1.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_delta_1" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form13|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+
+          </div>
+        </div>
+        <div class="column">
+            <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 2 GOES HERE</div> {% endcomment %}
+<span class="tag is-light"><b>Delta Position 2</b></span> 
+          <div class="content">
+          <br>
+<!--________________________________________ START DELTA 2 _____________________________________-->
+          {% if delta2 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ delta2.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ delta2.connected_rrh_serial }} </p>
+          {% for a in delta2.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in delta2.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if delta2.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs14.modalEdicion14.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion14">
+        <div onclick="refs14.modalEdicion14.close()" class="modal-background"></div>
+        <div class="modal-content">
+        <br>
+        <p> &nbsp; Delta Position 2</p>
+            <p class="image is-4by3">
+            
+
+            {% for a in delta2.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs14.modalEdicion14.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_delta2_form|crispy }} 
+                <input class="button is-small" name="screenshot_delta_2" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{delta2.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if delta2.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with delta2.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_delta_2" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form14|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+  
+            </div>
+          </div>
+          <div class="column">
+            <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 3 GOES HERE</div> {% endcomment %}
+<span class="tag is-light"><b>Delta Position 3</b></span> 
+          <div class="content">
+          <br>
+<!--__________________________________ START DELTA 3 ____________________________________________-->
+          {% if delta3 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ delta3.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ delta3.connected_rrh_serial }} </p>
+          {% for a in delta3.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in delta3.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if delta3.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs15.modalEdicion15.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion15">
+        <div onclick="refs15.modalEdicion15.close()" class="modal-background"></div>
+        <div class="modal-content">
+        <br>
+        <p> &nbsp; Delta Position 3 </p>
+            <p class="image is-4by3">
+            
+
+            {% for a in delta3.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs15.modalEdicion15.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_delta3_form|crispy }} 
+                <input class="button is-small" name="screenshot_delta_3" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{delta3.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if delta3.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with delta3.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_delta_3" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form15|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+  
+            </div>
+          </div>
+          <div class="column">
+            <div class="box">
+{% comment %} __________________<div class="heading">GAMMA 4 GOES HERE</div> {% endcomment %}
+<span class="tag is-light"><b>Delta Position 4</b></span> 
+          <div class="content">
+          <br>
+<!--__________________________________ START DELTA 4 ____________________________________________-->
+          {% if delta4 %}
+            <p class="is-size-7"> <i style="color:#14b36b;" class="fas fa-check"></i> <b>Using File:</b> {{ delta4.document.name }} </p>
+            <p class="is-size-7"><i style="color:#003566;" class="fas fa-qrcode"></i> <b>RRH Serial:</b> {{ delta4.connected_rrh_serial }} </p>
+          {% for a in delta4.parent_antenna_file.all %}  
+            <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
+          {% endfor %}  
+            <h5> Ret Files </h5>
+          {% for a in delta4.parent_file.all %}
+        <!--Accordion wrapper-->
+            <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
+              <!-- Accordion card -->
+              <div class="card">
+                <!-- Card header -->
+                <div class="card-header" role="tab" id="headingTwo1">
+                  <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx1" href="#collapseTwo1"
+                    aria-expanded="false" aria-controls="collapseTwo1">
+                    <h5 class="mb-0 is-subtitle">
+                      {{a.address}} <i class="fas fa-angle-down rotate-icon"></i>
+                    </h5>
+                  </a>
+                </div>
+                <!-- Card body -->
+                <div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+                  data-parent="#accordionEx1">
+                  <div class="card-body">
+                  <p class="is-size-7"><b>Station ID:</b> {{ a.station_id }}</p>
+                  <p class="is-size-7"><b>Band:</b> {{ a.band}}</p>
+                  <p class="is-size-7"><b>Technology:</b> {{ a.technology }}</p>
+                  <p class="is-size-7"><b>LTE cell ID :</b> {{ a.eutran_cell_id }}</p>
+                  <p class="is-size-7"><b>Operating Band :</b> {{ a.operating_band}}</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Accordion card -->
+            </div>
+            <!-- Accordion wrapper -->
+          {% endfor %}
+           <br>
+           <br>
+           <!-- MODAL Section -->
+          {% if delta4.parent_antenna_file.all %}
+    <button class="button is-small" onclick="refs16.modalEdicion16.open()">
+        <span>View Screenshot</span>
+    </button>
+    <div class="modal" id="modalEdicion16">
+        <div onclick="refs16.modalEdicion16.close()" class="modal-background"></div>
+        <div class="modal-content">
+        <br>
+        <p> &nbsp; Delta Position 4</p>
+            <p class="image is-4by3">
+            
+
+            {% for a in delta4.parent_antenna_file.all %}  
+                      <img class="#" src="{{ a.image_url|default_if_none:'#' }}" alt="">
+                    {% endfor %}  
+            </p>
+        </div>
+        <button class="modal-close is-large" aria-label="close" onclick="refs16.modalEdicion16.close()"></button>
+    </div>
+          <!-- END MODAL Section -->
+            {% else %}
+            <!-- Upload Screen Shot  -->
+              <form action={% url 'upload_screenshot' pk=refs.pk  %}  method="POST" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  {{ screenshot_delta4_form|crispy }} 
+                <input class="button is-small" name="screenshot_delta_4" type="submit" value="upload" />
+              </form>
+            <!-- END Upload Screen Shot  -->
+          {% endif %}
+           <!-- OPTIONS section  -->
+          <div class="dropdown is-hoverable">
+            <div class="dropdown-trigger">
+              <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu4">
+                <span>Options</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+              <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <button class="button is-small is-fullwidth">
+                          <a href="{{delta4.document.url}}" download> Download Antenna File </a> &nbsp;&nbsp;
+                          <i class="fa fa-download"></i>
+                    </button>
+                      {% if delta4.parent_antenna_file.all %}
+                      <button class="button is-small is-fullwidth">
+                            {% with delta4.parent_antenna_file.all|first as screen_file %}
+                            <a href="{{screen_file.image.url}}" download> Download ScreenShot </a> &nbsp;&nbsp;
+                            {% endwith %}
+                            <i class="fa fa-download"></i>
+                      </button>
+                      {% endif %}
+                      <form class="uniForm" enctype="multipart/form-data" action={% url 'delete_antenna' pk=refs.pk  %}  method="post">    
+                        {% csrf_token %}  
+                        <button type="submit" name="delete_delta_4" value="Send" class="button is-small is-fullwidth"> Remove Antenna File  &nbsp; <i class="fa fa-trash"></i> </button> 
+                        {% comment %} <button type="submit" name="#" value="Send" class="button is-small is-fullwidth"> Remove Screenshot &nbsp; <i class="fa fa-trash"></i> </button>  {% endcomment %}
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <!-- END OPTIONS section  -->
+            {% else %}
+            <!-- UPLOAD Antenna File section  -->
+            <form class="uniForm" enctype="multipart/form-data" action=""  method="post"> 
+              {% csrf_token %}  
+              {{ form16|crispy }} 
+              <input class="button is-small" type="submit" value="Submit" />
+            {% endif %}
+            </form>
+          </div>
+  
+            </div>
+          </div>
+      </div>
+
+
+
+
+
+
+
   
 
 </div>
@@ -2356,6 +2858,158 @@ Detail - {{ block.super }} {% endblock title %}
         {% else %}
             <tr>
           <td> No Data Gamma Position 4 </td>
+          </tr>
+      {% endif %}
+      <th> Delta Position 1 </th>
+  {% if delta1 %}
+    {% for a in delta1.parent_file.all %} 
+      <tr>
+        <td>Delta Position 1</td>
+        <td>{{ a.address  }}</td>
+        <td>{{refs.cross_sector_redundency}} </td>
+        <td>{{ a.antenna_serial_number }}</td>
+        <td>{{ a.device_serial }}</td>
+        <td>{{ a.antenna_model  }}</td>
+        <td>{{ a.aisg_version}}</td>
+        <td>{{ a.tilt_range }}</td>
+        <td>{{ a.electrical_tilt }}</td>
+        <td>{{ a.usid }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.sector_id }}</td>
+        <td>{{ a.relative_antenna_position  }}</td>
+        <td>{{ a.bearing }}</td>
+        <td>{{ a.operating_band  }}</td>
+        <td>{{ a.band  }}</td>
+        <td>{{ a.technology }}</td>
+        <td>{{ a.eutran_cell_id }}</td>
+        <td>N/A</td>
+        <td>{{a.parent_file.connected_rrh_serial}} </td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installer_id}}</td>
+        <td>{{ a.ret_sub_unit  }}</td>
+        <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data Delta Position 1 </td>
+          </tr>
+      {% endif %}
+      <th> Delta Position 2 </th>
+  {% if delta2 %}
+    {% for a in delta2.parent_file.all %} 
+      <tr>
+        <td>Delta Position 2</td>
+        <td>{{ a.address  }}</td>
+        <td>{{refs.cross_sector_redundency}} </td>
+        <td>{{ a.antenna_serial_number }}</td>
+        <td>{{ a.device_serial }}</td>
+        <td>{{ a.antenna_model  }}</td>
+        <td>{{ a.aisg_version}}</td>
+        <td>{{ a.tilt_range }}</td>
+        <td>{{ a.electrical_tilt }}</td>
+        <td>{{ a.usid }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.sector_id }}</td>
+        <td>{{ a.relative_antenna_position  }}</td>
+        <td>{{ a.bearing }}</td>
+        <td>{{ a.operating_band  }}</td>
+        <td>{{ a.band  }}</td>
+        <td>{{ a.technology }}</td>
+        <td>{{ a.eutran_cell_id }}</td>
+        <td>N/A</td>
+        <td>{{a.parent_file.connected_rrh_serial}} </td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installer_id}}</td>
+        <td>{{ a.ret_sub_unit  }}</td>
+        <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data Delta Position 2 </td>
+          </tr>
+      {% endif %}
+      <th> Delta Position 3 </th>
+  {% if delta3 %}
+    {% for a in delta3.parent_file.all %} 
+      <tr>
+        <td>Delta Position 3</td>
+        <td>{{ a.address  }}</td>
+        <td>{{refs.cross_sector_redundency}} </td>
+        <td>{{ a.antenna_serial_number }}</td>
+        <td>{{ a.device_serial }}</td>
+        <td>{{ a.antenna_model  }}</td>
+        <td>{{ a.aisg_version}}</td>
+        <td>{{ a.tilt_range }}</td>
+        <td>{{ a.electrical_tilt }}</td>
+        <td>{{ a.usid }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.sector_id }}</td>
+        <td>{{ a.relative_antenna_position  }}</td>
+        <td>{{ a.bearing }}</td>
+        <td>{{ a.operating_band  }}</td>
+        <td>{{ a.band  }}</td>
+        <td>{{ a.technology }}</td>
+        <td>{{ a.eutran_cell_id }}</td>
+        <td>N/A</td>
+        <td>{{a.parent_file.connected_rrh_serial}} </td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installer_id}}</td>
+        <td>{{ a.ret_sub_unit  }}</td>
+        <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data Delta Position 3 </td>
+          </tr>
+      {% endif %}
+      <th> Delta Position 4 </th>
+  {% if delta4 %}
+    {% for a in delta4.parent_file.all %} 
+      <tr>
+        <td>Delta Position 4</td>
+        <td>{{ a.address  }}</td>
+        <td>{{refs.cross_sector_redundency}} </td>
+        <td>{{ a.antenna_serial_number }}</td>
+        <td>{{ a.device_serial }}</td>
+        <td>{{ a.antenna_model  }}</td>
+        <td>{{ a.aisg_version}}</td>
+        <td>{{ a.tilt_range }}</td>
+        <td>{{ a.electrical_tilt }}</td>
+        <td>{{ a.usid }}</td>
+        <td>{{ a.station_id  }}</td>
+        <td>{{ a.sector_id }}</td>
+        <td>{{ a.relative_antenna_position  }}</td>
+        <td>{{ a.bearing }}</td>
+        <td>{{ a.operating_band  }}</td>
+        <td>{{ a.band  }}</td>
+        <td>{{ a.technology }}</td>
+        <td>{{ a.eutran_cell_id }}</td>
+        <td>N/A</td>
+        <td>{{a.parent_file.connected_rrh_serial}} </td>
+        <td>N/A</td>
+        <td>N/A</td>
+        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installer_id}}</td>
+        <td>{{ a.ret_sub_unit  }}</td>
+        <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
+      </tr>
+      {% endfor %}
+        {% else %}
+            <tr>
+          <td> No Data Delta Position 4 </td>
           </tr>
       {% endif %}
 

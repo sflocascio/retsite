@@ -6,22 +6,28 @@
 {% block content %}
  
  
+ <main>
+
+<div class = "section"> 
+<div class = "box">
 
  <div class="container">
-<h1 class="fonttitle "> Login </h1>
+<h1 class="title "> Login </h1>
 		<div class="row">
 
     <form role="form" action="" method="post">
         {% csrf_token %}
         {{ form|crispy }}
+        <br> 
         <input class="btn btn-primary "type="submit" value="Submit" />
     </form>
     <p>
         <a href="{% url 'password_reset' %}">
-        Forgot your password? </a>
+       &nbsp&nbsp Forgot your password? </a>
     </p>
     
     </div>
+</div>
 </div>
 <br>
 <br>
@@ -30,5 +36,7 @@
 <br>
 <br>
 <br>
+</div>
+              </main> 
 
 {% endblock content %}

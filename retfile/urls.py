@@ -55,31 +55,32 @@ urlpatterns = [
     path('<pk>/table/', views.session_table, name='session_table'),
     path('<pk>/export/', views.export_csv, name='export_csv'),
     path('<pk>/delete', views.delete_all_files, name='delete_all_files'),
-    # path('accounts/', include('registration.backends.simple.urls')),
-    # path('accounts/register/',
+    path('accounts/', include('registration.backends.simple.urls')),
+    #path('accounts/register/',
+    # url(r'^accounts/', include('registration.backends.simple.urls')),
     #     HomeRegistrationView.as_view(),
     #     name="registration_register"),
     
 
-    # path(
-    #     'accounts/password/reset/',
-    #     PasswordResetView.as_view(
-    #         template_name='registration/password_reset_form.html'),
-    #     name="password_reset"),
-    # path(
-    #     'accounts/password/reset/done/',
-    #     PasswordResetView.as_view(
-    #         template_name='registration/password_reset_done.html'),
-    #     name="password_reset_done"),
-    # path(
-    #     'accounts/password/reset/<uidb64>/<token>/',
-    #     PasswordResetConfirmView.as_view(
-    #         template_name='registration/password_reset_confirm.html'),
-    #     name="password_reset_confirm"),
-    # path(
-    #     'accounts/password/done/',
-    #     PasswordResetCompleteView.as_view(
-    #         template_name='registration/password_reset_complete.html'),
-    #     name="password_reset_complete"),
+    path(
+        'accounts/password/reset/',
+        PasswordResetView.as_view(
+            template_name='registration/password_reset_form.html'),
+        name="password_reset"),
+    path(
+        'accounts/password/reset/done/',
+        PasswordResetView.as_view(
+            template_name='registration/password_reset_done.html'),
+        name="password_reset_done"),
+    path(
+        'accounts/password/reset/<uidb64>/<token>/',
+        PasswordResetConfirmView.as_view(
+            template_name='registration/password_reset_confirm.html'),
+        name="password_reset_confirm"),
+    path(
+        'accounts/password/done/',
+        PasswordResetCompleteView.as_view(
+            template_name='registration/password_reset_complete.html'),
+        name="password_reset_complete"),
 ]
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

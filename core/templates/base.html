@@ -50,7 +50,7 @@
           <a class="navbar-item " href="#">
             Overview
           </a>
-          <a class="navbar-item " href="#">
+          <!-- <a class="navbar-item " href="#">
             Modifiers
           </a>
           <a class="navbar-item " href="#">
@@ -60,7 +60,7 @@
           
             <a class="navbar-item is-active" href="#">
               Components
-            </a>
+            </a> -->
           
           <hr class="navbar-divider">
           <div class="navbar-item">
@@ -78,7 +78,7 @@
         </div>
       </div>
       <div class="navbar-item has-dropdown is-hoverable">
-        <a class="navbar-link " href="#">
+        <!-- <a class="navbar-link " href="#">
           Blog
         </a>
         <div id="blogDropdown" class="navbar-dropdown " data-style="width: 18rem;">
@@ -135,7 +135,7 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
       </div>
     </div>
     <div class="navbar-end">
@@ -144,14 +144,28 @@
         <div class="field is-grouped">
           <p class="control">
           </p>
+          {% if user.is_authenticated %} 
+          
           <p class="control">
-            <a class="button is-info" href="#">
+            <a class="button is-info" href="{% url 'auth_logout' %}">
               <span class="icon">
                 <i class="fa fa-download"></i>
               </span>
-              <span>Sign In</span>
+              <span>Sign Out {{user}}</span>
             </a>
           </p>
+          {% else %} 
+          
+          <p class="control">
+          
+            <a class="button is-info" href="{% url 'auth_login' %}">
+              <span class="icon">
+                <i class="fa fa-download"></i>
+              </span>
+              <span>Log in</span>
+            </a>
+          </p>
+          {% endif %}
         </div>
       </div>
     </div>

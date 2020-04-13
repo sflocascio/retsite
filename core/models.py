@@ -28,7 +28,9 @@ POSITION_OPTIONS = (
 #     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
 class Process(models.Model):
+    
     #Essentials
+     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="sessions")
      ref_number = models.CharField(max_length=100, blank=True, unique=True, default=uuid.uuid4)
      created_date = models.DateTimeField('date created', default=timezone.now)
      fcc_id = models.CharField(max_length=500, null=True)

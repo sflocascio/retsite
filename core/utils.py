@@ -3,7 +3,7 @@ import string
 
 #Returns only Sector and Position code, ie: A4
 def get_sector_and_position_code(base_station_id):
-    sector = base_station_id[6] #(A)lpha, (B)eta, (C)Gamma 
+    sector = base_station_id[6] #(A)lpha, (B)eta, (C)Gamma , (D)Delta
     position = base_station_id[9] #1,2,3,4
     sector_and_position = sector + position
     print("Sector + Position", sector_and_position )
@@ -33,7 +33,11 @@ def get_ret_position(sector_and_position):
         'C1' : 'Gamma Position 1', 
         'C2' : 'Gamma Position 2', 
         'C3' : 'Gamma Position 3', 
-        'C4' : 'Gamma Position 4',  
+        'C4' : 'Gamma Position 4',
+        'D1' : 'Delta Position 1', 
+        'D2' : 'Delta Position 2', 
+        'D3' : 'Delta Position 3', 
+        'D4' : 'Delta Position 4',   
     } 
     # get() method of dictionary data type returns  
     # value of passed argument if it is present  

@@ -133,6 +133,46 @@ var refs = {
 	}
   };
 
+  var refs13 = {
+	modalEdicion13: {
+	  open: function() { document.getElementById('modalEdicion13').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion13').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs14 = {
+	modalEdicion14: {
+	  open: function() { document.getElementById('modalEdicion14').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion14').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs15 = {
+	modalEdicion15: {
+	  open: function() { document.getElementById('modalEdicion15').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion15').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
+  var refs16 = {
+	modalEdicion16: {
+	  open: function() { document.getElementById('modalEdicion16').classList.add('is-active');
+	  },
+	  close:function() { document.getElementById('modalEdicion16').classList.remove('is-active');
+						
+	  }
+	}
+  };
+
   
 
 
