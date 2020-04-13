@@ -18,6 +18,8 @@ boto3 = "*"
 whitenoise = "*"
 django-heroku = "*"
 gunicorn = "*"
+django-registration-redux = "==2.0"
+upgrade = "*"
 
 [requires]
 python_version = "3.7"
