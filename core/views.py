@@ -589,6 +589,10 @@ def session_detail_v2(request, pk):
 
             for values in data['Data']:
                 station_id = values['Station ID']
+                if len(station_id) <= 11:
+                    messages.error(request,  "Error: The uploaded file contains a Station ID value that is not the correct length. Please remove the uploaded file, correct the Station ID, and try again")
+                    return redirect('session_detail_v2', pk=session_id)
+
                 tilt_range = values['Min Tilt']
                 tilt_range = get_tilt_range(tilt_range)
 

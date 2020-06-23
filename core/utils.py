@@ -1,5 +1,7 @@
 from core.models import *
 import string
+from django.contrib import messages
+from django.shortcuts import render, redirect
 
 #Returns only Sector and Position code, ie: A4
 def get_sector_and_position_code(base_station_id):
@@ -61,8 +63,9 @@ def get_band(base_station_id):
    
 def get_technology(base_station_id):
     technology = base_station_id[11]
-    return technology
+    return technology  
 
+    
 def get_operating_band(band, technology):
     if technology == 'N':
         operating_band = '--' 

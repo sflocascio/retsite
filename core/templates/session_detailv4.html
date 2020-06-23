@@ -13,12 +13,22 @@ Detail - {{ block.super }} {% endblock title %}
 <main class="column">
 {% if messages %}
       {% for message in messages %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
         <div class="notification is-success ">
             <button class="delete"></button>
             {{ message }}
         </div>
+        {% endif %}
+        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR%}
+        <div class="notification is-primary">
+            <button class="delete"></button>
+            {{ message }}
+        </div>
+        {% endif %}
       {% endfor %}
     {% endif %}
+
+
 
       <div class="level">
         <div class="level-left">
@@ -348,7 +358,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in alpha1.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in alpha1.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -470,7 +480,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in alpha2.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in alpha2.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -593,7 +603,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in alpha3.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in alpha3.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -717,7 +727,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in alpha4.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in alpha4.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -848,7 +858,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in beta1.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in beta1.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -971,7 +981,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in beta2.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in beta2.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1094,7 +1104,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in beta3.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in beta3.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1217,7 +1227,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in beta4.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in beta4.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1344,7 +1354,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in gamma1.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in gamma1.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1467,7 +1477,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in gamma2.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in gamma2.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1580,7 +1590,7 @@ Detail - {{ block.super }} {% endblock title %}
           <div class="column">
             <div class="box">
 {% comment %} __________________<div class="heading">GAMMA 3 GOES HERE</div> {% endcomment %}
-<span class="tag is-success is-light"><b>Gamma Position 4</b></span> 
+<span class="tag is-success is-light"><b>Gamma Position 3</b></span> 
           <div class="content">
           <br>
 <!--__________________________________ START GAMMA 3 ____________________________________________-->
@@ -1590,7 +1600,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in gamma3.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in gamma3.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1713,7 +1723,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in gamma4.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in gamma4.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1839,7 +1849,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in delta1.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in delta1.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -1962,7 +1972,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in delta2.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in delta2.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -2085,7 +2095,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in delta3.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in delta3.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -2208,7 +2218,7 @@ Detail - {{ block.super }} {% endblock title %}
           {% for a in delta4.parent_antenna_file.all %}  
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
-            <h5> Ret Files </h5>
+            <h5> RETs </h5>
           {% for a in delta4.parent_file.all %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
@@ -2394,7 +2404,7 @@ Detail - {{ block.super }} {% endblock title %}
       <th><abbr title="Additional Information">Fiber # at Squid Junction</abbr></th>
       <th><abbr title="Additional Information">Installation Date</abbr></th>
       <th><abbr title="Additional Information">Installer ID</abbr></th>
-      <th><abbr title="Additional Information">E// for OSS RetSubUnit</abbr></th>
+      <th><abbr title="Additional Information">E// for OSS RetsubUnit</abbr></th>
       <th><abbr title="Additional Information">Nokia for OSS userNote2(FL17A)</abbr></th>
       <th><abbr title="Additional Information">Notes</abbr></th>
       {% comment %} <th><abbr title="Goal difference">GD</abbr></th>
