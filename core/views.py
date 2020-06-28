@@ -1158,24 +1158,22 @@ def export_csv(request, pk):
     refs = Process.objects.get(pk=pk)
     docs = refs.process.all()
     rets = refs.parent_ref_number.all()
-    alpha1 = rets.filter(ret_position__contains='Alpha Position 1')
-    alpha2 = rets.filter(ret_position__contains='Alpha Position 2')
-    alpha3 = rets.filter(ret_position__contains='Alpha Position 3')
-    alpha4 = rets.filter(ret_position__contains='Alpha Position 4')
-    beta1 = rets.filter(ret_position__contains='Beta Position 1')
-    beta2 = rets.filter(ret_position__contains='Beta Position 2')
-    beta3 = rets.filter(ret_position__contains='Beta Position 3')
-    beta4 = rets.filter(ret_position__contains='Beta Position 4')
-    gamma1 = rets.filter(ret_position__contains='Gamma Position 1')
-    gamma2 = rets.filter(ret_position__contains='Gamma Position 2')
-    gamma3 = rets.filter(ret_position__contains='Gamma Position 3')
-    gamma4 = rets.filter(ret_position__contains='Gamma Position 4')
-    delta1 = rets.filter(ret_position__contains='Delta Position 1')
-    delta2 = rets.filter(ret_position__contains='Delta Position 2')
-    delta3 = rets.filter(ret_position__contains='Delta Position 3')
-    delta4 = rets.filter(ret_position__contains='Delta Position 4')
-
-   
+    alpha1 = rets.filter(ret_position__contains='Alpha Position 1').order_by('address')
+    alpha2 = rets.filter(ret_position__contains='Alpha Position 2').order_by('address')
+    alpha3 = rets.filter(ret_position__contains='Alpha Position 3').order_by('address')
+    alpha4 = rets.filter(ret_position__contains='Alpha Position 4').order_by('address')
+    beta1 = rets.filter(ret_position__contains='Beta Position 1').order_by('address')
+    beta2 = rets.filter(ret_position__contains='Beta Position 2').order_by('address')
+    beta3 = rets.filter(ret_position__contains='Beta Position 3').order_by('address')
+    beta4 = rets.filter(ret_position__contains='Beta Position 4').order_by('address')
+    gamma1 = rets.filter(ret_position__contains='Gamma Position 1').order_by('address')
+    gamma2 = rets.filter(ret_position__contains='Gamma Position 2').order_by('address')
+    gamma3 = rets.filter(ret_position__contains='Gamma Position 3').order_by('address')
+    gamma4 = rets.filter(ret_position__contains='Gamma Position 4').order_by('address')
+    delta1 = rets.filter(ret_position__contains='Delta Position 1').order_by('address')
+    delta2 = rets.filter(ret_position__contains='Delta Position 2').order_by('address')
+    delta3 = rets.filter(ret_position__contains='Delta Position 3').order_by('address')
+    delta4 = rets.filter(ret_position__contains='Delta Position 4').order_by('address')
 
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attatchment; filename="export.csv"'
@@ -1206,9 +1204,11 @@ def export_csv(request, pk):
                         'Installation Date',
                         'Installer ID',
                         'E// for OSS RetSubUnit',
+                        'Delimiter(specify by MRAN)',
+                        'Delimiter(RET validation via automation)',
                         'Nokia for OSS userNote2(FL17A)',
                         'Notes',
-                       
+                        'Radio head controlling RET'
                         ])
 
     for a in alpha1:
@@ -1237,9 +1237,12 @@ def export_csv(request, pk):
             'N/A', 
             a.installation_date, 
             a.installer_id,
-            a.ret_sub_unit, 
-            a.ret_cell_id,
+            a.ret_sub_unit,
             'N/A', 
+            'N/A',  
+            a.ret_cell_id,
+            'N/A',
+            'N/A',  
             ])
     writer.writerow([" "])
 
@@ -1270,7 +1273,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1302,7 +1308,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1334,8 +1343,11 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
-            a.ret_cell_id,
             'N/A', 
+            'N/A',  
+            a.ret_cell_id,
+            'N/A',
+            'N/A',  
             ])
     writer.writerow([" "])
 
@@ -1366,7 +1378,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1398,7 +1413,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1430,8 +1448,11 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
-            a.ret_cell_id,
             'N/A', 
+            'N/A',  
+            a.ret_cell_id,
+            'N/A',
+            'N/A',  
             ])
     writer.writerow([" "])
 
@@ -1462,7 +1483,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1494,7 +1518,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1526,7 +1553,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1558,7 +1588,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1590,7 +1623,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1622,8 +1658,11 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
-            a.ret_cell_id,
             'N/A', 
+            'N/A',  
+            a.ret_cell_id,
+            'N/A',
+            'N/A',  
             ])
     writer.writerow([" "])
 
@@ -1654,8 +1693,11 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
-            a.ret_cell_id,
             'N/A', 
+            'N/A',  
+            a.ret_cell_id,
+            'N/A',
+            'N/A',  
             ])
     writer.writerow([" "])
 
@@ -1686,7 +1728,10 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
+            'N/A', 
+            'N/A',  
             a.ret_cell_id,
+            'N/A',
             'N/A', 
             ])
     writer.writerow([" "])
@@ -1718,8 +1763,11 @@ def export_csv(request, pk):
             a.installation_date, 
             a.installer_id,
             a.ret_sub_unit, 
-            a.ret_cell_id,
             'N/A', 
+            'N/A',  
+            a.ret_cell_id,
+            'N/A',
+            'N/A',  
             ])
     writer.writerow([" "])
     

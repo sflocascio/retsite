@@ -331,19 +331,6 @@ Detail - {{ block.super }} {% endblock title %}
 {% comment %} END TECHNOLOGY SECTION {% endcomment %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
      <div class="columns is-multiline">
         <div class="column">
           <div class="box">
@@ -359,7 +346,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in alpha1.parent_file.all %}
+          {% for a in alpha1.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -481,7 +468,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in alpha2.parent_file.all %}
+          {% for a in alpha2.parent_file.all|dictsort:"address"%}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -604,7 +591,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in alpha3.parent_file.all %}
+          {% for a in alpha3.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -728,7 +715,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in alpha4.parent_file.all %}
+          {% for a in alpha4.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -859,7 +846,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in beta1.parent_file.all %}
+          {% for a in beta1.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -982,7 +969,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in beta2.parent_file.all %}
+          {% for a in beta2.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1105,7 +1092,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in beta3.parent_file.all %}
+          {% for a in beta3.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1228,7 +1215,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in beta4.parent_file.all %}
+          {% for a in beta4.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1355,7 +1342,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in gamma1.parent_file.all %}
+          {% for a in gamma1.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1478,7 +1465,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in gamma2.parent_file.all %}
+          {% for a in gamma2.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1601,7 +1588,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in gamma3.parent_file.all %}
+          {% for a in gamma3.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1724,7 +1711,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in gamma4.parent_file.all %}
+          {% for a in gamma4.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1850,7 +1837,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in delta1.parent_file.all %}
+          {% for a in delta1.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -1973,7 +1960,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in delta2.parent_file.all %}
+          {% for a in delta2.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -2096,7 +2083,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in delta3.parent_file.all %}
+          {% for a in delta3.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -2219,7 +2206,7 @@ Detail - {{ block.super }} {% endblock title %}
             <p class="is-size-7"><i style="color:#662000;" class="far fa-file-image"></i> <b> Uploaded Screenshot </b> {{a.image.name}}</p>
           {% endfor %}  
             <h5> RETs </h5>
-          {% for a in delta4.parent_file.all %}
+          {% for a in delta4.parent_file.all|dictsort:"address" %}
         <!--Accordion wrapper-->
             <div class="accordion md-accordion" id="accordionEx1" role="tablist" aria-multiselectable="true">
               <!-- Accordion card -->
@@ -2405,8 +2392,12 @@ Detail - {{ block.super }} {% endblock title %}
       <th><abbr title="Additional Information">Installation Date</abbr></th>
       <th><abbr title="Additional Information">Installer ID</abbr></th>
       <th><abbr title="Additional Information">E// for OSS RetsubUnit</abbr></th>
+      <th><abbr title="Additional Information">Delimiter(specify by MRAN)</abbr></th>
+      <th><abbr title="Additional Information">Delimiter(RET validation via automation)</abbr></th>
       <th><abbr title="Additional Information">Nokia for OSS userNote2(FL17A)</abbr></th>
       <th><abbr title="Additional Information">Notes</abbr></th>
+      <th><abbr title="Additional Information">Radio head controlling RET</abbr></th>
+      
       {% comment %} <th><abbr title="Goal difference">GD</abbr></th>
       <th><abbr title="Points">Pts</abbr></th>
       <th>Qualification or relegation</th> {% endcomment %}
@@ -2416,7 +2407,7 @@ Detail - {{ block.super }} {% endblock title %}
   <tbody>
    <th> Alpha Position 1 </th>
   {% if alpha1 %}
-    {% for a in alpha1.parent_file.all %} 
+    {% for a in alpha1.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Alpha Position 1</td>
         <td>{{ a.address  }}</td>
@@ -2440,10 +2431,13 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{a.parent_file.connected_rrh_serial}} </td>
         <td>N/A</td>
         <td>N/A</td>
-        <td>{{ a.installation_date  }}</td>
+        <td>{{ a.installation_date }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2454,7 +2448,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
     <th> Alpha Position 2 </th>
   {% if alpha2 %}
-    {% for a in alpha2.parent_file.all %} 
+    {% for a in alpha2.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Alpha Position 2</td>
         <td>{{ a.address  }}</td>
@@ -2481,7 +2475,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2492,7 +2489,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
     <th> Alpha Position 3 </th>
   {% if alpha3 %}
-    {% for a in alpha3.parent_file.all %} 
+    {% for a in alpha3.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Alpha Position 3</td>
         <td>{{ a.address  }}</td>
@@ -2519,7 +2516,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2530,7 +2530,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Alpha Position 4 </th>
   {% if alpha4 %}
-    {% for a in alpha4.parent_file.all %} 
+    {% for a in alpha4.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Alpha Position 4</td>
         <td>{{ a.address  }}</td>
@@ -2557,7 +2557,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2568,7 +2571,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Beta Position 1 </th>
   {% if beta1 %}
-    {% for a in beta1.parent_file.all %} 
+    {% for a in beta1.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Beta Position 1</td>
         <td>{{ a.address  }}</td>
@@ -2595,7 +2598,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2606,7 +2612,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Beta Position 2 </th>
   {% if beta2 %}
-    {% for a in beta2.parent_file.all %} 
+    {% for a in beta2.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Beta Position 2</td>
         <td>{{ a.address  }}</td>
@@ -2633,7 +2639,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2644,7 +2653,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Beta Position 3 </th>
   {% if beta3 %}
-    {% for a in beta3.parent_file.all %} 
+    {% for a in beta3.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Beta Position 3</td>
         <td>{{ a.address  }}</td>
@@ -2671,7 +2680,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2682,7 +2694,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Beta Position 4 </th>
   {% if beta4 %}
-    {% for a in beta4.parent_file.all %} 
+    {% for a in beta4.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Beta Position 4</td>
         <td>{{ a.address  }}</td>
@@ -2709,7 +2721,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2720,7 +2735,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Gamma Position 1 </th>
   {% if gamma1 %}
-    {% for a in gamma1.parent_file.all %} 
+    {% for a in gamma1.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Gamma Position 1</td>
         <td>{{ a.address  }}</td>
@@ -2747,7 +2762,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2758,7 +2776,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Gamma Position 2 </th>
   {% if gamma2 %}
-    {% for a in gamma2.parent_file.all %} 
+    {% for a in gamma2.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Gamma Position 2</td>
         <td>{{ a.address  }}</td>
@@ -2785,7 +2803,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2796,7 +2817,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Gamma Position 3 </th>
   {% if gamma3 %}
-    {% for a in gamma3.parent_file.all %} 
+    {% for a in gamma3.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Gamma Position 3</td>
         <td>{{ a.address  }}</td>
@@ -2823,7 +2844,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2834,7 +2858,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Gamma Position 4 </th>
   {% if gamma4 %}
-    {% for a in gamma4.parent_file.all %} 
+    {% for a in gamma4.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Gamma Position 4</td>
         <td>{{ a.address  }}</td>
@@ -2861,7 +2885,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2872,7 +2899,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Delta Position 1 </th>
   {% if delta1 %}
-    {% for a in delta1.parent_file.all %} 
+    {% for a in delta1.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Delta Position 1</td>
         <td>{{ a.address  }}</td>
@@ -2899,7 +2926,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2910,7 +2940,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Delta Position 2 </th>
   {% if delta2 %}
-    {% for a in delta2.parent_file.all %} 
+    {% for a in delta2.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Delta Position 2</td>
         <td>{{ a.address  }}</td>
@@ -2937,7 +2967,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2948,7 +2981,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Delta Position 3 </th>
   {% if delta3 %}
-    {% for a in delta3.parent_file.all %} 
+    {% for a in delta3.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Delta Position 3</td>
         <td>{{ a.address  }}</td>
@@ -2975,7 +3008,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
@@ -2986,7 +3022,7 @@ Detail - {{ block.super }} {% endblock title %}
       {% endif %}
       <th> Delta Position 4 </th>
   {% if delta4 %}
-    {% for a in delta4.parent_file.all %} 
+    {% for a in delta4.parent_file.all|dictsort:"address"  %} 
       <tr>
         <td>Delta Position 4</td>
         <td>{{ a.address  }}</td>
@@ -3013,7 +3049,10 @@ Detail - {{ block.super }} {% endblock title %}
         <td>{{ a.installation_date  }}</td>
         <td>{{ a.installer_id}}</td>
         <td>{{ a.ret_sub_unit  }}</td>
+        <td>N/A</td>
+        <td>N/A</td>
         <td>{{ a.ret_cell_id}}</td>
+        <td>N/A</td>
         <td>N/A</td>
       </tr>
       {% endfor %}
