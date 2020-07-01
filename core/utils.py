@@ -13,7 +13,7 @@ def get_sector_and_position_code(base_station_id):
 
 #returns the USID 
 def get_usid(station_id):
-    usid = station_id[0:5]
+    usid = station_id[0:6]
     return usid
 
 #Returns Relative Antenna Position

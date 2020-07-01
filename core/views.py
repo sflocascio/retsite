@@ -606,6 +606,7 @@ def session_detail_v2(request, pk):
                 relative_antenna_position = get_relative_antenna_position(station_id)
                 usid = get_usid(station_id)
                 uploaded_file_name.antenna_position = ret_position #Setting the position of the RET
+                #Add Comparison here
                 save = uploaded_file_name.save()
 
                 #Handle Technologies that Come back empty and set subunit if they are, otherwise set to undefined

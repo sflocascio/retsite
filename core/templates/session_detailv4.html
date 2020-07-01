@@ -210,7 +210,7 @@ Detail - {{ block.super }} {% endblock title %}
 <nav class="level is-mobile">
         <div class="level-left">
      
-          <button class="button is-link is-light is-outlined is-small">  <i class="fas fa-pen"></i>&nbsp;&nbsp; Edit </button></a>
+          <a href="#grid"><button class="button is-link is-light is-outlined is-small">  <i class="far fa-file-alt"></i>&nbsp;&nbsp; Grid </button></a>
           &nbsp;&nbsp;
     
           <a href="{% url 'export_csv' pk=refs.pk %}"><button class="button is-success is-light is-outlined is-small"><i class="fas fa-table"></i> &nbsp;&nbsp; Export CSV</button></a>
